@@ -1,0 +1,23 @@
+{
+  "name": "gul-market-pro",
+  "version": "1.0.0",
+  "main": "index.js",
+  "sideEffects": false,
+  "scripts": {
+    "start": "kill-port --port 8080; NODE_ENV=development webpack serve",
+    "build": "NODE_ENV=production webpack",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "rm -rf node_modules/.cache"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "shared": "1.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "18.2.37",
+    "@types/react-dom": "18.2.15",
+    "@types/webpack-env": "1.18.4"
+  }
+}
