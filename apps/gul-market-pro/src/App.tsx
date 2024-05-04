@@ -1,6 +1,7 @@
 import React from "react";
 import { helloWorld } from "shared";
 import "./index.css";
+import { Button } from "@design-system/ui";
 
 export function App() {
   return (
@@ -12,6 +13,7 @@ export function App() {
         width="384"
         height="512"
       />
+      <Button />
       <div className="pt-6 md:p-8 text-center md:text-left space-y-4">
         <blockquote>
           <p className="text-lg font-semibold">
