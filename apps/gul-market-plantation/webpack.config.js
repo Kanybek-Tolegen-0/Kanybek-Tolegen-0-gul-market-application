@@ -18,7 +18,7 @@ module.exports = merge(
     context: __dirname,
   }),
   {
-    name: "frontend",
+    name: "gul-market-plantation",
     target: "web",
     entry: "./src/index.tsx",
     output: {
