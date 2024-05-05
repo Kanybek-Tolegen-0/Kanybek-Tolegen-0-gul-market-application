@@ -3,6 +3,6 @@
   "compilerOptions": {
     "jsx": "preserve"
   },
-  "include": ["ui/**"],
+  "include": ["ui/**/*"],
   "exclude": ["node_modules"]
 }
