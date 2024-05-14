@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .btn{
+        border-radius: theme('borderRadius.lg');
+        padding: 13px 21px;
+        width: theme('width.full');
+    }
+
+    .primary {
+        background: theme('background.brand');
+        color: theme('colors.primary');
+    }
+
+}

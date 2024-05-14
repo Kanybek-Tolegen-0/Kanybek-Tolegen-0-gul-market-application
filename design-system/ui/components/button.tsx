@@ -1,5 +1,15 @@
-import React from 'react'
+import React, { CSSProperties, FC } from 'react'
 
-export const Button = () => {
-  return <button className='text-orange-500 bg-gray-400'>Button tailwinded</button>;
-};
+interface IButtonProps {
+  children?: React.ReactNode
+  className?: string
+  style?: CSSProperties
+}
+
+export const Button: FC<IButtonProps> = ({ children, className, style }) => {
+  return (
+    <button className={`btn primary ${className}`} style={style}>
+      {children}
+    </button>
+  )
+}
