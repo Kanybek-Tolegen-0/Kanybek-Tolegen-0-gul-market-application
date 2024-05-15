@@ -4,7 +4,7 @@
     "baseUrl": ".",
     "rootDir": "./src",
     "outDir": "./build",
-    "jsx": "react"
+    "jsx": "react",
   },
-  "include": ["./src/**/*"]
+  "include": ["./src/**/*"],
 }
