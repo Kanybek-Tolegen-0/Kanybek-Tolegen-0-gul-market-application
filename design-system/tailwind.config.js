@@ -6,12 +6,25 @@ module.exports = withMT({
     extend: {
       colors: {
         primary: '#FFFFFF',
+        secondary: 'rgba(75, 85, 99, 1)',
+        brand: 'rgba(236, 72, 153, 1)',
         brand_bold: 'rgba(219, 39, 119, 1)'
       },
       background: {
         brand: 'rgba(236, 72, 153, 1)',
+        brand_bold: 'rgba(219, 39, 119, 1)',
         disabled: 'rgba(236, 72, 153, 1)',
-        transparent: 'transparent'
+        transparent: 'transparent',
+        layout: 'rgba(249, 250, 251, 1)'
+      },
+      fontSize: {
+        base: ['1rem', '1.25rem']
+      },
+
+      boxShadow: {
+        pr: '0 4px 6px -2px rgba(0, 0, 0, 0.05), 0 10px 15px -3px rgba(0, 0, 0, 0.1)'
+        // Additional way to add
+        // '3xl': ['0 4px 6px -2px rgba(219, 39, 119, 1)', ' 0 10px 15px -3px rgba(255,0,11,1)'],
       }
     }
   },

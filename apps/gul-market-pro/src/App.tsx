@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button } from '@design-system/ui'
 import { Input } from '@material-tailwind/react'
+import ChooseRoleLayout from './pageComponents/ChooseRole/ChooseRole.Layout'
 
 export function App() {
   return (
@@ -9,6 +10,7 @@ export function App() {
       <div className="w-72">
         <Input label="Электронная почта" variant="static" icon={<i className="fas fa-heart" />} crossOrigin="" />
       </div>
+      <ChooseRoleLayout />
     </div>
   )
 }
