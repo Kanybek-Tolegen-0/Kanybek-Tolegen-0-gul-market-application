@@ -7,7 +7,7 @@ import './ChooseRole.style.css'
 import { Container } from '@design-system/ui'
 const ChooseRoleLayout: FC = props => {
   return (
-    <div className="flex flex-col items-center gap-6">
+    <div className="flex flex-col items-center gap-6 mt-24">
       <Typography children="Выберите вашу роль" className="font-bold text-3xl" />
 
       <div className="flex gap-5">

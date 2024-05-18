@@ -6,16 +6,12 @@ module.exports = withMT({
     extend: {
       colors: {
         primary: '#FFFFFF',
-        secondary: 'rgba(75, 85, 99, 1)',
-        brand: 'rgba(236, 72, 153, 1)',
-        brand_bold: 'rgba(219, 39, 119, 1)'
-      },
-      background: {
+        secondary: 'rgba(246, 246, 250, 1)',
+        tip: 'rgba(75, 85, 99, 1)',
         brand: 'rgba(236, 72, 153, 1)',
         brand_bold: 'rgba(219, 39, 119, 1)',
-        disabled: 'rgba(236, 72, 153, 1)',
-        transparent: 'transparent',
-        layout: 'rgba(249, 250, 251, 1)'
+        layout: 'rgba(249, 250, 251, 1)',
+        transparent: 'transparent'
       },
       fontSize: {
         base: ['1rem', '1.25rem']

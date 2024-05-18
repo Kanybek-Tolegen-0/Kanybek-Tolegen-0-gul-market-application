@@ -7,5 +7,5 @@
 }
 
 .role_type_desc{
-    @apply text-secondary font-normal text-base
+    @apply text-tip font-normal text-base
 }

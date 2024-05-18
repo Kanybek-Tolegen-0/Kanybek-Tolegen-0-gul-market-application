@@ -1,5 +1,5 @@
 import { createBrowserRouter, Link } from 'react-router-dom'
-import ChooseRoleLayout from './pageComponents/ChooseRole/ChooseRole.Layout'
+import ChooseRoleLayout from '../pages/ChooseRole/ChooseRole.Layout'
 import React from 'react'
 const routes = createBrowserRouter([
   {
