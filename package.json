@@ -55,5 +55,8 @@
         "kill-port"
       ]
     }
+  },
+  "dependencies": {
+    "react-router-dom": "6.23.1"
   }
 }
