@@ -4,11 +4,11 @@
     "baseUrl": ".",
     "rootDir": "./src",
     "outDir": "./build",
-    "jsx": "react",
-//    "paths": {
-//      "assets/*": ["../assets/*"]
-//    },
+    "jsx": "react"
+    //    "paths": {
+    //      "assets/*": ["../assets/*"]
+    //    },
   },
-  "include": ["./src/**/*"],
+  "include": ["./src/**/**/*"],
   "exclude": ["node_modules"]
 }
