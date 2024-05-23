@@ -19,6 +19,7 @@
   "license": "MIT",
   "devDependencies": {
     "@pmmmwh/react-refresh-webpack-plugin": "0.5.11",
+    "@svgr/webpack": "8.1.0",
     "@types/node": "20.9.1",
     "@typescript-eslint/eslint-plugin": "7.8.0",
     "@typescript-eslint/parser": "7.8.0",
@@ -26,6 +27,7 @@
     "css-loader": "6.8.1",
     "css-minimizer-webpack-plugin": "5.0.1",
     "eslint": "9.2.0",
+    "file-loader": "6.2.0",
     "fork-ts-checker-webpack-plugin": "9.0.2",
     "html-webpack-plugin": "5.5.3",
     "kill-port": "1.6.1",
@@ -41,6 +43,7 @@
     "ts-loader": "9.5.1",
     "typescript": "5.2.2",
     "ultra-runner": "3.10.5",
+    "url-loader": "4.1.1",
     "webpack": "5.89.0",
     "webpack-cli": "5.1.4",
     "webpack-dev-server": "4.15.1",
@@ -53,5 +56,11 @@
         "kill-port"
       ]
     }
+  },
+  "dependencies": {
+    "@2gis/mapgl": "1.47.1",
+    "@2gis/mapgl-ruler": "2.0.8",
+    "@pbe/react-yandex-maps": "1.2.5",
+    "react-router-dom": "6.23.1"
   }
 }
