@@ -84,23 +84,6 @@ module.exports = merge(
           ].filter(Boolean)
         },
         {
-          test: /\.svg$/,
-          use: [
-            {
-              loader: '@svgr/webpack',
-              options: {
-                icon: true
-              }
-            },
-            {
-              loader: 'file-loader',
-              options: {
-                name: 'assets/svg/[name].[hash].[ext]'
-              }
-            }
-          ]
-        },
-        {
           test: /\.(png|jpg|gif)$/i,
           type: 'asset/resource',
           generator: {
@@ -113,6 +96,11 @@ module.exports = merge(
           generator: {
             filename: 'assets/fonts/[name][ext][query]'
           }
+        },
+        {
+          test: /\.svg$/i,
+          issuer: /\.[jt]sx?$/,
+          use: ['@svgr/webpack']
         }
       ].filter(Boolean)
     },

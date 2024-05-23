@@ -1,0 +1,7 @@
+export { default as AddImageIcon } from './add_image.svg'
+export { default as CheckIcon } from './check.svg'
+export { default as ChevronLeftIcon } from './chevron-left.svg'
+export { default as CompletedIcon } from './completed.svg'
+export { default as GeoIcon } from './geo.svg'
+export { default as NonCheckedIcon } from './non_checked.svg'
+export { default as PlusIcon } from './plus.svg'

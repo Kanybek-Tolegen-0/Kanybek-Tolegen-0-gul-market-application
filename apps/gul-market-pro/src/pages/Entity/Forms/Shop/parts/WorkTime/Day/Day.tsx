@@ -1,7 +1,6 @@
 import React, { FC, useState } from 'react'
 import { Input, Typography } from '@material-tailwind/react'
-import check from 'assets/svg/check.svg'
-import nonChecked from 'assets/svg/non_checked.svg'
+import { NonCheckedIcon, CheckIcon } from '@design-system/ui'
 interface DayProps {
   day: string
 }
@@ -25,11 +24,11 @@ const Day: FC<DayProps> = ({ day }) => {
             <div
               className={`absolute flex justify-center items-center h-5 w-5 bg-white rounded-[10px] shadow-md transform transition-transform duration-300 ${isOn ? 'translate-x-5' : ''}`}
             >
-              <img
-                alt={isOn ? 'checked' : 'unchecked'}
-                src={isOn ? check : nonChecked}
-                className="w-3 h-3 select-none"
-              />
+              {isOn ? (
+                <CheckIcon className="w-3 h-3 select-none" alt={isOn ? 'checked' : 'unchecked'} />
+              ) : (
+                <NonCheckedIcon className="w-3 h-3 select-none" alt={isOn ? 'checked' : 'unchecked'} />
+              )}
             </div>
           </div>
         </div>

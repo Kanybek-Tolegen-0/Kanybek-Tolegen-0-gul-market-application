@@ -2,7 +2,8 @@ import React, { FunctionComponent, useEffect, useRef } from 'react'
 import { load } from '@2gis/mapgl'
 import { Map as MapType } from '@2gis/mapgl/types'
 import { Ruler, RulerControl } from '@2gis/mapgl-ruler'
-import geo from 'assets/svg/geo.svg'
+import { GeoIcon } from '@design-system/ui'
+
 interface IMapProps {}
 
 const Map: FunctionComponent<IMapProps> = React.memo(
@@ -67,7 +68,7 @@ const Map: FunctionComponent<IMapProps> = React.memo(
           <div id="map-container" style={{ width: '100%', height: '100%' }}></div>
         </div>
         <div id="status" ref={statusRef} className={'h-8 w-8 bg-primary cursor-pointer rounded'}>
-          <img alt={'find'} src={geo} className={'h-8 w-8'} />
+          <GeoIcon className={'h-8 w-8'} alt={'find'} />
         </div>
       </div>
     )

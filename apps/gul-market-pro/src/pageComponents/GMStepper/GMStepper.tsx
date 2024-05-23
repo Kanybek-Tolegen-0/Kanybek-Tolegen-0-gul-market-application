@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { Stepper, Step, Typography } from '@material-tailwind/react'
-import completed from '../../../assets/svg/completed.svg'
 import { IStep } from '../../pages/Individual/consts/configs'
+import { CompletedIcon } from '@design-system/ui'
 
 interface IGMStepperProps {
   activeStep: number
@@ -28,7 +28,7 @@ const GMStepper: FC<IGMStepperProps> = ({ activeStep, stepper_configs, onStepCha
           className="step"
           onClick={() => onStepChange(index)}
         >
-          {index < activeStep ? <img alt={'completed'} src={completed} className={'h-5 w-5'} /> : step.value}
+          {index < activeStep ? <CompletedIcon alt={'completed'} className={'h-5 w-5'} /> : step.value}
           <div className="step_text_container">
             <Typography className="step_text" children={step.helpText} />
           </div>

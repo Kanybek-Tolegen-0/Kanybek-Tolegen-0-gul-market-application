@@ -5,7 +5,7 @@ import StepHeader from '../../pageComponents/StepHeader/StepHeader'
 import { configs } from './consts/configs'
 import { BrandButton, Container } from '@design-system/ui'
 import { Link } from 'react-router-dom'
-import chevron_left from 'assets/svg/chevron-left.svg'
+import { ChevronLeftIcon } from '@design-system/ui'
 import GMStepper from '../../pageComponents/GMStepper/GMStepper'
 
 const IndividualLayout: FC = props => {
@@ -41,7 +41,7 @@ const IndividualLayout: FC = props => {
             <Link to="/choose_role">
               <div className={'flex items-center gap-2'}>
                 <IconButton variant="text" className="w-4 h-4">
-                  <img alt="svg" src={chevron_left} />
+                  <ChevronLeftIcon alt="svg" />
                 </IconButton>
                 <Typography children="К выбору роли" />
               </div>
@@ -50,7 +50,7 @@ const IndividualLayout: FC = props => {
             <button onClick={handlePrev}>
               <div className={'flex items-center gap-2'}>
                 <IconButton variant="text" className="w-4 h-4">
-                  <img alt="svg" src={chevron_left} />
+                  <ChevronLeftIcon alt="svg" />
                 </IconButton>
                 <Typography children="К предыдущему шагу" />
               </div>

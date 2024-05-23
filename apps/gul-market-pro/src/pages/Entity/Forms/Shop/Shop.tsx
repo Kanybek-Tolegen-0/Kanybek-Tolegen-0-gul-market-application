@@ -4,7 +4,8 @@ import Main from './parts/Main/Main'
 import Logo from './parts/Logo/Logo'
 import WorkTime from './parts/WorkTime/WorkTime'
 import { Button, Typography } from '@material-tailwind/react'
-import plus from 'assets/svg/plus.svg'
+import { PlusIcon } from '@design-system/ui'
+
 interface ShopsProps {}
 
 const Shop: FunctionComponent<ShopsProps> = props => {
@@ -24,7 +25,7 @@ const Shop: FunctionComponent<ShopsProps> = props => {
           onClick={addMainComponent}
           className="flex items-center gap-2.5 rounded-lg px-4 py-3 bg-gr-100 w-56 h-9"
         >
-          <img alt="add subsidiary" src={plus} className="bg-primary rounded-full" />
+          <PlusIcon className="bg-primary rounded-full" alt="add subsidiary" />
           <Typography children={'Добавить еще филиал'} className="font-medium text-sm text-bl text-gr-800" />
         </button>
       </InfoPart>
