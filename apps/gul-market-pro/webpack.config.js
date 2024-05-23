@@ -24,7 +24,9 @@ module.exports = merge(
       publicPath: RELEASE_PATH
     },
     devServer: {
-      port: 4251
+      port: 4251,
+      hot: true,
+      historyApiFallback: true
     },
     optimization: {
       minimizer: [`...`, isProd && new CssMinimizerPlugin()].filter(Boolean)

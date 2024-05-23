@@ -2,12 +2,12 @@ import { FC } from 'react'
 import { Typography } from '@material-tailwind/react'
 import React from 'react'
 import { individualImage } from '@design-system/ui'
-import './ChooseRole.style.css'
 import { Container } from '@design-system/ui'
 import { Link } from 'react-router-dom'
 import { entityImage } from '@design-system/ui'
+import './style.css'
 
-const ChooseRoleLayout: FC = props => {
+export const ChooseRolePage: FC = props => {
   return (
     <div className="flex flex-col items-center gap-6 mt-24 ">
       <Typography children="Выберите вашу роль" className="font-bold text-3xl" />
@@ -43,5 +43,3 @@ const ChooseRoleLayout: FC = props => {
     </div>
   )
 }
-
-export default ChooseRoleLayout

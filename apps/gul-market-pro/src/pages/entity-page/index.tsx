@@ -1,18 +1,22 @@
-import React, { FC } from 'react'
-import './Invidivual.styles.css'
+import React, { FC, useState } from 'react'
 import { IconButton, Typography } from '@material-tailwind/react'
 import { StepHeader } from '../../components/step-header'
-import { configs } from './consts/configs'
+import { configs } from './constants'
 import { BrandButton, Container } from '@design-system/ui'
 import { Link } from 'react-router-dom'
 import { ChevronLeftIcon } from '@design-system/ui'
 import { GMStepper } from '../../components/gm-stepper'
+import './style.css'
 
-const IndividualLayout: FC = props => {
+export const EntityPage: FC = props => {
   const [activeStep, setActiveStep] = React.useState(0)
   const [isLastStep, setIsLastStep] = React.useState(false)
   const [isFirstStep, setIsFirstStep] = React.useState(false)
+  const [shops, setShops] = useState<number[]>([0, 1])
 
+  const addShop = () => {
+    setShops(prevShops => [...prevShops, prevShops.length])
+  }
   const handleNext = () => !isLastStep && setActiveStep(cur => cur + 1)
   const handlePrev = () => !isFirstStep && setActiveStep(cur => cur - 1)
 
@@ -33,9 +37,18 @@ const IndividualLayout: FC = props => {
       />
       <StepHeader title={content.title} description={content.description} />
       <div>
-        <Container className={'flex-col mb-6 min-w-[630px]'}>
-          <StepForm />
-        </Container>
+        {activeStep !== 1 ? (
+          <Container className={'flex-col mb-6 min-w-[630px]'}>
+            <StepForm />
+          </Container>
+        ) : (
+          shops.map((_, index) => (
+            <Container className={'flex-col mb-6 min-w-[630px]'}>
+              <StepForm key={index} />
+            </Container>
+          ))
+        )}
+
         <div className="flex justify-between items-center w-full">
           {activeStep === 0 ? (
             <Link to="/choose_role">
@@ -68,5 +81,3 @@ const IndividualLayout: FC = props => {
     </div>
   )
 }
-
-export default IndividualLayout

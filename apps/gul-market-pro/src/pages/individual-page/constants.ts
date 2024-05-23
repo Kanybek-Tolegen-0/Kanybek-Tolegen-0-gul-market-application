@@ -1,6 +1,6 @@
-import ResidentialAddress from '../Forms/ResidentialAddress/ResidentialAddress'
-import FullName from '../Forms/FullName/FullName'
-import Completed from '../Forms/Completed/Completed'
+import ResidentialAddress from './forms/ResidentialAddress/ResidentialAddress'
+import FullName from './forms/FullName/FullName'
+import Completed from './forms/Completed/Completed'
 import { FC } from 'react'
 
 export interface IContent {

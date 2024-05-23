@@ -1,22 +1,18 @@
-import React, { FC, useState } from 'react'
+import React, { useState, FC } from 'react'
 import { IconButton, Typography } from '@material-tailwind/react'
-import { StepHeader } from './../../components/step-header'
-import { configs } from './consts/configs'
-import { BrandButton, Container } from '@design-system/ui'
+import { StepHeader } from '../../components/step-header'
+import { configs } from './constants'
+import { BrandButton, Container, Layout } from '@design-system/ui'
 import { Link } from 'react-router-dom'
 import { ChevronLeftIcon } from '@design-system/ui'
-import { GMStepper } from './../../components/gm-stepper'
-import './Entity.styles.css'
+import { GMStepper } from '../../components/gm-stepper'
+import './style.css'
 
-const EntityLayout: FC = props => {
-  const [activeStep, setActiveStep] = React.useState(0)
-  const [isLastStep, setIsLastStep] = React.useState(false)
-  const [isFirstStep, setIsFirstStep] = React.useState(false)
-  const [shops, setShops] = useState<number[]>([0, 1])
+export const IndividualPage: FC = props => {
+  const [activeStep, setActiveStep] = useState(0)
+  const [isLastStep, setIsLastStep] = useState(false)
+  const [isFirstStep, setIsFirstStep] = useState(false)
 
-  const addShop = () => {
-    setShops(prevShops => [...prevShops, prevShops.length])
-  }
   const handleNext = () => !isLastStep && setActiveStep(cur => cur + 1)
   const handlePrev = () => !isFirstStep && setActiveStep(cur => cur - 1)
 
@@ -37,18 +33,9 @@ const EntityLayout: FC = props => {
       />
       <StepHeader title={content.title} description={content.description} />
       <div>
-        {activeStep !== 1 ? (
-          <Container className={'flex-col mb-6 min-w-[630px]'}>
-            <StepForm />
-          </Container>
-        ) : (
-          shops.map((_, index) => (
-            <Container className={'flex-col mb-6 min-w-[630px]'}>
-              <StepForm key={index} />
-            </Container>
-          ))
-        )}
-
+        <Container className={'flex-col mb-6 min-w-[630px]'}>
+          <StepForm />
+        </Container>
         <div className="flex justify-between items-center w-full">
           {activeStep === 0 ? (
             <Link to="/choose_role">
@@ -81,5 +68,3 @@ const EntityLayout: FC = props => {
     </div>
   )
 }
-
-export default EntityLayout
