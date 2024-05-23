@@ -4,6 +4,7 @@ import React from 'react'
 import LayoutNonAuth from '../pageComponents/Layouts/LayoutNonAuth'
 import IndividualLayout from '../pages/Individual/Invidivual.Layout'
 import EntityLayout from '../pages/Entity/Entity.Layout'
+import { LoginPage } from '../pages/login-page'
 // CreateBrowserRouter поменяем как сервак будет
 const routes = createHashRouter([
   {
@@ -12,7 +13,7 @@ const routes = createHashRouter([
     children: [
       {
         path: '',
-        element: <Link to={'choose_role'}>Choose Role</Link>
+        element: <LoginPage />
       },
       {
         path: 'choose_role',
