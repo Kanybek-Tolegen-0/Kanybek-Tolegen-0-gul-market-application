@@ -5,9 +5,15 @@ interface TimeProps {}
 
 const WorkTime: FunctionComponent<TimeProps> = props => {
   return (
-    <>
-      <Day day={'pon'} />
-    </>
+    <div className="flex flex-col gap-5">
+      <Day day={'Понедельник'} />
+      <Day day={'Вторник'} />
+      <Day day={'Среда'} />
+      <Day day={'Четверг'} />
+      <Day day={'Пятница'} />
+      <Day day={'Суббота'} />
+      <Day day={'Воскресенье'} />
+    </div>
   )
 }
 

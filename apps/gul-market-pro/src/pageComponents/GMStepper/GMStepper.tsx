@@ -28,7 +28,7 @@ const GMStepper: FC<IGMStepperProps> = ({ activeStep, stepper_configs, onStepCha
           className="step"
           onClick={() => onStepChange(index)}
         >
-          {index < activeStep ? <CompletedIcon alt={'completed'} className={'h-5 w-5'} /> : step.value}
+          {index < activeStep ? <CompletedIcon alt={'completed'} /> : step.value}
           <div className="step_text_container">
             <Typography className="step_text" children={step.helpText} />
           </div>
