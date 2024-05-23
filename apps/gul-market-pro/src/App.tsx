@@ -6,9 +6,7 @@ import LayoutNonAuth from './pageComponents/Layouts/LayoutNonAuth'
 export function App() {
   return (
     <div>
-      <LayoutNonAuth>
-        <RouterProvider router={routes} />
-      </LayoutNonAuth>
+      <RouterProvider router={routes} />
     </div>
   )
 }

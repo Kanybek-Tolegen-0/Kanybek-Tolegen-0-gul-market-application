@@ -1,6 +1,6 @@
-import React, { CSSProperties, FC } from 'react'
+import React, { CSSProperties, FC, HTMLAttributes } from 'react'
 
-interface IContainerProps {
+interface IContainerProps extends HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode
   className?: string
   style?: CSSProperties

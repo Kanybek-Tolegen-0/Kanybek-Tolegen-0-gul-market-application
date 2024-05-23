@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react'
 import logo from '../../../assets/images/logo.png'
 import profile from '../../../assets/images/profile.png'
+import { Outlet } from 'react-router-dom'
 interface ILayoutProps {
   children?: React.ReactNode
 }
@@ -8,7 +9,7 @@ interface ILayoutProps {
 const LayoutNonAuth: FunctionComponent<ILayoutProps> = ({ children }) => {
   return (
     <>
-      <div className={'flex justify-between h-[72px] px-[120px] py-4'}>
+      <div className={'flex justify-between h-[72px] px-[120px] py-4 bg-primary'}>
         <img src={logo} alt="logo" className={'h-10'} />
         <div className={'bg-secondary flex gap-2.5 p-3 rounded-lg h-12'}>
           <div>
@@ -17,7 +18,9 @@ const LayoutNonAuth: FunctionComponent<ILayoutProps> = ({ children }) => {
           menu
         </div>
       </div>
-      {children}
+      <div className={'flex justify-center'}>
+        <Outlet />
+      </div>
     </>
   )
 }

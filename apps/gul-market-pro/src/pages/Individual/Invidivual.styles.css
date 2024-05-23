@@ -1,0 +1,21 @@
+.stepper{
+    @apply min-w-[1000px] w-fit border-[1px] pl-6 py-4 pr-72 rounded-md border-disabled my-8
+}
+.step{
+    @apply relative border-2 rounded-base border-disabled text-tdisabled bg-transparent text-sm font-medium
+}
+
+.active{
+    @apply border-brand_bold text-brand_bold bg-transparent
+}
+
+.completed{
+    @apply bg-brand_bold text-black border-0
+}
+
+.step_text_container{
+    @apply absolute left-14
+}
+.step_text{
+    @apply w-max font-medium text-sm
+}

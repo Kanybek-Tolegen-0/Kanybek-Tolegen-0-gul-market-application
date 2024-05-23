@@ -9,8 +9,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 
-// release path is used for cache forever strategy on CDN. Usage:
-// RELEASE_PATH=/version pnpm build
 const RELEASE_PATH = process.env.RELEASE_PATH ?? ''
 
 module.exports = merge(
@@ -29,11 +27,7 @@ module.exports = merge(
       port: 4251
     },
     optimization: {
-      minimizer: [
-        // special webpack syntax to include default optimizers
-        `...`,
-        isProd && new CssMinimizerPlugin()
-      ].filter(Boolean)
+      minimizer: [`...`, isProd && new CssMinimizerPlugin()].filter(Boolean)
     },
     plugins: [
       isDev && new ReactRefreshWebpackPlugin(),
@@ -47,12 +41,7 @@ module.exports = merge(
       }),
       isProd &&
         new webpack.SourceMapDevToolPlugin({
-          // same as 'source-map'
-          // https://stackoverflow.com/questions/52228650/configure-sourcemapdevtoolplugin-to-generate-source-map/55282204#55282204
           filename: '[file].map[query]'
-          // TODO: set url for private deployment
-          // TODO: probably better do that with sed while deployment
-          // publicPath: 'https://api.example.com/project/',
         }),
       isProd &&
         new CompressionPlugin({
@@ -82,7 +71,6 @@ module.exports = merge(
         },
         {
           test: /\.css$/i,
-          // https://stackoverflow.com/questions/55505894/webpack-mini-css-extract-plugin-not-outputting-css-file/60482491#60482491
           sideEffects: true,
           use: [
             {
@@ -97,10 +85,20 @@ module.exports = merge(
         },
         {
           test: /\.svg$/,
-          type: 'asset/resource',
-          generator: {
-            filename: 'assets/svg/[name][ext][query]'
-          }
+          use: [
+            {
+              loader: '@svgr/webpack',
+              options: {
+                icon: true
+              }
+            },
+            {
+              loader: 'file-loader',
+              options: {
+                name: 'assets/svg/[name].[hash].[ext]'
+              }
+            }
+          ]
         },
         {
           test: /\.(png|jpg|gif)$/i,

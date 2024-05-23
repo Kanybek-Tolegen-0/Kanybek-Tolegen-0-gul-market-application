@@ -1,2 +1,2 @@
-export * from './button'
+export * from './brand_button'
 export * from './container'
