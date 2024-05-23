@@ -1,12 +1,12 @@
 import React, { FC } from 'react'
 import './Invidivual.styles.css'
 import { IconButton, Typography } from '@material-tailwind/react'
-import StepHeader from '../../pageComponents/StepHeader/StepHeader'
+import { StepHeader } from '../../components/step-header'
 import { configs } from './consts/configs'
 import { BrandButton, Container } from '@design-system/ui'
 import { Link } from 'react-router-dom'
 import { ChevronLeftIcon } from '@design-system/ui'
-import GMStepper from '../../pageComponents/GMStepper/GMStepper'
+import { GMStepper } from '../../components/gm-stepper'
 
 const IndividualLayout: FC = props => {
   const [activeStep, setActiveStep] = React.useState(0)

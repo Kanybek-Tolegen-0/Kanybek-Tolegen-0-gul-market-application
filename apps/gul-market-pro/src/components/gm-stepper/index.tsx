@@ -11,7 +11,13 @@ interface IGMStepperProps {
   isFirstStep: (value: boolean) => void
 }
 
-const GMStepper: FC<IGMStepperProps> = ({ activeStep, stepper_configs, onStepChange, isLastStep, isFirstStep }) => {
+export const GMStepper: FC<IGMStepperProps> = ({
+  activeStep,
+  stepper_configs,
+  onStepChange,
+  isLastStep,
+  isFirstStep
+}) => {
   return (
     <Stepper
       activeStep={activeStep}
@@ -37,5 +43,3 @@ const GMStepper: FC<IGMStepperProps> = ({ activeStep, stepper_configs, onStepCha
     </Stepper>
   )
 }
-
-export default GMStepper

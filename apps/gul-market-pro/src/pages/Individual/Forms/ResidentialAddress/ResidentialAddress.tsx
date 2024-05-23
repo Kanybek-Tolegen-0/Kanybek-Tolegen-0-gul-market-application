@@ -1,9 +1,7 @@
 import React, { FC, useEffect } from 'react'
 import { Input, Typography } from '@material-tailwind/react'
-import Map from '../../../../pageComponents/Map/Map'
+import { Map } from '../../../../components/map'
 // import { YMaps, Map as YMap } from '@pbe/react-yandex-maps'
-
-interface IResidentialAddressProps {}
 
 const ResidentialAddress: FC = props => {
   // const mapOptions = {

@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Input, Typography } from '@material-tailwind/react'
-import Map from '../../../../pageComponents/Map/Map'
+import { Map } from '../../../../components/map'
 
 interface IShopAddressProps {}
 

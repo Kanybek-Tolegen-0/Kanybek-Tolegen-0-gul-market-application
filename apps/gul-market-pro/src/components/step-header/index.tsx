@@ -7,7 +7,7 @@ interface IStepHeaderProps {
   description?: string
 }
 
-const StepHeader: FC<IStepHeaderProps> = ({ title, description }) => {
+export const StepHeader: FC<IStepHeaderProps> = ({ title, description }) => {
   return (
     <div className={'flex flex-col gap-5 items-center w-[534px] text-center mb-6'}>
       <Typography className="font-bold text-3xl " children={title} />
@@ -15,5 +15,3 @@ const StepHeader: FC<IStepHeaderProps> = ({ title, description }) => {
     </div>
   )
 }
-
-export default StepHeader

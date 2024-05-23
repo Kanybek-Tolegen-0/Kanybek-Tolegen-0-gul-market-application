@@ -1,13 +1,13 @@
 import React, { FC, useState } from 'react'
 import { IconButton, Typography } from '@material-tailwind/react'
-import StepHeader from '../../pageComponents/StepHeader/StepHeader'
+import { StepHeader } from './../../components/step-header'
 import { configs } from './consts/configs'
 import { BrandButton, Container } from '@design-system/ui'
 import { Link } from 'react-router-dom'
 import { ChevronLeftIcon } from '@design-system/ui'
-import GMStepper from '../../pageComponents/GMStepper/GMStepper'
+import { GMStepper } from './../../components/gm-stepper'
 import './Entity.styles.css'
-import Main from './Forms/Shop/parts/Main/Main'
+
 const EntityLayout: FC = props => {
   const [activeStep, setActiveStep] = React.useState(0)
   const [isLastStep, setIsLastStep] = React.useState(false)

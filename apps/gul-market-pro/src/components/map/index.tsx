@@ -6,7 +6,7 @@ import { GeoIcon } from '@design-system/ui'
 
 interface IMapProps {}
 
-const Map: FunctionComponent<IMapProps> = React.memo(
+export const Map: FunctionComponent<IMapProps> = React.memo(
   () => {
     const mapRef = useRef<MapType | null>(null)
     const statusRef = useRef<HTMLDivElement | null>(null)
@@ -75,4 +75,3 @@ const Map: FunctionComponent<IMapProps> = React.memo(
   },
   () => true
 )
-export default Map
