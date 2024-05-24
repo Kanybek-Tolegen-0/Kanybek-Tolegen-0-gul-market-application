@@ -5,4 +5,5 @@ export interface InputProps {
   className?: string
   label?: string
   type?: HTMLInputTypeAttribute
+  onChange?: (value: string) => void
 }
