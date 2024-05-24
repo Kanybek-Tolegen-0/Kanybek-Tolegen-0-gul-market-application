@@ -1,0 +1,8 @@
+.input {
+  padding: 9px 13px 9px 13px;
+}
+
+.input:focus {
+  background: none;
+  border: 1px solid #6366f1;
+}
