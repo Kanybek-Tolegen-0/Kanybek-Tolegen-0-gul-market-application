@@ -20,7 +20,9 @@ module.exports = withMT({
         transparent: 'transparent',
         'gr-100': 'rgba(243, 244, 246, 1)',
         'gr-800': 'rgba(31, 41, 55, 1)',
-        'gr-200': 'rgba(229, 231, 235, 1)'
+        'gr-200': 'rgba(229, 231, 235, 1)',
+        'Gr-800': 'rgba(39, 40, 44, 1)',
+        'Gr-900': 'rgba(31, 31, 32, 1)'
       },
       fontSize: {
         base: ['1rem', '1.25rem']

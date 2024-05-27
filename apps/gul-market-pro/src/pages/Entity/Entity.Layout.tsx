@@ -1,13 +1,13 @@
 import React, { FC, useState } from 'react'
-import { IconButton, Typography } from '@material-tailwind/react'
+import { Button, IconButton, Typography } from '@material-tailwind/react'
 import StepHeader from '../../pageComponents/StepHeader/StepHeader'
 import { configs } from './consts/configs'
-import { BrandButton, Container } from '@design-system/ui'
+import { BrandButton, Container, PlusIcon } from '@design-system/ui'
 import { Link } from 'react-router-dom'
 import { ChevronLeftIcon } from '@design-system/ui'
 import GMStepper from '../../pageComponents/GMStepper/GMStepper'
 import './Entity.styles.css'
-import Main from './Forms/Shop/parts/Main/Main'
+
 const EntityLayout: FC = props => {
   const [activeStep, setActiveStep] = React.useState(0)
   const [isLastStep, setIsLastStep] = React.useState(false)
@@ -42,11 +42,20 @@ const EntityLayout: FC = props => {
             <StepForm />
           </Container>
         ) : (
-          shops.map((_, index) => (
-            <Container className={'flex-col mb-6 min-w-[630px]'}>
-              <StepForm key={index} />
-            </Container>
-          ))
+          <>
+            {shops.map((_, index) => (
+              <Container className={'flex-col mb-6 min-w-[630px]'}>
+                <StepForm key={index} />
+              </Container>
+            ))}
+            <Button
+              onClick={addShop}
+              className="normal-case flex justify-center items-center mb-6 gap-6 w-full !rounded-base px-[32px] py-[20px] bg-gr-800 h-16 "
+            >
+              <PlusIcon alt="add shop" className="bg-primary rounded-full" />
+              <Typography children="Добавить еще магазин" className="font-bold text-base text-primary" />
+            </Button>
+          </>
         )}
 
         <div className="flex justify-between items-center w-full">
