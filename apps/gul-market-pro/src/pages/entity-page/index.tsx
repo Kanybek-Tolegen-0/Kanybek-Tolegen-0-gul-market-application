@@ -62,7 +62,7 @@ export const EntityPage: FC = props => {
 
             <div className="flex justify-between items-center w-full">
               {activeStep === 0 ? (
-                <Link to="/choose_role">
+                <Link to="/choose-role">
                   <div className={'flex items-center gap-2'}>
                     <IconButton variant="text" className="w-4 h-4">
                       <ChevronLeftIcon alt="svg" />
