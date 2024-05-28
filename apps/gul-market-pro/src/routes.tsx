@@ -9,6 +9,8 @@ import {
   RememberPasswordPage,
   NewPasswordPage
 } from './pages'
+import { MainPage } from './pages/main-page'
+import Main from './pages/entity-page/Forms/Shop/parts/Main/Main'
 // CreateBrowserRouter поменяем как сервак будет
 export const routes = createBrowserRouter([
   {
@@ -30,6 +32,10 @@ export const routes = createBrowserRouter([
   {
     path: '/entity',
     element: <EntityPage />
+  },
+  {
+    path: '/main-page',
+    element: <MainPage />
   },
   {
     path: '/remember-password',

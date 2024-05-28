@@ -11,7 +11,7 @@ module.exports = withMT({
         tip: 'rgba(55, 65, 81, 1)',
         tip_bold: 'rgba(75, 85, 99, 1)',
         disabled: 'rgba(209, 213, 219, 1)',
-        tdisabled: 'rgba(107, 114, 128, 1)',
+        't-disabled': 'rgba(107, 114, 128, 1)',
         brand: 'rgba(236, 72, 153, 1)',
         brand_bold: 'rgba(219, 39, 119, 1)',
         brand_disabled: 'rgba(236, 72, 153, 1)',

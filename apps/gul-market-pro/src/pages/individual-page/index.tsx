@@ -61,7 +61,7 @@ export const IndividualPage: FC = props => {
               {!isLastStep ? (
                 <BrandButton onClick={handleNext}>Далее</BrandButton>
               ) : (
-                <Link to="">
+                <Link to="/main-page">
                   <BrandButton>Завершить создание аккаунта</BrandButton>
                 </Link>
               )}
