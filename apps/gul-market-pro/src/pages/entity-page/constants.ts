@@ -1,7 +1,7 @@
 import { FC } from 'react'
-import ShopAddress from '../Forms/ShopAddress/ShopAddress'
-import Shop from '../Forms/Shop/Shop'
-import ShopCreated from '../Forms/ShopCreated/ShopCreated'
+import ShopAddress from './Forms/ShopAddress/ShopAddress'
+import Shop from './Forms/Shop/Shop'
+import ShopCreated from './Forms/ShopCreated/ShopCreated'
 
 export interface IContent {
   title: string

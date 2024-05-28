@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react'
 import { fakeShopImage } from '@design-system/ui'
 import { Typography } from '@material-tailwind/react'
-import WorkTime from '../Shop/parts/WorkTime/WorkTime'
 
 interface ShopCreatedProps {}
 
