@@ -15,7 +15,7 @@ export const ChooseRolePage: FC = props => {
           <Typography children="Выберите вашу роль" className="font-bold text-3xl" />
 
           <div className="flex gap-5">
-            <Link to={'individual'}>
+            <Link to={'/individual'}>
               <Container>
                 <div className="role_type">
                   <Typography children="Физ. Лицо" className="role_type_name" />
@@ -24,7 +24,7 @@ export const ChooseRolePage: FC = props => {
                 <img alt="individual" src={individualImage} />
               </Container>
             </Link>
-            <Link to={'entity'}>
+            <Link to={'/entity'}>
               <Container>
                 <div className="role_type">
                   <Typography children="Магазин" className="role_type_name" />

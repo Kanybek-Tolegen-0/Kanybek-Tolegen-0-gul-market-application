@@ -4,7 +4,6 @@ import { countries } from './constants'
 import { Input } from '../input'
 import { Label } from '../label'
 import './../input/style.css'
-import { PatternFormat } from 'react-number-format'
 
 export const PhoneNumberInput: FC<{ className?: string }> = ({ className }) => {
   const [countryId, setCountryId] = useState(0)
@@ -47,7 +46,7 @@ export const PhoneNumberInput: FC<{ className?: string }> = ({ className }) => {
             })}
           </MenuList>
         </Menu>
-        <PatternFormat className="w-full" name="phone-number" format="%% (%%%)" customInput={Input} />
+        <Input className="w-full" name="phone-number" />
       </div>
     </div>
   )
