@@ -7,7 +7,8 @@ import {
   EntityPage,
   LoginPage,
   RememberPasswordPage,
-  NewPasswordPage
+  NewPasswordPage,
+  FlowersPage
 } from './pages'
 import { MainPage } from './pages/main-page'
 import Main from './pages/entity-page/Forms/Shop/parts/Main/Main'
@@ -36,6 +37,10 @@ export const routes = createBrowserRouter([
   {
     path: '/main-page',
     element: <MainPage />
+  },
+  {
+    path: 'flowers',
+    element: <FlowersPage />
   },
   {
     path: '/remember-password',
