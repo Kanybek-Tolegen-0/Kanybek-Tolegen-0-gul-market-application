@@ -3,7 +3,7 @@ import { Button, Typography } from '@material-tailwind/react'
 import { MenuIcon, ProfileIcon, LogoIcon, NotificationIcon, fakeShopImage } from '../../assets'
 import Nav from '../nav'
 import { Select } from '../select'
-import Search from '../search'
+import { SearchInput } from '../search-input'
 
 interface HeaderProps {
   fullHeader?: boolean
@@ -30,7 +30,7 @@ export const Header: FC<HeaderProps> = ({ isLogged, fullHeader }) => (
           {fullHeader && (
             <>
               <Select options={[{ label: 'one', value: 'one' }]} />
-              <Search />
+              <SearchInput inputProps={{ placeholder: 'Искать товар или плантацию' }} />
               <div className="w-6 h-6">
                 <NotificationIcon />
               </div>

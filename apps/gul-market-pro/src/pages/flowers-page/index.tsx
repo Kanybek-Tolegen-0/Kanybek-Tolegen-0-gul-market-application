@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react'
-import { Layout, ButtonTabs, ListIcon, RectangleIcon } from '@design-system/ui'
+import { Layout, ButtonTabs, ListIcon, RectangleIcon, FilterPart, Filter, CheckboxGroup } from '@design-system/ui'
 import { Tab, Tabs, TabsBody, TabsHeader, Typography } from '@material-tailwind/react'
 import { FilterSelect } from '../../components'
 
@@ -13,6 +13,40 @@ const data = [
     value: 'plantations'
   }
 ]
+
+const BUTTON_TABS_OPTIONS = [
+  { label: 'Списком', value: 'list', Icon: <ListIcon /> },
+  { label: 'Карточками', value: 'card', Icon: <RectangleIcon /> }
+]
+
+const FILTER_SELECT_OPTIONS = [
+  { label: 'one', value: 'one' },
+  { label: 'two', value: 'two' }
+]
+
+const FILTER_PART_FLOWER_TYPE_OPTIONS = [
+  { label: 'Гвоздика', value: 'Гвоздика' },
+  { label: 'Розы', value: 'Розы' },
+  { label: 'Гортензия', value: 'Гортензия' },
+  { label: 'Спрей', value: 'Спрей' }
+]
+
+const FILTER_PART_FLOWER_SORT_OPTIONS = {
+  carnation: {
+    label: 'Гвоздика',
+    options: [
+      { label: 'Deep blue', value: 'Deep blue' },
+      { label: 'Deep red', value: 'Deep red' }
+    ]
+  },
+  rose: {
+    label: 'Розы',
+    options: [
+      { label: 'Deep blue', value: 'Deep blue' },
+      { label: 'Deep red', value: 'Deep red' }
+    ]
+  }
+}
 
 export const FlowersPage: FC = () => {
   const [activeTab, setActiveTab] = useState(data[0]?.value)
@@ -41,21 +75,32 @@ export const FlowersPage: FC = () => {
               ))}
             </TabsHeader>
             <div className="flex gap-3 items-center">
-              <FilterSelect
-                options={[
-                  { label: 'one', value: 'one' },
-                  { label: 'two', value: 'two' }
-                ]}
-              />
-              <ButtonTabs
-                options={[
-                  { label: 'Списком', value: 'list', Icon: <ListIcon /> },
-                  { label: 'Карточками', value: 'card', Icon: <RectangleIcon /> }
-                ]}
-              />
+              <FilterSelect options={FILTER_SELECT_OPTIONS} />
+              <ButtonTabs options={BUTTON_TABS_OPTIONS} />
             </div>
           </div>
-          <TabsBody>{activeTab}</TabsBody>
+          <TabsBody>
+            <Filter>
+              <div className="flex flex-col gap-8">
+                <FilterPart label="Тип цветов">
+                  <CheckboxGroup
+                    options={FILTER_PART_FLOWER_TYPE_OPTIONS}
+                    inputProps={{ placeholder: 'Поиск' }}
+                    checkboxProps={{ name: 'flower-type' }}
+                    onCheckboxChange={({ label, value }) => console.log({ label, value })}
+                  />
+                </FilterPart>
+                <FilterPart label="Сорт цветов">
+                  <CheckboxGroup
+                    options={FILTER_PART_FLOWER_SORT_OPTIONS}
+                    inputProps={{ placeholder: 'Поиск' }}
+                    checkboxProps={{ name: 'flower-type' }}
+                    onCheckboxChange={({ label, value }) => console.log({ label, value })}
+                  />
+                </FilterPart>
+              </div>
+            </Filter>
+          </TabsBody>
         </Tabs>
       </Layout.Content>
     </Layout>

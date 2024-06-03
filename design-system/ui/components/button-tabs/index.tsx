@@ -17,6 +17,7 @@ export const ButtonTabs: FC<ButtonTabsProps> = ({ className, options }) => {
     <div className="flex gap-4">
       {options.map(({ label, value, Icon }) => (
         <div
+          key={value}
           className={`flex gap-2 items-center rounded-lg transition-all duration-300 ${active === value ? 'bg-gray-100' : ''} cursor-pointer px-[8px] py-[6px] ${className}`}
           onClick={() => onChange(value)}
         >

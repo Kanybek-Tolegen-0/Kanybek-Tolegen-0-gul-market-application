@@ -25,7 +25,8 @@ module.exports = withMT({
         'Gr-800': 'rgba(39, 40, 44, 1)',
         'Gr-900': 'rgba(31, 31, 32, 1)',
         'gr-300': '#D1D5DB',
-        'gr-700': '#374151'
+        'gr-700': '#374151',
+        'gr-800': '#1F2937'
       },
       fontSize: {
         base: ['1rem', '1.25rem']
