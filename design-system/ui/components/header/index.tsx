@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { Button, Typography } from '@material-tailwind/react'
 import { MenuIcon, ProfileIcon, LogoIcon, NotificationIcon, fakeShopImage } from '../../assets'
 import Nav from '../nav'
-import ChooseCountry from '../choose-country'
+import { Select } from '../select'
 import Search from '../search'
 
 interface HeaderProps {
@@ -29,7 +29,7 @@ export const Header: FC<HeaderProps> = ({ isLogged, fullHeader }) => (
         <div className="flex items-center gap-4">
           {fullHeader && (
             <>
-              <ChooseCountry />
+              <Select options={[{ label: 'one', value: 'one' }]} />
               <Search />
               <div className="w-6 h-6">
                 <NotificationIcon />

@@ -18,6 +18,7 @@ module.exports = withMT({
         body: 'rgba(249, 250, 251, 1)',
         label: 'rgba(55, 65, 81, 1)',
         transparent: 'transparent',
+        'pink-500': '#EC4899',
         'gr-100': 'rgba(243, 244, 246, 1)',
         'gr-800': 'rgba(31, 41, 55, 1)',
         'gr-200': 'rgba(229, 231, 235, 1)',
