@@ -3,12 +3,11 @@ import { Input, Typography } from '@material-tailwind/react'
 import './style.css'
 
 export const FilterDoubleSlider: FC<{
-  label: string
   metric: string
   min: number
   max: number
   onChange: ({ min, max }: { min: number; max: number }) => void
-}> = ({ label, metric, min, max, onChange }) => {
+}> = ({ metric, min, max, onChange }) => {
   const [minVal, setMinVal] = useState(min)
   const [maxVal, setMaxVal] = useState(max)
   const minValRef = useRef(min)
@@ -41,8 +40,7 @@ export const FilterDoubleSlider: FC<{
   }, [minVal, maxVal, onChange])
 
   return (
-    <div className="flex flex-col gap-8">
-      <Typography className="text-sm leading-4 font-medium text-gray-500">{label}</Typography>
+    <>
       <div className="flex gap-4">
         <Input
           value={minVal}
@@ -93,7 +91,7 @@ export const FilterDoubleSlider: FC<{
           <div ref={range} className="slider__range" />
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
