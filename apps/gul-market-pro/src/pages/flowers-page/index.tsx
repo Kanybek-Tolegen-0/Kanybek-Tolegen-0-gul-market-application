@@ -1,5 +1,14 @@
 import React, { FC, useState } from 'react'
-import { Layout, ButtonTabs, ListIcon, RectangleIcon, FilterPart, Filter, CheckboxGroup } from '@design-system/ui'
+import {
+  Layout,
+  ButtonTabs,
+  ListIcon,
+  RectangleIcon,
+  FilterPart,
+  Filter,
+  CheckboxGroup,
+  FilterDoubleSlider
+} from '@design-system/ui'
 import { Tab, Tabs, TabsBody, TabsHeader, Typography } from '@material-tailwind/react'
 import { FilterSelect } from '../../components'
 
@@ -98,6 +107,21 @@ export const FlowersPage: FC = () => {
                     onCheckboxChange={({ label, value }) => console.log({ label, value })}
                   />
                 </FilterPart>
+                <FilterDoubleSlider
+                  label="Цена за штуку"
+                  metric={'$'}
+                  min={1}
+                  max={100}
+                  onChange={({ min, max }) => console.log({ min, max })}
+                />
+                <FilterDoubleSlider
+                  label="Размер"
+                  metric={'см'}
+                  min={30}
+                  max={120}
+                  onChange={({ min, max }) => console.log({ min, max })}
+                />
+                <div className="h-[120px]"></div>
               </div>
             </Filter>
           </TabsBody>
