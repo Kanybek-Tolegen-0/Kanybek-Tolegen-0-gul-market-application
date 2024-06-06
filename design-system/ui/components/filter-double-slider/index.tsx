@@ -41,7 +41,7 @@ export const FilterDoubleSlider: FC<{
 
   return (
     <>
-      <div className="flex gap-4">
+      <div className="flex gap-4 pb-[16px]">
         <Input
           value={minVal}
           type="number"

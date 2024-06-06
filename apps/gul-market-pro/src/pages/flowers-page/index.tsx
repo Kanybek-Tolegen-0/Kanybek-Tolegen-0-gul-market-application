@@ -52,8 +52,8 @@ export const FlowersPage: FC = () => {
             </div>
           </div>
           <TabsBody>
-            <Filter className="w-[290px]">
-              <div className="flex flex-col gap-8">
+            <Filter>
+              <div className="flex flex-col gap-8 max-w-max">
                 <FilterPart label="Тип цветов" collapsable>
                   <CheckboxGroup
                     options={FILTER_PART_FLOWER_TYPE_OPTIONS}
@@ -82,7 +82,7 @@ export const FlowersPage: FC = () => {
                   />
                 </FilterPart>
 
-                <FilterPart label="Размер">
+                <FilterPart className="gap-3" label="Размер">
                   <FilterDoubleSlider
                     metric={'см'}
                     min={30}
