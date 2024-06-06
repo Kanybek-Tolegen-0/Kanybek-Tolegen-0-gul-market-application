@@ -2,7 +2,7 @@
     @apply min-w-[1000px] w-fit border-[1px] pl-6 py-4 pr-72 rounded-md border-disabled my-8
 }
 .step{
-    @apply relative border-2 rounded-base border-disabled text-tdisabled bg-transparent text-sm font-medium
+    @apply relative border-2 rounded-base border-disabled text-t-disabled bg-transparent text-sm font-medium
 }
 
 .active{

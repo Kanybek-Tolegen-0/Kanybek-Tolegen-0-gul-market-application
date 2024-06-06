@@ -13,7 +13,7 @@ const Logo: FunctionComponent<LogoProps> = props => {
       </div>
       <Typography
         children="Логотип должен быть не более 2000x2000px и иметь формат .jpg, .jpeg, .png"
-        className="font-normal text-xs text-tdisabled"
+        className="font-normal text-xs text-t-disabled"
       />
     </div>
   )

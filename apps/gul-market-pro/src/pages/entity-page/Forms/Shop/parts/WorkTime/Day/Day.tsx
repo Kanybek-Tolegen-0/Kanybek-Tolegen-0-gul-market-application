@@ -13,7 +13,7 @@ const Day: FC<DayProps> = ({ day }) => {
 
   return (
     <div className={'flex flex-col gap-2.5'}>
-      <Typography children={day} className="font-normal text-base text-tdisabled" />
+      <Typography children={day} className="font-normal text-base text-t-disabled" />
       <div className="flex gap-[69px] items-center h-[38px]">
         <div className="flex gap-3">
           <Typography children="Рабочий день" className="font-normal text-base text-black" />

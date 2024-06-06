@@ -1,15 +1,32 @@
-import React, { FC } from 'react'
+import React, { FC, ReactNode } from 'react'
 import { Header } from '../header'
 
-const Content: FC<{ className?: string; children: React.ReactNode }> = ({ className, children }) => (
+interface LayoutProps {
+  children: ReactNode
+  isLogged?: boolean
+  fullHeader?: boolean
+}
+
+interface ContentProps {
+  className?: string
+  children: ReactNode
+}
+
+const Content: FC<ContentProps> = ({ className, children }) => (
   <div className={`px-[120px] pb-16 ${className}`}>{children}</div>
 )
 
-export const Layout = ({ children }: { children: React.ReactNode }) => (
+interface LayoutComponent extends FC<LayoutProps> {
+  Content: FC<ContentProps>
+}
+
+const Layout: LayoutComponent = ({ children, isLogged = false, fullHeader = false }) => (
   <div className="flex flex-col">
-    <Header />
+    <Header isLogged={isLogged} fullHeader={fullHeader} />
     {children}
   </div>
 )
 
 Layout.Content = Content
+
+export { Layout }
