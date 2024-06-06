@@ -1,9 +1,18 @@
 import React, { FC, useState } from 'react'
-import { Layout, ButtonTabs, FilterPart, Filter, CheckboxGroup, FilterDoubleSlider } from '@design-system/ui'
+import {
+  Layout,
+  ButtonTabs,
+  FilterPart,
+  Filter,
+  CheckboxGroup,
+  FilterDoubleSlider,
+  ColorSelect
+} from '@design-system/ui'
 import { Tab, Tabs, TabsBody, TabsHeader, Typography } from '@material-tailwind/react'
 import { FilterSelect } from '../../components'
 import {
   BUTTON_TABS_OPTIONS,
+  FILTER_PART_COLOR_OPTIONS,
   FILTER_PART_FLOWER_BOX_TYPE_OPTIONS,
   FILTER_PART_FLOWER_DELIVERY_OPTIONS,
   FILTER_PART_FLOWER_SORT_OPTIONS,
@@ -43,9 +52,9 @@ export const FlowersPage: FC = () => {
             </div>
           </div>
           <TabsBody>
-            <Filter>
+            <Filter className="w-[290px]">
               <div className="flex flex-col gap-8">
-                <FilterPart label="Тип цветов">
+                <FilterPart label="Тип цветов" collapsable>
                   <CheckboxGroup
                     options={FILTER_PART_FLOWER_TYPE_OPTIONS}
                     inputProps={{
@@ -96,6 +105,9 @@ export const FlowersPage: FC = () => {
                     checkboxProps={{ name: 'delivery' }}
                     onCheckboxChange={({ label, value }) => console.log({ label, value })}
                   />
+                </FilterPart>
+                <FilterPart label="Цвет">
+                  <ColorSelect options={FILTER_PART_COLOR_OPTIONS} />
                 </FilterPart>
               </div>
             </Filter>

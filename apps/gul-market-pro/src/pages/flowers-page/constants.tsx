@@ -58,3 +58,26 @@ export const FILTER_PART_FLOWER_BOX_TYPE_OPTIONS = [
   { label: 'QB', value: 'QB' },
   { label: 'HB', value: 'HB' }
 ]
+
+export const FILTER_PART_COLOR_OPTIONS = [
+  {
+    label: 'Белый',
+    value: '#FFFFFF'
+  },
+  {
+    label: 'Голубой',
+    value: '#7BE9E1'
+  },
+  {
+    label: 'Желтый',
+    value: '#F5EF58'
+  },
+  {
+    label: 'Оранжевый',
+    value: '#FDAC4D'
+  },
+  {
+    label: 'Красный',
+    value: '#EB4F4F'
+  }
+]
