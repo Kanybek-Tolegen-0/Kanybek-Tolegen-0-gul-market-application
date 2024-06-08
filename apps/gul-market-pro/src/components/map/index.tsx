@@ -12,7 +12,6 @@ export const Map: FunctionComponent<IMapProps> = React.memo(
     const statusRef = useRef<HTMLDivElement | null>(null)
 
     function success(pos: GeolocationPosition) {
-      console.log(pos)
       const center: [number, number] = [pos.coords.longitude, pos.coords.latitude]
       mapRef.current?.setCenter(center)
     }

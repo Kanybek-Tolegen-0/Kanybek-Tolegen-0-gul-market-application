@@ -6,7 +6,8 @@ import {
   Filter,
   CheckboxGroup,
   FilterDoubleSlider,
-  ColorSelect
+  ColorSelect,
+  Chips
 } from '@design-system/ui'
 import { Tab, Tabs, TabsBody, TabsHeader, Typography } from '@material-tailwind/react'
 import { FilterSelect } from '../../components'
@@ -20,9 +21,21 @@ import {
   FILTER_SELECT_OPTIONS,
   TABS
 } from './constants'
+import { IFilter } from '@design-system/ui/ui/@types'
 
 export const FlowersPage: FC = () => {
   const [activeTab, setActiveTab] = useState(TABS[0]?.value)
+
+  const [filters, setFilters] = useState<IFilter[]>([])
+
+  const handleCheckboxChange = ({ label, value: newValue }: IFilter) => {
+    setFilters(prev => {
+      const isExist = prev.find(({ value }) => value === newValue)
+
+      return isExist ? prev.filter(({ value }) => value !== newValue) : [...prev, { label, value: newValue }]
+    })
+  }
+
   return (
     <Layout fullHeader isLogged>
       <Layout.Content className="bg-white">
@@ -53,24 +66,31 @@ export const FlowersPage: FC = () => {
           </div>
           <TabsBody>
             <Filter>
+              <Chips
+                filters={filters}
+                onChange={({ value: rmValue }) => setFilters(prev => prev.filter(({ value }) => value !== rmValue))}
+                onReset={() => setFilters([])}
+              />
               <div className="flex flex-col gap-8 max-w-max">
                 <FilterPart label="Тип цветов" collapsable>
                   <CheckboxGroup
                     options={FILTER_PART_FLOWER_TYPE_OPTIONS}
+                    filters={filters}
                     inputProps={{
                       placeholder: 'Поиск'
                     }}
                     checkboxProps={{ name: 'flower-type' }}
-                    onCheckboxChange={({ label, value }) => console.log({ label, value })}
+                    onCheckboxChange={handleCheckboxChange}
                     showButton
                   />
                 </FilterPart>
                 <FilterPart label="Сорт цветов">
                   <CheckboxGroup
                     options={FILTER_PART_FLOWER_SORT_OPTIONS}
+                    filters={filters}
                     inputProps={{ placeholder: 'Поиск' }}
                     checkboxProps={{ name: 'flower-type' }}
-                    onCheckboxChange={({ label, value }) => console.log({ label, value })}
+                    onCheckboxChange={handleCheckboxChange}
                   />
                 </FilterPart>
                 <FilterPart label="Цена за штуку">
@@ -93,17 +113,19 @@ export const FlowersPage: FC = () => {
                 <FilterPart label="Доставка">
                   <CheckboxGroup
                     options={FILTER_PART_FLOWER_DELIVERY_OPTIONS}
+                    filters={filters}
                     inputProps={{ placeholder: 'Поиск' }}
                     checkboxProps={{ name: 'delivery' }}
-                    onCheckboxChange={({ label, value }) => console.log({ label, value })}
+                    onCheckboxChange={handleCheckboxChange}
                   />
                 </FilterPart>
                 <FilterPart label="Тип коробки">
                   <CheckboxGroup
+                    filters={filters}
                     options={FILTER_PART_FLOWER_BOX_TYPE_OPTIONS}
                     inputProps={{ placeholder: 'Поиск' }}
                     checkboxProps={{ name: 'delivery' }}
-                    onCheckboxChange={({ label, value }) => console.log({ label, value })}
+                    onCheckboxChange={handleCheckboxChange}
                   />
                 </FilterPart>
                 <FilterPart label="Цвет">
