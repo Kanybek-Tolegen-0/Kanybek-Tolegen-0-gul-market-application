@@ -81,3 +81,76 @@ export const FILTER_PART_COLOR_OPTIONS = [
     value: '#EB4F4F'
   }
 ]
+
+export const TABLE_DATA = [
+  {
+    id: 0,
+    plantation: 'Название плантации 1',
+    type: 'Роза',
+    sort: 'Deep purple',
+    color: '#EB4F4F',
+    size: '40',
+    cost_dollar: 0.25,
+    cost_tenge: 153,
+    box_type: 'QB',
+    paking: 350,
+    amount: 3,
+    is_like: false
+  },
+  {
+    id: 1,
+    plantation: 'Название плантации 2',
+    type: 'Роза',
+    sort: 'Deep purple',
+    color: '#FF5733',
+    size: '40',
+    cost_dollar: 0.25,
+    cost_tenge: 153,
+    box_type: 'QB',
+    paking: 350,
+    amount: 3,
+    is_like: true
+  },
+  {
+    id: 2,
+    plantation: 'Название плантации 3',
+    type: 'Роза',
+    sort: 'Deep purple',
+    color: '#33FF57',
+    size: '40',
+    cost_dollar: 0.25,
+    cost_tenge: 153,
+    box_type: 'QB',
+    paking: 350,
+    amount: 3,
+    is_like: false
+  },
+  {
+    id: 3,
+    plantation: 'Название плантации 4',
+    type: 'Роза',
+    sort: 'Deep purple',
+    color: '#3357FF',
+    size: '40',
+    cost_dollar: 0.25,
+    cost_tenge: 153,
+    box_type: 'QB',
+    paking: 350,
+    amount: 3,
+    is_like: false
+  },
+  {
+    id: 4,
+    plantation: 'Название плантации 5',
+    type: 'Роза',
+    sort: 'Deep purple',
+    color: '#33FF57',
+    size: '40',
+    cost_dollar: 0.25,
+    cost_tenge: 153,
+    box_type: 'QB',
+    paking: 350,
+    amount: 3,
+    is_like: true
+  }
+]
