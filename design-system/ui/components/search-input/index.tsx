@@ -7,13 +7,13 @@ export interface SearchInputProps extends React.InputHTMLAttributes<HTMLInputEle
 }
 
 export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(({ inputProps = {} }, ref) => (
-  <div className="flex items-center border border-disabled rounded-[6px] gap-2 py-[9px] px-[13px] h-10 w-[290px]">
+  <div className="flex items-center border border-disabled rounded-[6px] gap-2 py-[9px] px-[13px] h-10 w-[290px] w-full">
     <div className="">
       <SearchIcon />
     </div>
     <Input
       type="text"
-      className="border-none focus:ring-0 h-fit !p-0"
+      className="border-none focus:ring-0 h-fit !p-0 w-full"
       labelProps={{
         className: 'before:content-none after:content-none '
       }}
