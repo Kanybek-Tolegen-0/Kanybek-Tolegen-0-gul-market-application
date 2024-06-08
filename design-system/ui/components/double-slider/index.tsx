@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState, useRef, FC } from 'react'
-import { Input, Typography } from '@material-tailwind/react'
+import { Input } from '@material-tailwind/react'
 import './style.css'
 
 export const DoubleSlider: FC<{
@@ -46,6 +46,9 @@ export const DoubleSlider: FC<{
           icon={metric}
           onChange={e => setMinVal(+e.target.value)}
           crossOrigin=""
+          containerProps={{
+            className: 'min-w-[100px] max-w-[135px]'
+          }}
         />
         <Input
           value={maxVal}
@@ -54,6 +57,9 @@ export const DoubleSlider: FC<{
           icon={metric}
           onChange={e => setMaxVal(+e.target.value)}
           crossOrigin=""
+          containerProps={{
+            className: 'min-w-[100px] max-w-[135px]'
+          }}
         />
       </div>
 
@@ -93,9 +99,3 @@ export const DoubleSlider: FC<{
     </>
   )
 }
-
-// MultiRangeSlider.propTypes = {
-//   min: PropTypes.number.isRequired,
-//   max: PropTypes.number.isRequired,
-//   onChange: PropTypes.func.isRequired
-// };

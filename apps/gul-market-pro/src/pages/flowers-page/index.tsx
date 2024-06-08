@@ -7,7 +7,9 @@ import {
   CheckboxGroup,
   DoubleSlider,
   ColorSelect,
-  Chips
+  Chips,
+  Table,
+  HeartIcon
 } from '@design-system/ui'
 import { Tab, Tabs, TabsBody, TabsHeader, Typography } from '@material-tailwind/react'
 import { FilterSelect } from '../../components'
@@ -19,9 +21,49 @@ import {
   FILTER_PART_FLOWER_SORT_OPTIONS,
   FILTER_PART_FLOWER_TYPE_OPTIONS,
   FILTER_SELECT_OPTIONS,
+  TABLE_DATA,
   TABS
 } from './constants'
-import { IFilter } from '@design-system/ui/ui/@types'
+import { IFilter, THeader } from '@design-system/ui/ui/@types'
+import { IData } from './types'
+
+export const TABLE_HEADERS: THeader = [
+  { label: 'Плантация', key: 'plantation' },
+  { label: 'Тип', key: 'type' },
+  { label: 'Сорт', key: 'sort' },
+  {
+    label: 'Цвет',
+    key: 'color',
+    renderCell: color => (
+      <div className="flex justify-center">
+        <div
+          className={`w-[20px] h-[20px] rounded-full ${['#FFF', '#FFFFFF'].includes(String(color)) ? 'border-gr-300 border-[1px]' : ''}`}
+          style={{ backgroundColor: String(color) }}
+        />
+      </div>
+    )
+  },
+  { label: 'Размер', key: 'size' },
+  { label: 'Цена, $', key: 'cost_dollar' },
+  { label: 'Цена, тг', key: 'cost_tenge' },
+  { label: 'Коробка', key: 'box_type' },
+  { label: 'Пакинг', key: 'paking' },
+  { label: 'Кол-во', key: 'amount' },
+  {
+    label: '',
+    key: 'is_like',
+    renderCell: isLiked => {
+      return (
+        <div className="flex justify-center cursor-pointer">
+          <HeartIcon color={Boolean(isLiked) ? '#EB4F4F' : 'none'} />
+        </div>
+      )
+    }
+  }
+]
+
+const itemsAdapter = ({ data, headers }: { data: IData[]; headers: THeader }) =>
+  data.map(dt => headers.map(({ key }) => dt[key]))
 
 export const FlowersPage: FC = () => {
   const [activeTab, setActiveTab] = useState(TABS[0]?.value)
@@ -103,8 +145,8 @@ export const FlowersPage: FC = () => {
               <ButtonTabs options={BUTTON_TABS_OPTIONS} />
             </div>
           </div>
-          <TabsBody>
-            <Filter>
+          <TabsBody className="flex gap-4 items-start">
+            <Filter className="max-w-[300px]">
               <Chips
                 filters={filters}
                 onChange={({ value: rmValue }) => setFilters(prev => prev.filter(({ value }) => value !== rmValue))}
@@ -132,11 +174,11 @@ export const FlowersPage: FC = () => {
                     onCheckboxChange={handleCheckboxChange}
                   />
                 </FilterPart>
-                <FilterPart label="Цена за штуку">
+                <FilterPart className="max-w-min" label="Цена за штуку">
                   <DoubleSlider name="cost" metric={'$'} min={1} max={100} onChange={handleDoubleSliderChange} />
                 </FilterPart>
 
-                <FilterPart className="gap-3" label="Размер">
+                <FilterPart label="Размер">
                   <DoubleSlider name="size" metric={'см'} min={30} max={120} onChange={handleDoubleSliderChange} />
                 </FilterPart>
                 <FilterPart label="Доставка">
@@ -162,6 +204,7 @@ export const FlowersPage: FC = () => {
                 </FilterPart>
               </div>
             </Filter>
+            <Table headers={TABLE_HEADERS} items={itemsAdapter({ data: TABLE_DATA, headers: TABLE_HEADERS })} />
           </TabsBody>
         </Tabs>
       </Layout.Content>
