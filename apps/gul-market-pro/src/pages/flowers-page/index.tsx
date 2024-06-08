@@ -9,7 +9,9 @@ import {
   ColorSelect,
   Chips,
   Table,
-  HeartIcon
+  HeartIcon,
+  MiniCard,
+  plantationImage
 } from '@design-system/ui'
 import { Tab, Tabs, TabsBody, TabsHeader, Typography } from '@material-tailwind/react'
 import { FilterSelect } from '../../components'
@@ -70,6 +72,8 @@ export const FlowersPage: FC = () => {
 
   const [filters, setFilters] = useState<IFilter[]>([])
 
+  const [active, setActive] = useState<string | null>(BUTTON_TABS_OPTIONS[0]?.value || null)
+
   const handleCheckboxChange = ({ label, value: newValue, name }: IFilter) => {
     setFilters(prev => {
       const isExist = prev.some(({ value }) => value === newValue)
@@ -117,6 +121,7 @@ export const FlowersPage: FC = () => {
         : [...prev, { label, value, name: checkName }]
     })
   }
+
   return (
     <Layout fullHeader isLogged>
       <Layout.Content className="bg-white">
@@ -142,11 +147,17 @@ export const FlowersPage: FC = () => {
             </TabsHeader>
             <div className="flex gap-3 items-center">
               <FilterSelect options={FILTER_SELECT_OPTIONS} />
-              <ButtonTabs options={BUTTON_TABS_OPTIONS} />
+              {activeTab === 'positions' ? (
+                <ButtonTabs
+                  active={String(active)}
+                  options={BUTTON_TABS_OPTIONS}
+                  onChange={(active: string) => setActive(active)}
+                />
+              ) : null}
             </div>
           </div>
           <TabsBody className="flex gap-4 items-start">
-            <Filter className="max-w-[300px]">
+            <Filter className="w-[300px]">
               <Chips
                 filters={filters}
                 onChange={({ value: rmValue }) => setFilters(prev => prev.filter(({ value }) => value !== rmValue))}
@@ -204,7 +215,21 @@ export const FlowersPage: FC = () => {
                 </FilterPart>
               </div>
             </Filter>
-            <Table headers={TABLE_HEADERS} items={itemsAdapter({ data: TABLE_DATA, headers: TABLE_HEADERS })} />
+            {activeTab === 'positions' ? (
+              active === 'list' ? (
+                <Table headers={TABLE_HEADERS} items={itemsAdapter({ data: TABLE_DATA, headers: TABLE_HEADERS })} />
+              ) : null
+            ) : (
+              <div className="grid grid-cols-3 gap-x-4 gap-y-4 w-full">
+                <MiniCard label="Название плантации" imgSrc={plantationImage} rating={4.76} />
+                <MiniCard label="Название плантации" imgSrc={plantationImage} rating={4.76} showNewFlag />
+                <MiniCard label="Название плантации" imgSrc={plantationImage} rating={4.76} />
+                <MiniCard label="Название плантации" imgSrc={plantationImage} rating={4.76} />
+                <MiniCard label="Название плантации" imgSrc={plantationImage} rating={4.76} showNewFlag />
+                <MiniCard label="Название плантации" imgSrc={plantationImage} rating={4.76} />
+                <MiniCard label="Название плантации" imgSrc={plantationImage} rating={4.76} showNewFlag />
+              </div>
+            )}
           </TabsBody>
         </Tabs>
       </Layout.Content>
