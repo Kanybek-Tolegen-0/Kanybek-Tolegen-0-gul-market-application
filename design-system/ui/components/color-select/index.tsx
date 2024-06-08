@@ -1,7 +1,11 @@
 import React, { FC, useState } from 'react'
 import { Color } from './color'
 
-export const ColorSelect: FC<{ options: { label: string; value: string }[] }> = ({ options }) => {
+export const ColorSelect: FC<{
+  name: string
+  options: { label: string; value: string }[]
+  onChange: ({ label, value, name }: { label: string; value: string; name: string }) => void
+}> = ({ name, options, onChange }) => {
   const [active, setActive] = useState(options[0])
 
   return (
@@ -10,7 +14,10 @@ export const ColorSelect: FC<{ options: { label: string; value: string }[] }> = 
         <Color
           key={value}
           active={active?.value === value}
-          onChange={option => setActive(option)}
+          onChange={option => {
+            setActive(option)
+            onChange({ label, value, name })
+          }}
           label={label}
           value={value}
         />

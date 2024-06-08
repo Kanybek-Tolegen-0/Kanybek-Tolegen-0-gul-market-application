@@ -5,7 +5,7 @@ import {
   FilterPart,
   Filter,
   CheckboxGroup,
-  FilterDoubleSlider,
+  DoubleSlider,
   ColorSelect,
   Chips
 } from '@design-system/ui'
@@ -28,14 +28,53 @@ export const FlowersPage: FC = () => {
 
   const [filters, setFilters] = useState<IFilter[]>([])
 
-  const handleCheckboxChange = ({ label, value: newValue }: IFilter) => {
+  const handleCheckboxChange = ({ label, value: newValue, name }: IFilter) => {
     setFilters(prev => {
-      const isExist = prev.find(({ value }) => value === newValue)
+      const isExist = prev.some(({ value }) => value === newValue)
 
-      return isExist ? prev.filter(({ value }) => value !== newValue) : [...prev, { label, value: newValue }]
+      return isExist ? prev.filter(({ value }) => value !== newValue) : [...prev, { label, value: newValue, name }]
     })
   }
 
+  const handleDoubleSliderChange = ({
+    min,
+    max,
+    name: checkName,
+    metric
+  }: {
+    min: number
+    max: number
+    name: string
+    metric: string
+  }) => {
+    setFilters(prev => {
+      const isExist = prev.some(({ name }) => name === checkName)
+
+      return isExist
+        ? prev.map(pr =>
+            pr.name === checkName ? { label: `${metric} ${min}-${max}`, value: { min, max }, name: checkName } : pr
+          )
+        : [...prev, { label: `${metric} ${min}-${max}`, value: { min, max }, name: checkName }]
+    })
+  }
+
+  const handleColorSelectChange = ({
+    label,
+    value,
+    name: checkName
+  }: {
+    label: string
+    value: string
+    name: string
+  }) => {
+    setFilters(prev => {
+      const isExist = prev.some(({ name }) => name === checkName)
+
+      return isExist
+        ? prev.map(pr => (pr.name === checkName ? { label, value, name: checkName } : pr))
+        : [...prev, { label, value, name: checkName }]
+    })
+  }
   return (
     <Layout fullHeader isLogged>
       <Layout.Content className="bg-white">
@@ -74,62 +113,52 @@ export const FlowersPage: FC = () => {
               <div className="flex flex-col gap-8 max-w-max">
                 <FilterPart label="Тип цветов" collapsable>
                   <CheckboxGroup
+                    name="flower-type"
                     options={FILTER_PART_FLOWER_TYPE_OPTIONS}
                     filters={filters}
                     inputProps={{
                       placeholder: 'Поиск'
                     }}
-                    checkboxProps={{ name: 'flower-type' }}
                     onCheckboxChange={handleCheckboxChange}
                     showButton
                   />
                 </FilterPart>
                 <FilterPart label="Сорт цветов">
                   <CheckboxGroup
+                    name="flower-type"
                     options={FILTER_PART_FLOWER_SORT_OPTIONS}
                     filters={filters}
                     inputProps={{ placeholder: 'Поиск' }}
-                    checkboxProps={{ name: 'flower-type' }}
                     onCheckboxChange={handleCheckboxChange}
                   />
                 </FilterPart>
                 <FilterPart label="Цена за штуку">
-                  <FilterDoubleSlider
-                    metric={'$'}
-                    min={1}
-                    max={100}
-                    onChange={({ min, max }) => console.log({ min, max })}
-                  />
+                  <DoubleSlider name="cost" metric={'$'} min={1} max={100} onChange={handleDoubleSliderChange} />
                 </FilterPart>
 
                 <FilterPart className="gap-3" label="Размер">
-                  <FilterDoubleSlider
-                    metric={'см'}
-                    min={30}
-                    max={120}
-                    onChange={({ min, max }) => console.log({ min, max })}
-                  />
+                  <DoubleSlider name="size" metric={'см'} min={30} max={120} onChange={handleDoubleSliderChange} />
                 </FilterPart>
                 <FilterPart label="Доставка">
                   <CheckboxGroup
+                    name="delivery"
                     options={FILTER_PART_FLOWER_DELIVERY_OPTIONS}
                     filters={filters}
                     inputProps={{ placeholder: 'Поиск' }}
-                    checkboxProps={{ name: 'delivery' }}
                     onCheckboxChange={handleCheckboxChange}
                   />
                 </FilterPart>
                 <FilterPart label="Тип коробки">
                   <CheckboxGroup
+                    name="box-type"
                     filters={filters}
                     options={FILTER_PART_FLOWER_BOX_TYPE_OPTIONS}
                     inputProps={{ placeholder: 'Поиск' }}
-                    checkboxProps={{ name: 'delivery' }}
                     onCheckboxChange={handleCheckboxChange}
                   />
                 </FilterPart>
-                <FilterPart label="Цвет">
-                  <ColorSelect options={FILTER_PART_COLOR_OPTIONS} />
+                <FilterPart label="Цвет" collapsable>
+                  <ColorSelect name="color" options={FILTER_PART_COLOR_OPTIONS} onChange={handleColorSelectChange} />
                 </FilterPart>
               </div>
             </Filter>

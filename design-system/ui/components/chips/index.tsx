@@ -17,8 +17,8 @@ export const Chips: FC<{
             <CrossIcon />
           </Button>
         ) : null}
-        {filters.map(({ label, value }, index) => (
-          <Chip key={index} value={value} label={label} onChange={() => onChange({ label, value })} />
+        {filters.map(({ label, value, name }, index) => (
+          <Chip key={index} value={value} label={label} onChange={() => onChange({ label, value, name })} />
         ))}
       </div>
       {filters.length ? (

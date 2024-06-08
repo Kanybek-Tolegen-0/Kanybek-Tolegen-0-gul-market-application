@@ -2,12 +2,13 @@ import React, { useCallback, useEffect, useState, useRef, FC } from 'react'
 import { Input, Typography } from '@material-tailwind/react'
 import './style.css'
 
-export const FilterDoubleSlider: FC<{
+export const DoubleSlider: FC<{
+  name: string
   metric: string
   min: number
   max: number
-  onChange: ({ min, max }: { min: number; max: number }) => void
-}> = ({ metric, min, max, onChange }) => {
+  onChange: ({ min, max, name, metric }: { min: number; max: number; name: string; metric: string }) => void
+}> = ({ name, metric, min, max, onChange }) => {
   const [minVal, setMinVal] = useState(min)
   const [maxVal, setMaxVal] = useState(max)
   const minValRef = useRef(min)
@@ -34,10 +35,6 @@ export const FilterDoubleSlider: FC<{
       range.current.style.width = `${maxPercent - minPercent}%`
     }
   }, [maxVal, getPercent])
-
-  useEffect(() => {
-    onChange({ min: minVal, max: maxVal })
-  }, [minVal, maxVal, onChange])
 
   return (
     <>
@@ -71,6 +68,7 @@ export const FilterDoubleSlider: FC<{
             setMinVal(value)
             minValRef.current = value
           }}
+          onMouseUp={() => onChange({ min: minVal, max: maxVal, name, metric })}
           className="thumb thumb--left"
         />
         <input
@@ -83,6 +81,7 @@ export const FilterDoubleSlider: FC<{
             setMaxVal(value)
             maxValRef.current = value
           }}
+          onMouseUp={() => onChange({ min: minVal, max: maxVal, name, metric })}
           className="thumb thumb--right"
         />
 

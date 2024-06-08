@@ -4,18 +4,19 @@ import { SearchInput, SearchInputProps } from '../search-input'
 import { IFilter } from '../../@types'
 
 interface CheckboxGroupProps extends SearchInputProps {
+  name: string
   options:
     | { label: string; value: string }[]
     | { [key: string]: { label: string; options: { label: string; value: string }[] } }
-  checkboxProps: CheckboxProps
+  checkboxProps?: CheckboxProps
   filters: IFilter[]
   showButton?: boolean
   onShowButtonClick?: (show: boolean) => void
-  onCheckboxChange: ({ label, value }: { label: string; value: string }) => void
+  onCheckboxChange: ({ label, value, name }: { label: string; value: string; name: string }) => void
 }
 
 export const CheckboxGroup = React.forwardRef<HTMLInputElement, CheckboxGroupProps>(
-  ({ inputProps, filters, showButton = false, options, checkboxProps, onCheckboxChange }, ref) => {
+  ({ name, inputProps, filters, showButton = false, options, checkboxProps = {}, onCheckboxChange }, ref) => {
     const [show, setShow] = useState(showButton)
 
     return (
@@ -34,7 +35,7 @@ export const CheckboxGroup = React.forwardRef<HTMLInputElement, CheckboxGroupPro
                   labelProps={{
                     className: 'text-sm leading-none font-normal text-gr-800'
                   }}
-                  onChange={() => onCheckboxChange({ label, value })}
+                  onChange={() => onCheckboxChange({ label, value, name })}
                   crossOrigin=""
                   {...checkboxProps}
                   ref={ref}
@@ -58,7 +59,11 @@ export const CheckboxGroup = React.forwardRef<HTMLInputElement, CheckboxGroupPro
                       className: 'text-sm leading-none font-normal text-gr-800'
                     }}
                     onChange={() =>
-                      onCheckboxChange({ label: `${value.label}:${optionValue}`, value: `${key}:${optionValue}` })
+                      onCheckboxChange({
+                        label: `${value.label}:${optionValue}`,
+                        value: `${key}:${optionValue}`,
+                        name
+                      })
                     }
                     crossOrigin=""
                     {...checkboxProps}
