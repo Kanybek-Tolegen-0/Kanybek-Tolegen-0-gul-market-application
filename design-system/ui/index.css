@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-    body{
-        @apply bg-body
-    }
-}
 @layer components {
     .container {
         @apply flex gap-6 py-5 px-8 bg-primary rounded-[20px] shadow-pr w-fit

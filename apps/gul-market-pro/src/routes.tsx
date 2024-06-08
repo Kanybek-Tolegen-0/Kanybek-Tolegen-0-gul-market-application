@@ -12,6 +12,7 @@ import {
 } from './pages'
 import { MainPage } from './pages/main-page'
 import Main from './pages/entity-page/Forms/Shop/parts/Main/Main'
+import { CatalogPage } from './pages/catalog-page'
 // CreateBrowserRouter поменяем как сервак будет
 export const routes = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ export const routes = createBrowserRouter([
   {
     path: 'flowers',
     element: <FlowersPage />
+  },
+  {
+    path: '/catalog',
+    element: <CatalogPage />
   },
   {
     path: '/remember-password',

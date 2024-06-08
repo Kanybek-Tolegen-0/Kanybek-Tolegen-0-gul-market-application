@@ -28,15 +28,18 @@ module.exports = withMT({
         'gr-300': '#D1D5DB',
         'gr-500': '#6B7280',
         'gr-700': '#374151',
-        'gr-800': '#1F2937',
-        'gr-900': '#111827'
+        'gr-900': '#111827',
+        'card-gr': 'rgba(241, 244, 248, 1)',
+        'pk-400': 'rgba(244, 114, 182, 1)'
       },
       fontSize: {
-        base: ['1rem', '1.25rem']
+        base: ['1rem', '1.25rem'],
+        xsm: ['11px', '0.75rem']
       },
 
       boxShadow: {
-        pr: '0 4px 6px -2px rgba(0, 0, 0, 0.05), 0 10px 15px -3px rgba(0, 0, 0, 0.1)'
+        pr: '0 4px 6px -2px rgba(0, 0, 0, 0.05), 0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+        card: '0 1px 2px 0 rgba(0, 0, 0, 0.06), 0 1px 3px 0 rgba(0, 0, 0, 0.1)'
         // Additional way to add
         // '3xl': ['0 4px 6px -2px rgba(219, 39, 119, 1)', ' 0 10px 15px -3px rgba(255,0,11,1)'],
       },
