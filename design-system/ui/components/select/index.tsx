@@ -1,9 +1,5 @@
 import React, { FC } from 'react'
-import {
-  Select as MaterialTailwindSelect,
-  Option,
-  SelectProps as MaterialTailwindSelectProps
-} from '@material-tailwind/react'
+import { Select as MaterialTailwindSelect, Option } from '@material-tailwind/react'
 
 interface OptionsProps {
   label: string

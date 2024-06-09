@@ -14,7 +14,7 @@ module.exports = withMT({
         't-disabled': 'rgba(107, 114, 128, 1)',
         brand: 'rgba(236, 72, 153, 1)',
         brand_bold: 'rgba(219, 39, 119, 1)',
-        brand_disabled: 'rgba(236, 72, 153, 1)',
+        brand_disabled: 'rgba(236, 72, 153, 0.5)',
         body: 'rgba(249, 250, 251, 1)',
         label: 'rgba(55, 65, 81, 1)',
         transparent: 'transparent',
@@ -30,11 +30,13 @@ module.exports = withMT({
         'gr-700': '#374151',
         'gr-900': '#111827',
         'card-gr': 'rgba(241, 244, 248, 1)',
-        'pk-400': 'rgba(244, 114, 182, 1)'
+        'pk-400': 'rgba(244, 114, 182, 1)',
+        'gr-400': 'rgba(156, 163, 175, 1)'
       },
       fontSize: {
         base: ['1rem', '1.25rem'],
-        xsm: ['11px', '0.75rem']
+        xsm: ['11px', '0.75rem'],
+        little: ['13px', '18px']
       },
 
       boxShadow: {
