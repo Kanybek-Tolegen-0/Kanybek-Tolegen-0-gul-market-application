@@ -28,6 +28,8 @@ import {
 } from './constants'
 import { IFilter, THeader } from '@design-system/ui/ui/@types'
 import { IData } from './types'
+import ProductCard from '../catalog-page/parts/product-card'
+import data from '../catalog-page/constants'
 
 export const TABLE_HEADERS: THeader = [
   { label: 'Плантация', key: 'plantation' },
@@ -157,7 +159,7 @@ export const FlowersPage: FC = () => {
             </div>
           </div>
           <TabsBody className="flex gap-4 items-start">
-            <Filter className="w-[300px]">
+            <Filter>
               <Chips
                 filters={filters}
                 onChange={({ value: rmValue }) => setFilters(prev => prev.filter(({ value }) => value !== rmValue))}
@@ -218,7 +220,16 @@ export const FlowersPage: FC = () => {
             {activeTab === 'positions' ? (
               active === 'list' ? (
                 <Table headers={TABLE_HEADERS} items={itemsAdapter({ data: TABLE_DATA, headers: TABLE_HEADERS })} />
-              ) : null
+              ) : (
+                <div
+                  className="gap-x-4 gap-y-4 w-full"
+                  style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)' }}
+                >
+                  {data.products.map(product => (
+                    <ProductCard key={product.name} product={product} />
+                  ))}
+                </div>
+              )
             ) : (
               <div className="grid grid-cols-3 gap-x-4 gap-y-4 w-full">
                 <MiniCard label="Название плантации" imgSrc={plantationImage} rating={4.76} />

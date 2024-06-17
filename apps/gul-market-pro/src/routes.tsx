@@ -11,9 +11,8 @@ import {
   FlowersPage
 } from './pages'
 import { MainPage } from './pages/main-page'
-import Main from './pages/entity-page/Forms/Shop/parts/Main/Main'
 import { CatalogPage } from './pages/catalog-page'
-// CreateBrowserRouter поменяем как сервак будет
+
 export const routes = createBrowserRouter([
   {
     path: '/',
@@ -40,7 +39,7 @@ export const routes = createBrowserRouter([
     element: <MainPage />
   },
   {
-    path: 'flowers',
+    path: '/flowers',
     element: <FlowersPage />
   },
   {

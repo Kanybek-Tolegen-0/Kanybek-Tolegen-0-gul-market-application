@@ -6,14 +6,22 @@ import data from './constants'
 import CategoryCard from './parts/category-card'
 import { Typography } from '@material-tailwind/react'
 import PlantationSection from './parts/plantation-section'
+import { useNavigate } from 'react-router-dom'
+
 export const MainPage: FC = props => {
   const { catalogs, categories, plantationsSections } = data
+  const navigate = useNavigate()
+
+  const handlers: { [key: string]: () => void } = {
+    Цветы: () => navigate('/flowers')
+  }
+
   return (
     <Layout fullHeader isLogged>
       <Layout.Content className="flex flex-col mt-10 gap-12 justify-center items-center !px-0 w-[1200px] mx-auto">
         <div className="flex gap-5 w-[1200px]">
           {catalogs.map((catalog, idx) => (
-            <CatalogCard catalog={catalog} key={idx} />
+            <CatalogCard catalog={catalog} key={idx} onClick={handlers[catalog.categoryName]} />
           ))}
         </div>
         <div>

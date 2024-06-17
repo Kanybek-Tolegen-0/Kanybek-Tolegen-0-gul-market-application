@@ -3,12 +3,13 @@ import { Typography } from '@material-tailwind/react'
 import { Catalog } from '../../constants'
 interface CatalogCardProps {
   catalog: Catalog
+  onClick?: () => void
 }
 
-const CatalogCard: FC<CatalogCardProps> = ({ catalog }) => {
+const CatalogCard: FC<CatalogCardProps> = ({ catalog, onClick }) => {
   const { categoryName, examples, image, size } = catalog
   return (
-    <div className="flex rounded-base bg-card-gr relative w-fit h-[192px] ">
+    <div className="flex rounded-base bg-card-gr relative w-fit h-[192px]" onClick={() => onClick && onClick()}>
       <div className="flex flex-col pt-5 pl-5 pb-5">
         <Typography children={categoryName} className="font-bold text-2xl text-gr-800 mb-5" />
         <div className="flex flex-col gap-1 mb-3">
