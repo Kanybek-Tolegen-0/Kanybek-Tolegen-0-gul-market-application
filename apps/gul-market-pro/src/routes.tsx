@@ -8,7 +8,8 @@ import {
   LoginPage,
   RememberPasswordPage,
   NewPasswordPage,
-  FlowersPage
+  FlowersPage,
+  BasketPage
 } from './pages'
 import { MainPage } from './pages/main-page'
 import { CatalogPage } from './pages/catalog-page'
@@ -53,5 +54,9 @@ export const routes = createBrowserRouter([
   {
     path: '/new-password',
     element: <NewPasswordPage />
+  },
+  {
+    path: '/basket',
+    element: <BasketPage />
   }
 ])
