@@ -1,5 +1,6 @@
 import React from 'react'
-import { ListIcon, RectangleIcon } from '@design-system/ui/ui/assets/icons'
+import { HeartIcon, ListIcon, RectangleIcon } from '@design-system/ui/ui/assets/icons'
+import { THeader } from '@design-system/ui/ui/@types'
 
 export const TABS = [
   {
@@ -152,5 +153,40 @@ export const TABLE_DATA = [
     paking: 350,
     amount: 3,
     is_like: true
+  }
+]
+
+export const TABLE_HEADERS: THeader = [
+  { label: 'Плантация', key: 'plantation' },
+  { label: 'Тип', key: 'type' },
+  { label: 'Сорт', key: 'sort' },
+  {
+    label: 'Цвет',
+    key: 'color',
+    renderCell: color => (
+      <div className="flex justify-center">
+        <div
+          className={`w-[20px] h-[20px] rounded-full ${['#FFF', '#FFFFFF'].includes(String(color)) ? 'border-gr-300 border-[1px]' : ''}`}
+          style={{ backgroundColor: String(color) }}
+        />
+      </div>
+    )
+  },
+  { label: 'Размер', key: 'size' },
+  { label: 'Цена, $', key: 'cost_dollar' },
+  { label: 'Цена, тг', key: 'cost_tenge' },
+  { label: 'Коробка', key: 'box_type' },
+  { label: 'Пакинг', key: 'paking' },
+  { label: 'Кол-во', key: 'amount' },
+  {
+    label: '',
+    key: 'is_like',
+    renderCell: isLiked => {
+      return (
+        <div className="flex justify-center cursor-pointer">
+          <HeartIcon color={Boolean(isLiked) ? '#EB4F4F' : 'none'} />
+        </div>
+      )
+    }
   }
 ]
