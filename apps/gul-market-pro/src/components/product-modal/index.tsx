@@ -7,11 +7,9 @@ import {
   ChevronRightIcon,
   MinusIcon,
   PlusIcon,
-  OptionProps,
-  CrossIcon,
-  ThinCrossIcon
+  OptionProps
 } from '@design-system/ui'
-import { Typography, Button } from '@material-tailwind/react'
+import { Typography } from '@material-tailwind/react'
 import { Product } from '../../pages/catalog-page/constants'
 import NestedSelect from '@design-system/ui/ui/components/nested-select'
 
@@ -28,7 +26,7 @@ const ProductModal: FC<ProductModalProps> = ({ product }) => {
     setStock(value)
   }
   const totalPrice = priceT * count
-  const totalLeft = left - count
+  // const totalLeft = left - count
 
   const options: OptionProps[] = [
     {
