@@ -1,16 +1,19 @@
 import React, { FC, useState } from 'react'
 import {
   HeartIcon,
-  Select,
   BrandButton,
   StarIcon,
   fakePlantation,
   ChevronRightIcon,
   MinusIcon,
-  PlusIcon
+  PlusIcon,
+  OptionProps,
+  CrossIcon,
+  ThinCrossIcon
 } from '@design-system/ui'
-import { Typography } from '@material-tailwind/react'
+import { Typography, Button } from '@material-tailwind/react'
 import { Product } from '../../pages/catalog-page/constants'
+import NestedSelect from '@design-system/ui/ui/components/nested-select'
 
 interface ProductModalProps {
   product: Product
@@ -20,20 +23,71 @@ const ProductModal: FC<ProductModalProps> = ({ product }) => {
   const { images, name, priceD, priceT, variety, color, collected, growth, box, packing, left } = product
   const [count, setCount] = useState<number>(0)
   const [stock, setStock] = useState<string>('')
+  const [chosenImageIndex, setChosenImageIndex] = useState<number>(0)
+  const handleSelectChange = (value: string) => {
+    setStock(value)
+  }
   const totalPrice = priceT * count
   const totalLeft = left - count
+
+  const options: OptionProps[] = [
+    {
+      label: 'Алматы',
+      value: 'Алматы',
+      options: [
+        { label: 'Абая 20', value: 'Абая 20' },
+        { label: 'Сатпаева 140', value: 'Сатпаева 140' },
+        { label: 'Сейфуллина 550', value: 'Сейфуллина 550' },
+        { label: 'Райымбека 100', value: 'Райымбека 100' }
+      ]
+    },
+    {
+      label: 'Астана',
+      value: 'Астана',
+      options: [
+        { label: 'Адрес 1', value: 'Адрес 1' },
+        { label: 'Адрес 2', value: 'Адрес 2' },
+        { label: 'Адрес 3', value: 'Адрес 3' },
+        { label: 'Адрес 4', value: 'Адрес 4' }
+      ]
+    }
+  ]
+
+  const AdditionalOption = (
+    <div className="text-center flex flex-col gap-3 items-center">
+      <Typography
+        children={
+          options.length === 0
+            ? 'Вы пока не добавили ни один адрес магазина или город проживания'
+            : 'Хотите выбрать другой город? Добавьте новый адрес в этом городе'
+        }
+        className="font-normal text-base text-gr-800"
+      />
+      <BrandButton className="">Добавить адрес</BrandButton>
+    </div>
+  )
   return (
     <div className="flex flex-col p-5 gap-5">
       <div className="flex gap-5">
         <div className="flex flex-col gap-5 ">
-          <img src={images[0]} alt="chosen image" className="w-[406px] h-[478px] rounded-base object-cover" />
+          <img
+            src={images[chosenImageIndex]}
+            alt="chosen image"
+            className="w-[406px] h-[478px] rounded-base object-cover"
+          />
           <div className="flex gap-3">
             {images.map((image, i) => (
-              <img src={image} alt={`product image ${i + 1}`} className="w-[69px] h-[69px] rounded-lg" key={i} />
+              <img
+                src={image}
+                alt={`product image ${i + 1}`}
+                className={`w-[69px] h-[69px] rounded-lg ${chosenImageIndex === i && 'border border-brand'}`}
+                key={i}
+                onClick={() => setChosenImageIndex(i)}
+              />
             ))}
           </div>
         </div>
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-8 w-[334px]">
           <div className="flex flex-col gap-5 ">
             <div className="flex justify-between">
               <Typography children={name} className="font-normal text-xl text-gr-800" />
@@ -81,15 +135,14 @@ const ProductModal: FC<ProductModalProps> = ({ product }) => {
                 <MinusIcon
                   onClick={() => setCount(count === 0 ? count : count - 1)}
                   // className={count > 0 ? 'stroke-tip' : 'stroke-gr-400'}
-
                   className="cursor-pointer"
                 />
-                <Typography children={count} className="font-medium text-sm text-tip" />
+                <Typography children={count} className="font-medium text-sm text-tip select-none" />
                 <PlusIcon onClick={() => setCount(left - count === 0 ? count : count + 1)} className="cursor-pointer" />
               </div>
               <div className="flex flex-col gap-0.5 ">
-                <Typography children={left - count} className="font-medium text-sm text-tip_extra_bold" />
-                <Typography children="осталось в наличии" className="font-normal text-xs text-t-disabled" />
+                <Typography children={left - count} className="font-medium text-sm text-tip_extra_bold select-none" />
+                <Typography children="осталось в наличии" className="font-normal text-xs text-t-disabled select-none" />
               </div>
             </div>
             <Typography
@@ -97,11 +150,10 @@ const ProductModal: FC<ProductModalProps> = ({ product }) => {
               className={`font-medium text-4xl ${totalPrice > 0 ? 'text-tip_extra_bold' : 'text-t-disabled'}`}
             />
             <div className="flex flex-col gap-3">
-              <Select
-                options={[{ label: 'one', value: 'one' }]}
-                onChange={e => setStock(e)}
-                className="font-medium text-sm text-tip"
-              />
+              <NestedSelect options={options} onChange={handleSelectChange} className="w-full max-w-md">
+                {AdditionalOption}
+              </NestedSelect>
+
               <BrandButton
                 children={count === 0 || stock === '' ? 'Добавьте нужное кол-во коробок' : 'Заказать'}
                 className={`h-[50px] font-medium text-base ${count === 0 || stock === '' ? 'opacity-50' : ''}`}
@@ -114,7 +166,7 @@ const ProductModal: FC<ProductModalProps> = ({ product }) => {
                 </>
               )}
             </div>
-            <div className="flex gap-3 w-[386px] rounded-base p-3 bg-body items-center">
+            <div className="flex gap-3 w-full rounded-base p-3 bg-body items-center">
               <img alt="plantation logo" src={fakePlantation} />
               <div className="flex flex-col gap-2 w-full">
                 <Typography children="Название плантации" className="font-light text-sm text-tip_extra_bold" />

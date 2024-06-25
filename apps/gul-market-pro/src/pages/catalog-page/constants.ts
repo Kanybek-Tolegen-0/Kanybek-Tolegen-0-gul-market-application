@@ -54,7 +54,7 @@ const data: Data = {
     {
       images: [productImage1, ''],
       favorite: false,
-      name: 'Хризантемы' + 'в две строки',
+      name: 'Хризантемы' + ' в две строки',
       priceT: 1000,
       priceD: 0.2,
       variety: '',
@@ -84,7 +84,7 @@ const data: Data = {
       favorite: false,
       name: 'Тюльпаны',
       priceT: 198,
-      priceD: 0.2,
+      priceD: 0.4,
       variety: 'Deep Purple',
       color: 'rgba(235, 79, 79, 1)',
       collected: '17.02.2024',

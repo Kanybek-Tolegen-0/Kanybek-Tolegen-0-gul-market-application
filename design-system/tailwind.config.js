@@ -31,7 +31,8 @@ module.exports = withMT({
         'gr-900': '#111827',
         'card-gr': 'rgba(241, 244, 248, 1)',
         'pk-400': 'rgba(244, 114, 182, 1)',
-        'gr-400': 'rgba(156, 163, 175, 1)'
+        'gr-400': 'rgba(156, 163, 175, 1)',
+        'blue-50': 'rgba(239, 246, 255, 1)'
       },
       fontSize: {
         base: ['1rem', '1.25rem'],
@@ -41,7 +42,10 @@ module.exports = withMT({
 
       boxShadow: {
         pr: '0 4px 6px -2px rgba(0, 0, 0, 0.05), 0 10px 15px -3px rgba(0, 0, 0, 0.1)',
-        card: '0 1px 2px 0 rgba(0, 0, 0, 0.06), 0 1px 3px 0 rgba(0, 0, 0, 0.1)'
+        card: '0 1px 2px 0 rgba(0, 0, 0, 0.06), 0 1px 3px 0 rgba(0, 0, 0, 0.1)',
+        select: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+        'select-options':
+          '0 0 0 1px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05),0 10px 15px -3px rgba(0, 0, 0, 0.1)'
         // Additional way to add
         // '3xl': ['0 4px 6px -2px rgba(219, 39, 119, 1)', ' 0 10px 15px -3px rgba(255,0,11,1)'],
       },

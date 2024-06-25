@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Layout, productImage1 } from '@design-system/ui'
+import { ArrowLeftIcon, ArrowRightIcon, Layout, ThinCrossIcon } from '@design-system/ui'
 import './style.css'
 import { Dialog, Typography } from '@material-tailwind/react'
 import data, { Product } from './constants'
@@ -37,8 +37,19 @@ export const CatalogPage: FC = props => {
             ))}
           </div>
         </div>
-        <Dialog open={open} handler={handleOpen} size="lg" className="!min-w-fit !max-w-fit">
-          <ProductModal product={chosenProduct!} />
+        <Dialog open={open} handler={handleOpen} size="lg" className=" relative !min-w-fit !max-w-fit">
+          <div className="absolute -top-[42px] right-0 cursor-pointer" onClick={() => setOpen(false)}>
+            <ThinCrossIcon />
+          </div>
+          <div className="flex relative items-center">
+            <div className="absolute -left-[88px] cursor-pointer">
+              <ArrowLeftIcon />
+            </div>
+            <ProductModal product={chosenProduct!} />
+            <div className="absolute -right-[88px] cursor-pointer">
+              <ArrowRightIcon />
+            </div>
+          </div>
         </Dialog>
       </Layout.Content>
     </Layout>

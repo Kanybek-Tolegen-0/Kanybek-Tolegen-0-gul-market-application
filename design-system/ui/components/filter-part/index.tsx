@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react'
 import { Typography } from '@material-tailwind/react'
 import { SearchInputProps } from '../search-input'
 import { useCollapse } from 'react-collapsed'
-import { ArrowUp } from '../../assets'
+import { ChevronUpIcon } from '../../assets'
 
 interface FilterPartProps extends SearchInputProps {
   label: string
@@ -23,7 +23,7 @@ export const FilterPart: FC<FilterPartProps> = ({ label, children, collapsable =
       <div className="flex justify-between">
         <Typography className="text-sm leading-4 font-medium text-gray-500">{label}</Typography>
         {collapsable ? (
-          <ArrowUp
+          <ChevronUpIcon
             className={`outline-none border-[0px] transition-all duration-300 ${isExpanded ? 'rotate-180' : 'rotate-0'}`}
             {...getToggleProps({ onClick: handleOnClick })}
           />
