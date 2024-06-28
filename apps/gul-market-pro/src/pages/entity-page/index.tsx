@@ -8,6 +8,7 @@ import { ChevronLeftIcon } from '@design-system/ui'
 import { GMStepper } from '../../components/gm-stepper'
 import './style.css'
 import { PlusIcon } from '@design-system/ui'
+
 export const EntityPage: FC = props => {
   const [activeStep, setActiveStep] = React.useState(0)
   const [isLastStep, setIsLastStep] = React.useState(false)
@@ -46,8 +47,8 @@ export const EntityPage: FC = props => {
             ) : (
               <>
                 {shops.map((_, index) => (
-                  <Container className={'flex-col mb-6 min-w-[630px]'}>
-                    <StepForm key={index} />
+                  <Container key={index} className={'flex-col mb-6 min-w-[630px]'}>
+                    <StepForm />
                   </Container>
                 ))}
                 <Button
