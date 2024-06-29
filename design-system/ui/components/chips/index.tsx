@@ -13,7 +13,7 @@ export const Chips: FC<{
     <div className="flex flex-col gap-4 my-[16px]">
       <div className="flex align-items-center flex-wrap	gap-4">
         {filters.length ? (
-          <Button className="flex text-gr-900 bg-gr-100 px-[4px] py-[4px]" onClick={() => onReset()}>
+          <Button className="flex text-gray-900 bg-gray-100 px-[4px] py-[4px]" onClick={() => onReset()}>
             <CrossIcon />
           </Button>
         ) : null}
@@ -22,7 +22,7 @@ export const Chips: FC<{
         ))}
       </div>
       {filters.length ? (
-        <Button className="flex justify-center items-center gap-3 text-gr-900 bg-gr-100">
+        <Button className="flex justify-center items-center gap-3 text-gray-900 bg-gray-100">
           <HeartIcon />
           <Typography className="text-sm leading-none font-normal">Добавить фильтр избранное</Typography>
         </Button>

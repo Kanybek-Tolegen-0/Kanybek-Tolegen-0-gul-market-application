@@ -36,7 +36,7 @@ export const ChooseRolePage: FC = props => {
           </div>
           <Link
             className={
-              'text-base font-medium text-tip bg-secondary rounded-lg py-[21px] px-[13px] h-12 flex justify-center items-center self-end'
+              'text-base font-medium text-gray-700 bg-secondary rounded-lg py-[21px] px-[13px] h-12 flex justify-center items-center self-end'
             }
             to="/main-page"
           >

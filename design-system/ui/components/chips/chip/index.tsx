@@ -10,7 +10,7 @@ interface IChipProps extends Omit<IFilter, 'name'> {
 export const Chip: FC<IChipProps> = ({ label, value, onChange }) => {
   return (
     <Button
-      className="flex pl-[2px] pr-[6px] py-[4px] items-center gap-2 text-gr-900 bg-gr-200"
+      className="flex pl-[2px] pr-[6px] py-[4px] items-center gap-2 text-gray-900 bg-gray-200"
       onClick={() => onChange()}
     >
       <CrossIcon />

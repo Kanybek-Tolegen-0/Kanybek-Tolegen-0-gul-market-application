@@ -166,7 +166,7 @@ export const TABLE_HEADERS: THeader = [
     renderCell: color => (
       <div className="flex justify-center">
         <div
-          className={`w-[20px] h-[20px] rounded-full ${['#FFF', '#FFFFFF'].includes(String(color)) ? 'border-gr-300 border-[1px]' : ''}`}
+          className={`w-[20px] h-[20px] rounded-full ${['#FFF', '#FFFFFF'].includes(String(color)) ? 'border-gray-300 border-[1px]' : ''}`}
           style={{ backgroundColor: String(color) }}
         />
       </div>

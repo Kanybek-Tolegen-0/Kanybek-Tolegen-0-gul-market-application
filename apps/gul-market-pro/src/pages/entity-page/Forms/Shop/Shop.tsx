@@ -23,10 +23,10 @@ const Shop: FunctionComponent<ShopsProps> = props => {
         ))}
         <button
           onClick={addMainComponent}
-          className="flex items-center gap-2.5 rounded-lg px-4 py-3 bg-gr-100 w-56 h-9"
+          className="flex items-center gap-2.5 rounded-lg px-4 py-3 bg-gray-100 w-56 h-9"
         >
           <PlusIcon className="bg-primary rounded-full" alt="add subsidiary" />
-          <Typography children={'Добавить еще филиал'} className="font-medium text-sm text-bl text-gr-800" />
+          <Typography children={'Добавить еще филиал'} className="font-medium text-sm text-bl text-gray-800" />
         </button>
       </InfoPart>
       <InfoPart title="Логотип магазина">

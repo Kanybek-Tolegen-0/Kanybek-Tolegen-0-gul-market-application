@@ -18,7 +18,7 @@ export const Header: FC<HeaderProps> = ({ isLogged, fullHeader }) => (
         {fullHeader && (
           <Typography
             children="Название магазина в три строки"
-            className="w-[106px] font-normal text-sm text-t-disabled h-[50px]"
+            className="w-[106px] font-normal text-sm text-gray-500 h-[50px]"
           />
         )}
       </div>

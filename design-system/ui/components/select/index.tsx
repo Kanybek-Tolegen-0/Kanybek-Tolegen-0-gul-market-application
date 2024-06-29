@@ -15,7 +15,7 @@ export interface SelectProps {
 export const Select: FC<SelectProps> = ({ className, onChange, options }) =>
   options ? (
     <MaterialTailwindSelect
-      className={`rounded-[6px] border px-[13px] py-[9px] border-disabled z-10 ${className}`}
+      className={`rounded-[6px] border px-[13px] py-[9px] border-gray-300 z-10 ${className}`}
       labelProps={{
         className: 'before:content-none after:content-none '
       }}

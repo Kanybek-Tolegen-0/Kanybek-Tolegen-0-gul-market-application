@@ -46,18 +46,18 @@ const ShopCreated: FunctionComponent<ShopCreatedProps> = props => {
     <div className="flex flex-col items-center gap-4">
       <img src={fakeShopImage} alt={'profile'} className={'h-[150px] w-[150px]'} />
       <div className={'flex flex-col gap-3 items-center'}>
-        <Typography children="Название магазина" className="font-semibold text-xl text-tip_extra_bold" />
-        <Typography children="Описание магазина" className="font-normal text-base text-tip" />
+        <Typography children="Название магазина" className="font-semibold text-xl text-gray-900" />
+        <Typography children="Описание магазина" className="font-normal text-base text-gray-700" />
       </div>
       <div className="w-[378px] flex flex-col gap-1">
         {timeWork.map((time, index) => {
           const { day, start, finish } = time
           return (
             <div key={index} className="flex justify-between">
-              <Typography children={day} className="font-normal text-base text-Gr-800" />
+              <Typography children={day} className="font-normal text-base text-gray-800" />
               <Typography
                 children={start && finish ? start + ' - ' + finish : 'Выходной'}
-                className="font-normal text-base text-Gr-900"
+                className="font-normal text-base text-gray-900"
               />
             </div>
           )

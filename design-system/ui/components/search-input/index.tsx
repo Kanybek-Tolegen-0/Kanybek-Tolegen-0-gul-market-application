@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React from 'react'
 import { Input, InputProps } from '@material-tailwind/react'
 import { SearchIcon } from '../../assets'
 
@@ -7,7 +7,7 @@ export interface SearchInputProps extends React.InputHTMLAttributes<HTMLInputEle
 }
 
 export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(({ inputProps = {} }, ref) => (
-  <div className="flex items-center border border-disabled rounded-[6px] gap-2 py-[9px] px-[13px] h-10 w-[290px] w-full">
+  <div className="flex items-center border border-gray-300 rounded-[6px] gap-2 py-[9px] px-[13px] h-10 w-[290px] w-full">
     <div className="">
       <SearchIcon />
     </div>

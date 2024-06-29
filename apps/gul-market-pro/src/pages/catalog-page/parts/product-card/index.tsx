@@ -28,11 +28,11 @@ const ProductCard: FC<ProductCardProps> = ({ product, onClick }) => {
         </div>
       </div>
       <div className="px-3">
-        <Typography children={name} className="font-normal text-base text-tip_extra_bold mb-4" />
+        <Typography children={name} className="font-normal text-base text-gray-900 mb-4" />
         <div className="flex justify-between items-center">
-          <Typography children={formattedName + ' ₸'} className="font-normal text-sm text-gr-800" />
-          <div className="py-[1px] px-[8px] rounded-lg bg-gr-100">
-            <Typography children={'$ ' + priceD} className="font-medium text-xl text-tip_extra_bold" />
+          <Typography children={formattedName + ' ₸'} className="font-normal text-sm text-gray-800" />
+          <div className="py-[1px] px-[8px] rounded-lg bg-gray-100">
+            <Typography children={'$ ' + priceD} className="font-medium text-xl text-gray-900" />
           </div>
         </div>
       </div>

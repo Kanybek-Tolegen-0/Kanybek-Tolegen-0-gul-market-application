@@ -7,9 +7,9 @@ const Main: FunctionComponent<MainProps> = props => {
   return (
     <>
       <div>
-        <Typography children="Название магазина" className="font-medium text-sm text-tip mr-auto mb-1" />
+        <Typography children="Название магазина" className="font-medium text-sm text-gray-700 mr-auto mb-1" />
         <Input
-          className="!border-disabled focus:!border-[1px] rounded-md py-[9px] px-[13px] text-tip_bold"
+          className="!border-gray-300 focus:!border-[1px] rounded-md py-[9px] px-[13px] text-tip_bold"
           labelProps={{
             className: 'before:content-none after:content-none'
           }}
@@ -17,9 +17,9 @@ const Main: FunctionComponent<MainProps> = props => {
         />
       </div>
       <div>
-        <Typography children="Описание магазина" className="font-medium text-sm text-tip mr-auto mb-1" />
+        <Typography children="Описание магазина" className="font-medium text-sm text-gray-700 mr-auto mb-1" />
         <Textarea
-          className="!border-disabled focus:!border-[1px] border- rounded-md py-[9px] px-[13px] text-tip_bold"
+          className="!border-gray-300 focus:!border-[1px] border- rounded-md py-[9px] px-[13px] text-tip_bold"
           labelProps={{
             className: 'before:content-none after:content-none'
           }}
@@ -28,9 +28,9 @@ const Main: FunctionComponent<MainProps> = props => {
         />
       </div>
       <div>
-        <Typography children="Адрес магазина" className="font-medium text-sm text-tip mr-auto mb-1" />
+        <Typography children="Адрес магазина" className="font-medium text-sm text-gray-700 mr-auto mb-1" />
         <Input
-          className="!border-disabled focus:!border-[1px] rounded-md py-[9px] px-[13px] text-tip_bold"
+          className="!border-gray-300 focus:!border-[1px] rounded-md py-[9px] px-[13px] text-tip_bold"
           labelProps={{
             className: 'before:content-none after:content-none'
           }}

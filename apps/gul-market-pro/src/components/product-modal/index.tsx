@@ -59,7 +59,7 @@ const ProductModal: FC<ProductModalProps> = ({ product }) => {
             ? 'Вы пока не добавили ни один адрес магазина или город проживания'
             : 'Хотите выбрать другой город? Добавьте новый адрес в этом городе'
         }
-        className="font-normal text-base text-gr-800"
+        className="font-normal text-base text-gray-800"
       />
       <BrandButton className="">Добавить адрес</BrandButton>
     </div>
@@ -88,42 +88,42 @@ const ProductModal: FC<ProductModalProps> = ({ product }) => {
         <div className="flex flex-col gap-8 w-[334px]">
           <div className="flex flex-col gap-5 ">
             <div className="flex justify-between">
-              <Typography children={name} className="font-normal text-xl text-gr-800" />
+              <Typography children={name} className="font-normal text-xl text-gray-800" />
               <HeartIcon />
             </div>
             <div className="flex items-end gap-2">
-              <Typography children={'$ ' + priceD} className="font-medium text-4xl text-tip_extra_bold" />
+              <Typography children={'$ ' + priceD} className="font-medium text-4xl text-gray-900" />
               <Typography children="/" className="font-medium text-2xl text-tip_bold" />
               <Typography children={priceT + ' ₸'} className="font-medium text-2xl text-tip_bold" />
             </div>
             <div className="flex flex-col gap-2">
               <div className="flex gap-6">
                 <div className="flex gap-2 items-center">
-                  <Typography children="Сорт" className="font-normal !text-little text-t-disabled" />
-                  <Typography children={variety} className="font-normal !text-little text-tip_extra_bold" />
+                  <Typography children="Сорт" className="font-normal !text-little text-gray-500" />
+                  <Typography children={variety} className="font-normal !text-little text-gray-900" />
                 </div>
                 <div className="flex gap-2 items-center">
-                  <Typography children="Цвет" className="font-normal !text-little text-t-disabled" />
+                  <Typography children="Цвет" className="font-normal !text-little text-gray-500" />
                   <div className={`rounded-full h-4 w-4`} style={{ backgroundColor: color }} />
                 </div>
               </div>
               <div className="flex gap-6">
                 <div className="flex gap-2 items-center">
-                  <Typography children="Собрано" className="font-normal !text-little text-t-disabled" />
-                  <Typography children={collected} className="font-normal !text-little text-tip_extra_bold" />
+                  <Typography children="Собрано" className="font-normal !text-little text-gray-500" />
+                  <Typography children={collected} className="font-normal !text-little text-gray-900" />
                 </div>
                 <div className="flex gap-2 items-center">
-                  <Typography children="Рост" className="font-normal !text-little text-t-disabled" />
-                  <Typography children={growth} className="font-normal !text-little text-tip_extra_bold" />
+                  <Typography children="Рост" className="font-normal !text-little text-gray-500" />
+                  <Typography children={growth} className="font-normal !text-little text-gray-900" />
                 </div>
                 <div className="flex gap-2 items-center">
-                  <Typography children="Коробка" className="font-normal !text-little text-t-disabled" />
-                  <Typography children={box} className="font-normal !text-little text-tip_extra_bold" />
+                  <Typography children="Коробка" className="font-normal !text-little text-gray-500" />
+                  <Typography children={box} className="font-normal !text-little text-gray-900" />
                 </div>
               </div>
               <div className="flex gap-2 items-center">
-                <Typography children="Пакинг" className="font-normal !text-little text-t-disabled" />
-                <Typography children={packing} className="font-normal !text-little text-tip_extra_bold" />
+                <Typography children="Пакинг" className="font-normal !text-little text-gray-500" />
+                <Typography children={packing} className="font-normal !text-little text-gray-900" />
               </div>
             </div>
           </div>
@@ -132,20 +132,20 @@ const ProductModal: FC<ProductModalProps> = ({ product }) => {
               <div className="flex gap-[27px] rounded-md border px-[13px] py-[9px] items-center justify-between ">
                 <MinusIcon
                   onClick={() => setCount(count === 0 ? count : count - 1)}
-                  // className={count > 0 ? 'stroke-tip' : 'stroke-gr-400'}
+                  // className={count > 0 ? 'stroke-gray-700' : 'stroke-gray-400'}
                   className="cursor-pointer"
                 />
-                <Typography children={count} className="font-medium text-sm text-tip select-none" />
+                <Typography children={count} className="font-medium text-sm text-gray-700 select-none" />
                 <PlusIcon onClick={() => setCount(left - count === 0 ? count : count + 1)} className="cursor-pointer" />
               </div>
               <div className="flex flex-col gap-0.5 ">
-                <Typography children={left - count} className="font-medium text-sm text-tip_extra_bold select-none" />
-                <Typography children="осталось в наличии" className="font-normal text-xs text-t-disabled select-none" />
+                <Typography children={left - count} className="font-medium text-sm text-gray-900 select-none" />
+                <Typography children="осталось в наличии" className="font-normal text-xs text-gray-500 select-none" />
               </div>
             </div>
             <Typography
               children={totalPrice + ' ₸'}
-              className={`font-medium text-4xl ${totalPrice > 0 ? 'text-tip_extra_bold' : 'text-t-disabled'}`}
+              className={`font-medium text-4xl ${totalPrice > 0 ? 'text-gray-900' : 'text-gray-500'}`}
             />
             <div className="flex flex-col gap-3">
               <NestedSelect options={options} onChange={handleSelectChange} className="w-full max-w-md">
@@ -159,15 +159,15 @@ const ProductModal: FC<ProductModalProps> = ({ product }) => {
               />
               {stock && (
                 <>
-                  <Typography children="Примерная дата доставки:" className="font-normal text-sm text-tip_extra_bold" />
-                  <Typography children="25 мая - 30 мая" className="font-medium text-sm text-tip_extra_bold" />
+                  <Typography children="Примерная дата доставки:" className="font-normal text-sm text-gray-900" />
+                  <Typography children="25 мая - 30 мая" className="font-medium text-sm text-gray-900" />
                 </>
               )}
             </div>
-            <div className="flex gap-3 w-full rounded-base p-3 bg-body items-center">
+            <div className="flex gap-3 w-full rounded-base p-3 bg-gray-50 items-center">
               <img alt="plantation logo" src={fakePlantation} />
               <div className="flex flex-col gap-2 w-full">
-                <Typography children="Название плантации" className="font-light text-sm text-tip_extra_bold" />
+                <Typography children="Название плантации" className="font-light text-sm text-gray-900" />
                 <div className="flex justify-between items-center">
                   <div className="flex items-center gap-1">
                     <Typography children="Перейти к плантации" className="font-normal text-xs text-brand" />
@@ -175,7 +175,7 @@ const ProductModal: FC<ProductModalProps> = ({ product }) => {
                   </div>
                   <div className="flex items-center gap-1 h-4">
                     <StarIcon />
-                    <Typography children={'4.76'} className="font-normal !text-xsm text-tip" />
+                    <Typography children={'4.76'} className="font-normal !text-xsm text-gray-700" />
                   </div>
                 </div>
               </div>
@@ -183,11 +183,11 @@ const ProductModal: FC<ProductModalProps> = ({ product }) => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col gap-3 px-5 py-4 rounded-base bg-gr-100">
-        <Typography children="Условия доставки" className="font-normal text-sm text-t-disabled" />
+      <div className="flex flex-col gap-3 px-5 py-4 rounded-base bg-gray-100">
+        <Typography children="Условия доставки" className="font-normal text-sm text-gray-500" />
         <Typography
           children="Тут текст условий доставки Тут текст условий доставки"
-          className="font-normal text-sm text-tip_extra_bold"
+          className="font-normal text-sm text-gray-900"
         />
       </div>
     </div>

@@ -53,7 +53,7 @@ export const EntityPage: FC = props => {
                 ))}
                 <Button
                   onClick={addShop}
-                  className="normal-case flex justify-center items-center mb-6 gap-6 w-full !rounded-base px-[32px] py-[20px] bg-gr-800 h-16 "
+                  className="normal-case flex justify-center items-center mb-6 gap-6 w-full !rounded-base px-[32px] py-[20px] bg-gray-800 h-16 "
                 >
                   <PlusIcon alt="add shop" className="bg-primary rounded-full" />
                   <Typography children="Добавить еще магазин" className="font-bold text-base text-primary" />

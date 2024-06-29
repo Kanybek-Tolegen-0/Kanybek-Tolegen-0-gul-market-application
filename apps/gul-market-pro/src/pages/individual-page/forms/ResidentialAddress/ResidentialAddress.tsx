@@ -14,9 +14,9 @@ const ResidentialAddress: FC = props => {
   return (
     <>
       <div>
-        <Typography children="Город проживания" className="font-medium text-sm text-tip mr-auto mb-1" />
+        <Typography children="Город проживания" className="font-medium text-sm text-gray-700 mr-auto mb-1" />
         <Input
-          className="!border-disabled focus:!border-[1px] rounded-md py-[9px] px-[13px] text-tip_bold"
+          className="!border-gray-300 focus:!border-[1px] rounded-md py-[9px] px-[13px] text-tip_bold"
           labelProps={{
             className: 'before:content-none after:content-none'
           }}

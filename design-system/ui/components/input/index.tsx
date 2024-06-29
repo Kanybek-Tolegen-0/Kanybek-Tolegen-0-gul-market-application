@@ -11,7 +11,7 @@ export const Input: FC<InputProps> = ({ className, name, label, type = 'text', o
       {label ? <Label label={label} /> : null}
       <input
         name={name}
-        className={`input rounded-md border border-gr-300 ${className}`}
+        className={`input rounded-md border border-gray-300 ${className}`}
         type={type}
         value={value}
         onChange={e => {

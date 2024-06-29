@@ -56,21 +56,21 @@ export const BasketPage: FC = () => {
               </BasketContent>
             </div>
             <div className="flex flex-col grow-[1] gap-4 pt-[32px]">
-              <div className="flex bg-gr-50 p-[16px] gap-2 items-center rounded-2xl">
+              <div className="flex bg-gray-50 p-[16px] gap-2 items-center rounded-2xl">
                 <PaymentIcon />
                 <div className="flex gap-20">
-                  <Typography className="text-sm leading-5 font-medium text-gr-500">У вас на счету</Typography>
-                  <Typography className="text-sm leading-5 font-medium text-gr-500">1 377 560 ₸</Typography>
+                  <Typography className="text-sm leading-5 font-medium text-gray-500">У вас на счету</Typography>
+                  <Typography className="text-sm leading-5 font-medium text-gray-500">1 377 560 ₸</Typography>
                 </div>
               </div>
-              <div className="flex flex-col p-[16px] rounded-2xl bg-gr-50">
-                <div className="flex justify-between border-b-[1px] border-gr-200 pb-[12px]">
-                  <Typography className="text-base leading-6 font-medium text-gr-900">Сумма к оплате</Typography>
-                  <Typography className="text-lg leading-6 font-semibold text-gr-900">677 560 ₸</Typography>
+              <div className="flex flex-col p-[16px] rounded-2xl bg-gray-50">
+                <div className="flex justify-between border-b-[1px] border-gray-200 pb-[12px]">
+                  <Typography className="text-base leading-6 font-medium text-gray-900">Сумма к оплате</Typography>
+                  <Typography className="text-lg leading-6 font-semibold text-gray-900">677 560 ₸</Typography>
                 </div>
                 <div className="flex justify-between pt-[12px]">
-                  <Typography className="text-sm leading-5 font-medium text-gr-500">2 товара на сумму</Typography>
-                  <Typography className="text-sm leading-5 font-medium text-gr-500">677 560 ₸</Typography>
+                  <Typography className="text-sm leading-5 font-medium text-gray-500">2 товара на сумму</Typography>
+                  <Typography className="text-sm leading-5 font-medium text-gray-500">677 560 ₸</Typography>
                 </div>
                 <BrandButton className="mt-[12px]">Заказать</BrandButton>
               </div>
