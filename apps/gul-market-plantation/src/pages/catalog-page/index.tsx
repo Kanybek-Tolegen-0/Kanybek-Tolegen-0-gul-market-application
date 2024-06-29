@@ -12,13 +12,13 @@ import {
   MiniCard,
   plantationImage,
   ScreenTemplate,
-  itemsAdapter,
-  FilterSelect
+  itemsAdapter
 } from '@design-system/ui'
-import { Tab, Tabs, TabsBody, TabsHeader } from '@material-tailwind/react'
+import { Tabs, TabsBody, Typography } from '@material-tailwind/react'
 
 import {
   BUTTON_TABS_OPTIONS,
+  data,
   FILTER_PART_COLOR_OPTIONS,
   FILTER_PART_FLOWER_BOX_TYPE_OPTIONS,
   FILTER_PART_FLOWER_DELIVERY_OPTIONS,
@@ -29,11 +29,11 @@ import {
   TABLE_HEADERS,
   TABS
 } from './constants'
-import { IFilter } from '@design-system/ui/ui/@types'
-import ProductCard from '../catalog-page/parts/product-card'
-import data from '../catalog-page/constants'
 
-export const FlowersPage: FC = () => {
+import { ProductCard } from './product-card'
+import { IFilter } from '@design-system/ui/ui/@types'
+
+export const CatalogPage: FC = () => {
   const [activeTab, setActiveTab] = useState(TABS[0]?.value)
 
   const [filters, setFilters] = useState<IFilter[]>([])
@@ -93,33 +93,14 @@ export const FlowersPage: FC = () => {
       <Layout.Content className="bg-white">
         <ScreenTemplate title="Цветы">
           <Tabs value={activeTab}>
-            <div className="flex justify-between py-[12px]">
-              <TabsHeader
-                className="rounded-none border-b border-blue-gray-50 bg-transparent p-0 w-[400px]"
-                indicatorProps={{
-                  className: 'bg-transparent border-b-2 border-pink-500 shadow-none rounded-none'
-                }}
-              >
-                {TABS.map(({ label, value }) => (
-                  <Tab
-                    key={value}
-                    value={value}
-                    onClick={() => setActiveTab(value)}
-                    className={`${activeTab === value ? 'text-pink-500' : ''} pb-[16px]	`}
-                  >
-                    {label}
-                  </Tab>
-                ))}
-              </TabsHeader>
-              <div className="flex gap-3 items-center">
-                <FilterSelect options={FILTER_SELECT_OPTIONS} />
-                {activeTab === 'positions' ? (
-                  <ButtonTabs
-                    active={String(active)}
-                    options={BUTTON_TABS_OPTIONS}
-                    onChange={(active: string) => setActive(active)}
-                  />
-                ) : null}
+            <div className="flex justify-between items-start py-[12px]">
+              <Typography className="text-5xl leading-none font-normal">Мой каталог</Typography>
+              <div className="flex gap-3">
+                <ButtonTabs
+                  active={String(active)}
+                  options={BUTTON_TABS_OPTIONS}
+                  onChange={(active: string) => setActive(active)}
+                />
               </div>
             </div>
             <TabsBody className="flex gap-4 items-start">
