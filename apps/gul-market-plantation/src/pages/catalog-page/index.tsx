@@ -11,7 +11,6 @@ import {
   Table,
   MiniCard,
   plantationImage,
-  ScreenTemplate,
   itemsAdapter
 } from '@design-system/ui'
 import { Tabs, TabsBody, Typography } from '@material-tailwind/react'
@@ -91,104 +90,102 @@ export const CatalogPage: FC = () => {
   return (
     <Layout fullHeader isLogged>
       <Layout.Content className="bg-white">
-        <ScreenTemplate title="Цветы">
-          <Tabs value={activeTab}>
-            <div className="flex justify-between items-start py-[12px]">
-              <Typography className="text-5xl leading-none font-normal">Мой каталог</Typography>
-              <div className="flex gap-3">
-                <ButtonTabs
-                  active={String(active)}
-                  options={BUTTON_TABS_OPTIONS}
-                  onChange={(active: string) => setActive(active)}
-                />
-              </div>
+        <Tabs value={activeTab}>
+          <div className="flex justify-between items-start py-[12px]">
+            <Typography className="text-5xl leading-none font-normal">Мой каталог</Typography>
+            <div className="flex gap-3">
+              <ButtonTabs
+                active={String(active)}
+                options={BUTTON_TABS_OPTIONS}
+                onChange={(active: string) => setActive(active)}
+              />
             </div>
-            <TabsBody className="flex gap-4 items-start">
-              <Filter>
-                <Chips
-                  filters={filters}
-                  onChange={({ value: rmValue }) => setFilters(prev => prev.filter(({ value }) => value !== rmValue))}
-                  onReset={() => setFilters([])}
-                />
-                <div className="flex flex-col gap-8 max-w-max">
-                  <FilterPart label="Тип цветов" collapsable>
-                    <CheckboxGroup
-                      name="flower-type"
-                      options={FILTER_PART_FLOWER_TYPE_OPTIONS}
-                      filters={filters}
-                      inputProps={{
-                        placeholder: 'Поиск'
-                      }}
-                      onCheckboxChange={handleCheckboxChange}
-                      showButton
-                    />
-                  </FilterPart>
-                  <FilterPart label="Сорт цветов">
-                    <CheckboxGroup
-                      name="flower-type"
-                      options={FILTER_PART_FLOWER_SORT_OPTIONS}
-                      filters={filters}
-                      inputProps={{ placeholder: 'Поиск' }}
-                      onCheckboxChange={handleCheckboxChange}
-                    />
-                  </FilterPart>
-                  <FilterPart className="max-w-min" label="Цена за штуку">
-                    <DoubleSlider name="cost" metric={'$'} min={1} max={100} onChange={handleDoubleSliderChange} />
-                  </FilterPart>
+          </div>
+          <TabsBody className="flex gap-4 items-start">
+            <Filter>
+              <Chips
+                filters={filters}
+                onChange={({ value: rmValue }) => setFilters(prev => prev.filter(({ value }) => value !== rmValue))}
+                onReset={() => setFilters([])}
+              />
+              <div className="flex flex-col gap-8 max-w-max">
+                <FilterPart label="Тип цветов" collapsable>
+                  <CheckboxGroup
+                    name="flower-type"
+                    options={FILTER_PART_FLOWER_TYPE_OPTIONS}
+                    filters={filters}
+                    inputProps={{
+                      placeholder: 'Поиск'
+                    }}
+                    onCheckboxChange={handleCheckboxChange}
+                    showButton
+                  />
+                </FilterPart>
+                <FilterPart label="Сорт цветов">
+                  <CheckboxGroup
+                    name="flower-type"
+                    options={FILTER_PART_FLOWER_SORT_OPTIONS}
+                    filters={filters}
+                    inputProps={{ placeholder: 'Поиск' }}
+                    onCheckboxChange={handleCheckboxChange}
+                  />
+                </FilterPart>
+                <FilterPart className="max-w-min" label="Цена за штуку">
+                  <DoubleSlider name="cost" metric={'$'} min={1} max={100} onChange={handleDoubleSliderChange} />
+                </FilterPart>
 
-                  <FilterPart label="Размер">
-                    <DoubleSlider name="size" metric={'см'} min={30} max={120} onChange={handleDoubleSliderChange} />
-                  </FilterPart>
-                  <FilterPart label="Доставка">
-                    <CheckboxGroup
-                      name="delivery"
-                      options={FILTER_PART_FLOWER_DELIVERY_OPTIONS}
-                      filters={filters}
-                      inputProps={{ placeholder: 'Поиск' }}
-                      onCheckboxChange={handleCheckboxChange}
-                    />
-                  </FilterPart>
-                  <FilterPart label="Тип коробки">
-                    <CheckboxGroup
-                      name="box-type"
-                      filters={filters}
-                      options={FILTER_PART_FLOWER_BOX_TYPE_OPTIONS}
-                      inputProps={{ placeholder: 'Поиск' }}
-                      onCheckboxChange={handleCheckboxChange}
-                    />
-                  </FilterPart>
-                  <FilterPart label="Цвет" collapsable>
-                    <ColorSelect name="color" options={FILTER_PART_COLOR_OPTIONS} onChange={handleColorSelectChange} />
-                  </FilterPart>
-                </div>
-              </Filter>
-              {activeTab === 'positions' ? (
-                active === 'list' ? (
-                  <Table headers={TABLE_HEADERS} items={itemsAdapter({ data: TABLE_DATA, headers: TABLE_HEADERS })} />
-                ) : (
-                  <div
-                    className="gap-x-4 gap-y-4 w-full"
-                    style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)' }}
-                  >
-                    {data.products.map(product => (
-                      <ProductCard key={product.name} product={product} />
-                    ))}
-                  </div>
-                )
+                <FilterPart label="Размер">
+                  <DoubleSlider name="size" metric={'см'} min={30} max={120} onChange={handleDoubleSliderChange} />
+                </FilterPart>
+                <FilterPart label="Доставка">
+                  <CheckboxGroup
+                    name="delivery"
+                    options={FILTER_PART_FLOWER_DELIVERY_OPTIONS}
+                    filters={filters}
+                    inputProps={{ placeholder: 'Поиск' }}
+                    onCheckboxChange={handleCheckboxChange}
+                  />
+                </FilterPart>
+                <FilterPart label="Тип коробки">
+                  <CheckboxGroup
+                    name="box-type"
+                    filters={filters}
+                    options={FILTER_PART_FLOWER_BOX_TYPE_OPTIONS}
+                    inputProps={{ placeholder: 'Поиск' }}
+                    onCheckboxChange={handleCheckboxChange}
+                  />
+                </FilterPart>
+                <FilterPart label="Цвет" collapsable>
+                  <ColorSelect name="color" options={FILTER_PART_COLOR_OPTIONS} onChange={handleColorSelectChange} />
+                </FilterPart>
+              </div>
+            </Filter>
+            {activeTab === 'positions' ? (
+              active === 'list' ? (
+                <Table headers={TABLE_HEADERS} items={itemsAdapter({ data: TABLE_DATA, headers: TABLE_HEADERS })} />
               ) : (
-                <div className="grid grid-cols-3 gap-x-4 gap-y-4 w-full">
-                  <MiniCard label="Название плантации" imgSrc={plantationImage} rating={4.76} />
-                  <MiniCard label="Название плантации" imgSrc={plantationImage} rating={4.76} showNewFlag />
-                  <MiniCard label="Название плантации" imgSrc={plantationImage} rating={4.76} />
-                  <MiniCard label="Название плантации" imgSrc={plantationImage} rating={4.76} />
-                  <MiniCard label="Название плантации" imgSrc={plantationImage} rating={4.76} showNewFlag />
-                  <MiniCard label="Название плантации" imgSrc={plantationImage} rating={4.76} />
-                  <MiniCard label="Название плантации" imgSrc={plantationImage} rating={4.76} showNewFlag />
+                <div
+                  className="gap-x-4 gap-y-4 w-full"
+                  style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)' }}
+                >
+                  {data.products.map(product => (
+                    <ProductCard key={product.name} product={product} />
+                  ))}
                 </div>
-              )}
-            </TabsBody>
-          </Tabs>
-        </ScreenTemplate>
+              )
+            ) : (
+              <div className="grid grid-cols-3 gap-x-4 gap-y-4 w-full">
+                <MiniCard label="Название плантации" imgSrc={plantationImage} rating={4.76} />
+                <MiniCard label="Название плантации" imgSrc={plantationImage} rating={4.76} showNewFlag />
+                <MiniCard label="Название плантации" imgSrc={plantationImage} rating={4.76} />
+                <MiniCard label="Название плантации" imgSrc={plantationImage} rating={4.76} />
+                <MiniCard label="Название плантации" imgSrc={plantationImage} rating={4.76} showNewFlag />
+                <MiniCard label="Название плантации" imgSrc={plantationImage} rating={4.76} />
+                <MiniCard label="Название плантации" imgSrc={plantationImage} rating={4.76} showNewFlag />
+              </div>
+            )}
+          </TabsBody>
+        </Tabs>
       </Layout.Content>
     </Layout>
   )
