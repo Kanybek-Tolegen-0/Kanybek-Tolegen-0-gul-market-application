@@ -25,5 +25,5 @@ export const useTimer = ({
     }
   }, [startTimer, timeLeft])
 
-  return { timeLeft, setStartTimer }
+  return { timeLeft, startTimer, setStartTimer }
 }
