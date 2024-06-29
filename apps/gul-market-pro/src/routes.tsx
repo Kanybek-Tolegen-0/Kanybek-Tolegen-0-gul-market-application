@@ -9,10 +9,12 @@ import {
   RememberPasswordPage,
   NewPasswordPage,
   FlowersPage,
-  BasketPage
+  BasketPage,
+  ProfilePage
 } from './pages'
 import { MainPage } from './pages/main-page'
 import { CatalogPage } from './pages/catalog-page'
+import { FavoritePage } from './pages/favorite-page'
 
 export const routes = createBrowserRouter([
   {
@@ -58,5 +60,13 @@ export const routes = createBrowserRouter([
   {
     path: '/basket',
     element: <BasketPage />
+  },
+  {
+    path: '/profile',
+    element: <ProfilePage />
+  },
+  {
+    path: '/favorite',
+    element: <FavoritePage />
   }
 ])

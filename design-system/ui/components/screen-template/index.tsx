@@ -7,7 +7,7 @@ interface ScreenTemplateProps {
 }
 
 export const ScreenTemplate: FC<ScreenTemplateProps> = ({ title, children }) => (
-  <div className="flex flex-col">
+  <div className="flex flex-col ">
     <Typography className="text-5xl leading-none font-normal my-8">{title}</Typography>
     <div className="flex-1">{children}</div>
   </div>

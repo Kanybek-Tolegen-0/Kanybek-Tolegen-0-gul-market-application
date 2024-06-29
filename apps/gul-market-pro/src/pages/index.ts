@@ -15,3 +15,5 @@ export { NewPasswordPage } from './new-password-page'
 export { FlowersPage } from './flowers-page'
 
 export { BasketPage } from './basket-page'
+
+export { ProfilePage } from './profile-page'

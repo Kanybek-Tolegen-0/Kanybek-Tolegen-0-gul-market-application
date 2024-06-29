@@ -5,6 +5,7 @@ interface LayoutProps {
   children: ReactNode
   isLogged?: boolean
   fullHeader?: boolean
+  className?: string
 }
 
 interface ContentProps {
@@ -20,8 +21,8 @@ interface LayoutComponent extends FC<LayoutProps> {
   Content: FC<ContentProps>
 }
 
-const Layout: LayoutComponent = ({ children, isLogged = false, fullHeader = false }) => (
-  <div className="flex flex-col">
+const Layout: LayoutComponent = ({ children, isLogged = false, fullHeader = false, className }) => (
+  <div className={`flex flex-col h-screen ${className}`}>
     <Header isLogged={isLogged} fullHeader={fullHeader} />
     {children}
   </div>
