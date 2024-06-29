@@ -1,11 +1,10 @@
-
-.role_type{
-    @apply flex flex-col justify-center align-middle gap-3 w-48
+.role_type {
+  @apply flex flex-col justify-center align-middle gap-3 w-48;
 }
-.role_type_name{
-    @apply text-brand_bold  font-medium text-xl
+.role_type_name {
+  @apply text-brand_bold  font-medium text-xl;
 }
 
-.role_type_desc{
-    @apply text-tip font-normal text-base
+.role_type_desc {
+  @apply text-gray-700 font-normal text-base;
 }

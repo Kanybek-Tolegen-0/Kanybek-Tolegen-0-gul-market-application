@@ -12,7 +12,7 @@ const CatalogContainer: FC<CatalogContainerProps> = ({ catalog, width, height })
   const { name, image, size } = catalog
   return (
     <div className={`flex rounded-base bg-card-gr relative`} style={{ width: `${width}px`, height: `${height}px` }}>
-      <Typography children={name} className="mt-5 ml-5 font-bold text-3xl text-gr-800" />
+      <Typography children={name} className="mt-5 ml-5 font-bold text-3xl text-gray-800" />
       <img
         src={image}
         alt="catalog image"

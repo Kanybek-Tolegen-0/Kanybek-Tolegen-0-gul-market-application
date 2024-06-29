@@ -15,7 +15,7 @@ export const Table: FC<ITable> = ({ headers, items }) => {
       <thead>
         <tr>
           {headers.map(({ label }) => (
-            <th key={label} className="text-xs text-left text-gr-500 font-normal px-[12px] py-[8px]">
+            <th key={label} className="text-xs text-left text-gray-500 font-normal px-[12px] py-[8px]">
               {label}
             </th>
           ))}
@@ -29,7 +29,7 @@ export const Table: FC<ITable> = ({ headers, items }) => {
               const renderCell = header?.renderCell
 
               return (
-                <td className="text-xs bg-gr-100 text-gr-500 font-normal px-[12px] py-[8px]" key={`${m}${n}`}>
+                <td className="text-xs bg-gray-100 text-gray-500 font-normal px-[12px] py-[8px]" key={`${m}${n}`}>
                   {renderCell ? renderCell(cellValue) : cellValue}
                 </td>
               )

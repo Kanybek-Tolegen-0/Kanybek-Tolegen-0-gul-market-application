@@ -6,7 +6,7 @@ interface NavProps {}
 
 const Nav: FC<NavProps> = props => {
   return (
-    <div className="flex gap-6 items-center font-normal text-sm text-gr-800">
+    <div className="flex gap-6 items-center font-normal text-sm text-gray-800">
       <Link to={'/main-page'}>
         <Typography children="Главная" className="px-2 py-1" />
       </Link>

@@ -33,7 +33,7 @@ export const CheckboxGroup = React.forwardRef<HTMLInputElement, CheckboxGroupPro
                   className={'pl-0'}
                   checked={Boolean(filters.find(({ value: filterValue }) => value === filterValue))}
                   labelProps={{
-                    className: 'text-sm leading-none font-normal text-gr-800'
+                    className: 'text-sm leading-none font-normal text-gray-800'
                   }}
                   onChange={() => onCheckboxChange({ label, value, name })}
                   crossOrigin=""
@@ -56,7 +56,7 @@ export const CheckboxGroup = React.forwardRef<HTMLInputElement, CheckboxGroupPro
                     className={'pl-0'}
                     checked={Boolean(filters.find(({ value: filterValue }) => `${key}:${optionValue}` === filterValue))}
                     labelProps={{
-                      className: 'text-sm leading-none font-normal text-gr-800'
+                      className: 'text-sm leading-none font-normal text-gray-800'
                     }}
                     onChange={() =>
                       onCheckboxChange({
@@ -76,7 +76,7 @@ export const CheckboxGroup = React.forwardRef<HTMLInputElement, CheckboxGroupPro
         )}
         {show ? (
           <Button
-            className="normal-case text-sm leading-none font-normal text-gr-700 bg-gr-100"
+            className="normal-case text-sm leading-none font-normal text-gray-700 bg-gray-100"
             variant="filled"
             onClick={() => setShow(false)}
           >

@@ -8,9 +8,9 @@ const FullName: FC<IFullNameFormProps> = props => {
   return (
     <div className={'flex flex-col gap-5'}>
       <div>
-        <Typography children="Ваша фамилия" className="font-medium text-sm text-tip mr-auto mb-1" />
+        <Typography children="Ваша фамилия" className="font-medium text-sm text-gray-700 mr-auto mb-1" />
         <Input
-          className="!border-disabled focus:!border-[1px] rounded-md py-[9px] px-[13px] text-tip_bold"
+          className="!border-gray-300 focus:!border-[1px] rounded-md py-[9px] px-[13px] text-tip_bold"
           labelProps={{
             className: 'before:content-none after:content-none'
           }}
@@ -18,9 +18,9 @@ const FullName: FC<IFullNameFormProps> = props => {
         />
       </div>
       <div>
-        <Typography children="Ваше имя" className="font-medium text-sm text-tip mr-auto mb-1" />
+        <Typography children="Ваше имя" className="font-medium text-sm text-gray-700 mr-auto mb-1" />
         <Input
-          className="!border-disabled focus:!border-[1px] rounded-md py-[9px] px-[13px] text-tip_bold"
+          className="!border-gray-300 focus:!border-[1px] rounded-md py-[9px] px-[13px] text-tip_bold"
           labelProps={{
             className: 'before:content-none after:content-none'
           }}
@@ -29,9 +29,9 @@ const FullName: FC<IFullNameFormProps> = props => {
       </div>
 
       <div>
-        <Typography children="Ваше Отчество" className="font-medium text-sm text-tip mr-auto mb-1" />
+        <Typography children="Ваше Отчество" className="font-medium text-sm text-gray-700 mr-auto mb-1" />
         <Input
-          className="!border-disabled focus:!border-[1px] rounded-md py-[9px] px-[13px] text-tip_bold"
+          className="!border-gray-300 focus:!border-[1px] rounded-md py-[9px] px-[13px] text-tip_bold"
           labelProps={{
             className: 'before:content-none after:content-none'
           }}

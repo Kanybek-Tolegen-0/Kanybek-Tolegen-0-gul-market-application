@@ -66,7 +66,7 @@ export const DragAndDrop: FC = () => {
   return (
     <div
       className={`flex flex-col gap-1 items-center border-2 rounded-md ${
-        dragging ? 'border-blue-500' : 'border-disabled'
+        dragging ? 'border-blue-500' : 'border-gray-300'
       } border-dashed p-[26px] pt-[22px] cursor-pointer`}
       onDragEnter={handleDragEnter}
       onDragLeave={handleDragLeave}
@@ -115,7 +115,7 @@ export const DragAndDrop: FC = () => {
       </div>
       <Typography
         children="Логотип должен быть не более 2000x2000px и иметь формат .jpg, .jpeg, .png"
-        className="font-normal text-xs text-t-disabled"
+        className="font-normal text-xs text-gray-500"
       />
     </div>
   )

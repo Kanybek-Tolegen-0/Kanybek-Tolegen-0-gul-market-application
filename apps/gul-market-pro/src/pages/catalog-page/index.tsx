@@ -30,7 +30,7 @@ export const CatalogPage: FC = props => {
           <CatalogContainer catalog={catalog4} height={'304'} width={'387'} />
         </div>
         <div>
-          <Typography children="Популярные товары" className="font-normal text-3xl text-gr-800 mb-8" />
+          <Typography children="Популярные товары" className="font-normal text-3xl text-gray-800 mb-8" />
           <div className="flex flex-wrap gap-x-5 gap-y-6">
             {products.map((product, idx) => (
               <ProductCard product={product} key={idx} onClick={() => handleOpen(product)} />

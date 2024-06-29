@@ -19,7 +19,7 @@ export const PhoneNumberInput: FC<{ className?: string }> = ({ className }) => {
                 ripple={false}
                 variant="text"
                 color="blue-gray"
-                className="flex items-center gap-2 rounded-md border border-blue-gray-200 min-w-[108px] bg-gr-100 pl-3"
+                className="flex items-center gap-2 rounded-md border border-blue-gray-200 min-w-[108px] bg-gray-100 pl-3"
               >
                 <img
                   src={countries[countryId]?.flags.svg}

@@ -59,7 +59,7 @@ const NestedSelect: FC<NestedSelectProps> = ({ options, onChange, className, chi
   return (
     <div className={`relative ${className} select-none`}>
       <div
-        className="border border-disabled shadow-select text-tip font-medium text-sm rounded-md py-[9px] pl-[17px] pr-[13px] cursor-pointer flex justify-between items-center"
+        className="border border-gray-300 shadow-select text-gray-700 font-medium text-sm rounded-md py-[9px] pl-[17px] pr-[13px] cursor-pointer flex justify-between items-center"
         onClick={handleDropdownToggle}
       >
         <span>{getLabelByValue(selectedValue)}</span>
@@ -67,7 +67,7 @@ const NestedSelect: FC<NestedSelectProps> = ({ options, onChange, className, chi
       </div>
       {dropdownOpen && (
         <div
-          className={`absolute mt-1 w-full bg-white shadow-select-options border border-disabled py-1 rounded-md z-10 flex flex-col items-center`}
+          className={`absolute mt-1 w-full bg-white shadow-select-options border border-gray-300 py-1 rounded-md z-10 flex flex-col items-center`}
         >
           {options.map(({ label, value, options: subOptions }) => (
             <div
@@ -78,7 +78,7 @@ const NestedSelect: FC<NestedSelectProps> = ({ options, onChange, className, chi
             >
               <div
                 className={`
-                  cursor-pointer ${expandedOption === value && 'bg-blue-50'} flex items-center justify-between px-[16px] py-[8px] text-tip font-normal text-sm
+                  cursor-pointer ${expandedOption === value && 'bg-blue-50'} flex items-center justify-between px-[16px] py-[8px] text-gray-700 font-normal text-sm
                 `}
                 onClick={() => handleOptionClick(value, !!subOptions)}
               >
@@ -86,11 +86,11 @@ const NestedSelect: FC<NestedSelectProps> = ({ options, onChange, className, chi
                 {subOptions && <ChevronRightIcon />}
               </div>
               {expandedOption === value && subOptions && (
-                <div className="absolute top-0 left-full w-[260px] bg-white shadow-lg border border-disabled rounded-md z-20 py-1">
+                <div className="absolute top-0 left-full w-[260px] bg-white shadow-lg border border-gray-300 rounded-md z-20 py-1">
                   {subOptions.map(({ label: subLabel, value: subValue }) => (
                     <div
                       key={subValue}
-                      className="cursor-pointer hover:bg-gray-100 flex items-center justify-between px-[16px] py-[8px] text-tip font-normal text-sm"
+                      className="cursor-pointer hover:bg-gray-100 flex items-center justify-between px-[16px] py-[8px] text-gray-700 font-normal text-sm"
                       onClick={() => handleOptionClick(subValue, false)}
                     >
                       {subLabel}
@@ -101,7 +101,7 @@ const NestedSelect: FC<NestedSelectProps> = ({ options, onChange, className, chi
             </div>
           ))}
           <div
-            className={`${options.length === 0 ? 'py-[36.5px] font-normal text-base' : 'pt-6 pb-3 font-medium text-sm'} px-3 w-full text-gr-800`}
+            className={`${options.length === 0 ? 'py-[36.5px] font-normal text-base' : 'pt-6 pb-3 font-medium text-sm'} px-3 w-full text-gray-800`}
           >
             {children}
           </div>

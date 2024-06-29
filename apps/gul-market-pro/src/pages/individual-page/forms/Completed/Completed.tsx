@@ -8,9 +8,9 @@ const Completed: FC<ICompletedProps> = props => {
     <>
       <Typography
         children={'Абаев Аристотель Куандыкович'}
-        className={'font-semibold text-xl text-tip_extra_bold text-center '}
+        className={'font-semibold text-xl text-gray-900 text-center '}
       />
-      <Typography children={'Алматы'} className={'font-normal text-base text-tip text-center '} />
+      <Typography children={'Алматы'} className={'font-normal text-base text-gray-700 text-center '} />
     </>
   )
 }
