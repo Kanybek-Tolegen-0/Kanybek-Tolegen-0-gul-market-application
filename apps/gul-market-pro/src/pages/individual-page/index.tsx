@@ -1,12 +1,11 @@
 import React, { useState, FC } from 'react'
 import { IconButton, Typography } from '@material-tailwind/react'
-import { StepHeader } from '../../components/step-header'
+import { StepHeader } from '../../components'
 import { configs } from './constants'
 import { BrandButton, Container, Layout } from '@design-system/ui'
 import { Link } from 'react-router-dom'
 import { ChevronLeftIcon } from '@design-system/ui'
-import { GMStepper } from '../../components/gm-stepper'
-import './style.css'
+import { GMStepper } from '@design-system/ui'
 
 export const IndividualPage: FC = props => {
   const [activeStep, setActiveStep] = useState(0)

@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { Stepper, Step, Typography } from '@material-tailwind/react'
-import { CompletedIcon } from '@design-system/ui'
-import { IStep } from '../../pages/individual-page/constants'
+import { IStep } from './types'
+import { CompletedIcon } from '../../assets'
 
 interface IGMStepperProps {
   activeStep: number

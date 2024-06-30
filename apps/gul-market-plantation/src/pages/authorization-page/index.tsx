@@ -26,7 +26,7 @@ export const AuthorizationPage: FunctionComponent = () => {
                     <PhoneNumberInput />
                     <PasswordInput />
                   </div>
-                  <BrandButton className="w-full" onClick={() => navigate('/choose-role')}>
+                  <BrandButton className="w-full" onClick={() => navigate('/register-plantation')}>
                     Создать аккаунт
                   </BrandButton>
                 </div>

@@ -1,6 +1,7 @@
-import { FilterOrderIcon, Select, SelectProps } from '@design-system/ui'
 import { Typography } from '@material-tailwind/react'
 import React, { FC, useState } from 'react'
+import { FilterOrderIcon } from '../../assets'
+import { Select, SelectProps } from '../select'
 
 export const FilterSelect: FC<SelectProps> = ({ className, options, onChange }) => {
   const [value, setValue] = useState<string | null>(null)
