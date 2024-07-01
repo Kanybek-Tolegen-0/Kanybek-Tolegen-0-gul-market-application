@@ -4,7 +4,7 @@ import { Typography } from '@material-tailwind/react'
 
 interface ShopCreatedProps {}
 
-const ShopCreated: FunctionComponent<ShopCreatedProps> = props => {
+const PlantationCreated: FunctionComponent<ShopCreatedProps> = props => {
   const timeWork = [
     {
       day: 'Понедельник',
@@ -67,4 +67,4 @@ const ShopCreated: FunctionComponent<ShopCreatedProps> = props => {
   )
 }
 
-export default ShopCreated
+export default PlantationCreated

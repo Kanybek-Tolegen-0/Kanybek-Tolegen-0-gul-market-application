@@ -8,7 +8,7 @@ import { PlusIcon } from '@design-system/ui'
 
 interface ShopsProps {}
 
-const Shop: FunctionComponent<ShopsProps> = props => {
+const Plantation: FunctionComponent<ShopsProps> = props => {
   const [mainComponents, setMainComponents] = useState<number[]>([0]) // Initialize with one Main component
 
   const addMainComponent = () => {
@@ -39,4 +39,4 @@ const Shop: FunctionComponent<ShopsProps> = props => {
   )
 }
 
-export default Shop
+export default Plantation

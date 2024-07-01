@@ -1,7 +1,7 @@
 import { FC } from 'react'
-import ShopAddress from './Forms/ShopAddress/ShopAddress'
-import Shop from './Forms/Shop/Shop'
-import ShopCreated from './Forms/ShopCreated/ShopCreated'
+import PlantationAddress from './Forms/PlantationAddress/PlantationAddress'
+import Plantation from './Forms/Plantation/Plantation'
+import PlantationCreated from './Forms/PlantationCreated/PlantationCreated'
 
 export interface IContent {
   title: string
@@ -28,17 +28,17 @@ const steps_content: IContent[] = [
   {
     title: 'Город проживания',
     description: 'Введите адрес, чтобы получать уведомления о лучших предложениях в Вашем городе.',
-    stepForm: ShopAddress
+    stepForm: PlantationAddress
   },
   {
     title: 'Информация о плантации',
     description: 'Предоставьте информацию о плантации, чтобы покупатели могли найти вас и ваши товары',
-    stepForm: Shop
+    stepForm: Plantation
   },
   {
     title: 'Поздравляем',
     description: 'Вы создали аккаунт',
-    stepForm: ShopCreated
+    stepForm: PlantationCreated
   }
 ]
 

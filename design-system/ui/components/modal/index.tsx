@@ -9,11 +9,25 @@ interface ModalProps {
   handleOpen: (params?: any) => void
   handleNext?: () => void
   handlePrev?: () => void
+  className?: string
 }
 
-const Modal: FC<ModalProps> = ({ children, withArrows = false, open, handleOpen, handleNext, handlePrev }) => {
+const Modal: FC<ModalProps> = ({
+  children,
+  withArrows = false,
+  open,
+  handleOpen,
+  handleNext,
+  handlePrev,
+  className
+}) => {
   return (
-    <Dialog open={open} handler={handleOpen} size="lg" className="relative !min-w-fit !max-w-fit">
+    <Dialog
+      open={open}
+      handler={handleOpen}
+      size="lg"
+      className={`relative !min-w-fit !max-w-fit !rounded-base ${className}`}
+    >
       <div className="absolute -top-[42px] right-0 cursor-pointer" onClick={() => handleOpen()}>
         <ThinCrossIcon />
       </div>

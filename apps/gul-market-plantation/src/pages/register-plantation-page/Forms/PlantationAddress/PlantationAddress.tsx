@@ -4,7 +4,7 @@ import { Map } from '../../../../components'
 
 interface IShopAddressProps {}
 
-const ShopAddress: FC = props => {
+const PlantationAddress: FC = props => {
   return (
     <>
       <div>
@@ -24,4 +24,4 @@ const ShopAddress: FC = props => {
   )
 }
 
-export default ShopAddress
+export default PlantationAddress
