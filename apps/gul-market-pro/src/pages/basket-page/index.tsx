@@ -9,7 +9,7 @@ import { BasketNotAvailableCard } from './basket-not-available-card'
 
 export const BasketPage: FC = () => {
   return (
-    <Layout fullHeader isLogged>
+    <Layout>
       <Layout.Content>
         <ScreenTemplate title="Корзина">
           <div className="flex justify-between gap-12">

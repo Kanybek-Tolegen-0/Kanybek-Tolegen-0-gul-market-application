@@ -2,25 +2,18 @@ import React, { FC } from 'react'
 import { Link } from 'react-router-dom'
 import { Typography } from '@material-tailwind/react'
 
-interface NavProps {}
+export interface NavProps {
+  tabs: { link: string; label: string }[]
+}
 
-const Nav: FC<NavProps> = props => {
+export const Nav: FC<NavProps> = ({ tabs }) => {
   return (
     <div className="flex gap-6 items-center font-normal text-sm text-gray-800">
-      <Link to={'/main-page'}>
-        <Typography children="Главная" className="px-2 py-1" />
-      </Link>
-      <Link to={'/catalog'}>
-        <Typography children="Каталог" className="px-2 py-1" />
-      </Link>
-      <Link to={''}>
-        <Typography children="Заказы" className="px-2 py-1" />
-      </Link>
-      <Link to={''}>
-        <Typography children="Рекламация" className="px-2 py-1" />
-      </Link>
+      {tabs.map(({ label, link }) => (
+        <Link key={link} to={link} className="px-2 py-1">
+          {label}
+        </Link>
+      ))}
     </div>
   )
 }
-
-export default Nav

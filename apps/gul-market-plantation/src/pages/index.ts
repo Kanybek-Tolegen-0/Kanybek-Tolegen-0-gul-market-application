@@ -11,3 +11,5 @@ export { CatalogPage } from './catalog-page'
 export { RegisterPlantationPage } from './register-plantation-page'
 
 export { MyOrdersPage } from './my-orders-page'
+
+export { Dashboard } from './dashboard'

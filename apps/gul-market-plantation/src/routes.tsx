@@ -1,8 +1,9 @@
-import { createBrowserRouter } from 'react-router-dom'
 import React from 'react'
+import { createBrowserRouter } from 'react-router-dom'
 import {
   AuthorizationPage,
   CatalogPage,
+  Dashboard,
   MyOrdersPage,
   NewPasswordPage,
   RegisterPlantationPage,
@@ -13,30 +14,36 @@ import { LoginPage } from './pages'
 export const routes = createBrowserRouter([
   {
     path: '/',
-    element: <AuthorizationPage />
-  },
-  {
-    path: '/login',
-    element: <LoginPage />
-  },
-  {
-    path: '/remember-password',
-    element: <RememberPasswordPage />
-  },
-  {
-    path: '/new-password',
-    element: <NewPasswordPage />
-  },
-  {
-    path: '/catalog-page',
-    element: <CatalogPage />
-  },
-  {
-    path: '/register-plantation',
-    element: <RegisterPlantationPage />
-  },
-  {
-    path: '/my-orders',
-    element: <MyOrdersPage />
+    element: <Dashboard />,
+    children: [
+      {
+        index: true,
+        element: <AuthorizationPage />
+      },
+      {
+        path: '/login',
+        element: <LoginPage />
+      },
+      {
+        path: '/remember-password',
+        element: <RememberPasswordPage />
+      },
+      {
+        path: '/new-password',
+        element: <NewPasswordPage />
+      },
+      {
+        path: '/catalog',
+        element: <CatalogPage />
+      },
+      {
+        path: '/register-plantation',
+        element: <RegisterPlantationPage />
+      },
+      {
+        path: '/my-orders',
+        element: <MyOrdersPage />
+      }
+    ]
   }
 ])

@@ -1,5 +1,4 @@
 import React, { FC, ReactNode } from 'react'
-import { Header } from '../header'
 
 interface LayoutProps {
   children: ReactNode
@@ -21,11 +20,8 @@ interface LayoutComponent extends FC<LayoutProps> {
   Content: FC<ContentProps>
 }
 
-const Layout: LayoutComponent = ({ children, isLogged = false, fullHeader = false, className }) => (
-  <div className={`flex flex-col h-screen ${className}`}>
-    <Header isLogged={isLogged} fullHeader={fullHeader} />
-    {children}
-  </div>
+const Layout: LayoutComponent = ({ children, className }) => (
+  <div className={`flex flex-col h-screen ${className}`}>{children}</div>
 )
 
 Layout.Content = Content

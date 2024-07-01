@@ -10,18 +10,19 @@ import {
   CabinetIcon,
   ExitIcon
 } from '../../assets'
-import Nav from '../nav'
+import { Nav, NavProps } from '../nav'
 import { Select } from '../select'
 import { SearchInput } from '../search-input'
 import { BrandButton } from '../brand-button'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 interface HeaderProps {
   fullHeader?: boolean
   isLogged?: boolean
+  handleLogin: () => void
 }
 
-export const Header: FC<HeaderProps> = ({ isLogged, fullHeader }) => {
+export const Header: FC<HeaderProps & NavProps> = ({ isLogged, tabs, fullHeader, handleLogin }) => {
   const [openMenu, setOpenMenu] = React.useState(false)
 
   const handleMenu = () => {
@@ -33,19 +34,19 @@ export const Header: FC<HeaderProps> = ({ isLogged, fullHeader }) => {
       <div className="flex gap-8 items-center">
         <div className="flex items-center gap-3 h-[50px]">
           {fullHeader ? <img src={fakeShopImage} alt={'profile'} className={'h-[50px] w-[50px]'} /> : <LogoIcon />}
-          {fullHeader && (
+          {fullHeader ? (
             <Typography
               children="Название магазина в три строки"
               className="w-[106px] font-normal text-sm text-gray-500 h-[50px]"
             />
-          )}
+          ) : null}
         </div>
-        {fullHeader && <Nav />}
+        {fullHeader ? <Nav tabs={tabs} /> : null}
       </div>
       <div>
         {isLogged ? (
           <div className="flex items-center gap-4">
-            {fullHeader && (
+            {fullHeader ? (
               <>
                 <Select options={[{ label: 'one', value: 'one' }]} className="h-[38px]" />
                 <SearchInput inputProps={{ placeholder: 'Искать товар или плантацию' }} className="h-[38px]" />
@@ -53,7 +54,7 @@ export const Header: FC<HeaderProps> = ({ isLogged, fullHeader }) => {
                   <NotificationIcon />
                 </div>
               </>
-            )}
+            ) : null}
             <div>
               <Menu placement="bottom-start" open={openMenu} handler={handleMenu}>
                 <MenuHandler
@@ -98,7 +99,13 @@ export const Header: FC<HeaderProps> = ({ isLogged, fullHeader }) => {
             </div>
           </div>
         ) : (
-          <Button className="normal-case font-normal text-sm" variant="text">
+          <Button
+            className="normal-case font-normal text-sm"
+            variant="text"
+            onClick={() => {
+              handleLogin()
+            }}
+          >
             Войти
           </Button>
         )}
