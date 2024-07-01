@@ -34,6 +34,7 @@ module.exports = withMT({
         'pk-100': '#FCE7F3',
         'pk-400': 'rgba(244, 114, 182, 1)',
         'pink-500': '#EC4899',
+        'pink-600': '#DB2777',
         'pk-700': '#BE185D',
         'gr-400': 'rgba(156, 163, 175, 1)',
         'yellow-100': '#FEF3C7',

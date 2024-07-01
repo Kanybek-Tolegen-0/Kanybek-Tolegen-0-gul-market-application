@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from 'react'
 import { Button, Card, Typography } from '@material-tailwind/react'
-import { CommentIcon } from '../../../assets'
+import { CommentIcon } from '../../assets'
 
 interface OrderCardProps {
   title: string

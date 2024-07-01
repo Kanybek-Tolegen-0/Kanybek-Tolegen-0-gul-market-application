@@ -78,3 +78,12 @@ export const FLAG_LABELS: { [key: string]: FlagProps } = {
   [ORDER_STATUS.PLANTATION_DECLINED]: { label: 'Отклонена', color: 'text-red-800', bgColor: 'bg-red-100' },
   [ORDER_STATUS.IN_DELIVERY]: { label: 'Доставляется', color: 'text-blue-800', bgColor: 'bg-blue-100' }
 }
+
+export const steps = [
+  { label: 'Заказ прилетел в Караганду', value: '1' },
+  { label: 'Заказ выехал в Алматы', value: '2' },
+  { label: 'Заказ прибыл в Алматы', value: '3' },
+  { label: 'Доставлен', value: '4' }
+]
+
+export const boxes = ['4 FB', '2 HB', '1 EB']
