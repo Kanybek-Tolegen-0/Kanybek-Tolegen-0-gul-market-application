@@ -39,6 +39,15 @@ export const MyOrdersPage = () => {
           console.log('Заказать еще раз', data)
         }
       }
+    ],
+    [ORDER_STATUS.KARGO_DECLINED]: [
+      {
+        className: 'text-base font-medium px-[21px] py-[13px] bg-pink-500 normal-case min-w-[210px]',
+        label: 'Заказать еще раз',
+        handler: (data: IOrders) => {
+          console.log('Заказать еще раз', data)
+        }
+      }
     ]
   }
 
