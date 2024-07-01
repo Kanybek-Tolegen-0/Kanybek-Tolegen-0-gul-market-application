@@ -11,6 +11,7 @@ import {
   FlowersPage,
   BasketPage,
   ProfilePage
+  MyOrdersPage
 } from './pages'
 import { MainPage } from './pages/main-page'
 import { CatalogPage } from './pages/catalog-page'
@@ -68,5 +69,8 @@ export const routes = createBrowserRouter([
   {
     path: '/favorite',
     element: <FavoritePage />
+  },
+    path: '/my-orders',
+    element: <MyOrdersPage />
   }
 ])
