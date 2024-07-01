@@ -45,3 +45,7 @@ export { default as tulpanImage2 } from './tulpan2.png'
 export { default as tulpanImage3 } from './tulpan3.png'
 
 export { default as tulpanImage4 } from './tulpan4.png'
+
+export { default as logoImage } from './logo.png'
+
+export { default as orderFlowerImage } from './order-flower.png'
