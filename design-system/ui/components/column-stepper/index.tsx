@@ -16,12 +16,12 @@ export const ColumnStepper: FC<ColumnStepperProps> = ({ active, steps }) => (
         <React.Fragment key={index}>
           <div className="relative flex px-[24px] py-[20px] gap-[16px] items-center">
             <div
-              className={`flex justify-center items-center rounded-full w-[40px] h-[40px] text-sm leading-4 font-medium ${isActive ? 'text-pink-600' : 'text-gr-900'} ${isActive ? 'border-[2px] border-pink-600' : 'border-[2px] border-gr-300'} ${index < active ? 'bg-pink-600 border-none' : ''}`}
+              className={`flex justify-center items-center rounded-full w-[40px] h-[40px] text-sm leading-4 font-medium ${isActive ? 'text-pink-600' : 'text-gray-900'} ${isActive ? 'border-[2px] border-pink-600' : 'border-[2px] border-gray-300'} ${index < active ? 'bg-pink-600 border-none' : ''}`}
             >
               {index < active ? <CompletedIcon /> : `0${index + 1}`}
             </div>
             <Typography
-              className={`text-xs leading-4 font-semibold tracking-wide uppercase ${isActive ? 'text-pink-600' : 'text-gr-900'}`}
+              className={`text-xs leading-4 font-semibold tracking-wide uppercase ${isActive ? 'text-pink-600' : 'text-gray-900'}`}
             >
               {label}
             </Typography>

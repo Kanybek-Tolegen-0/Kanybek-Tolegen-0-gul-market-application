@@ -25,7 +25,7 @@ export const MyOrdersPage = () => {
     ],
     [ORDER_STATUS.PLANTATION_DECLINED]: [
       {
-        className: 'text-base text-gr-900 font-medium px-[21px] py-[13px] bg-primary normal-case min-w-[210px]',
+        className: 'text-base text-gray-900 font-medium px-[21px] py-[13px] bg-primary normal-case min-w-[210px]',
         label: 'Оценить заказ',
         handler: (data: IOrders) => {
           console.log('Оценить заказ', data)

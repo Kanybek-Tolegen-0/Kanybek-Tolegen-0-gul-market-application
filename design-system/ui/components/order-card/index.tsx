@@ -47,8 +47,8 @@ export const OrderCard: FC<OrderCardProps> = ({
         <div className="flex justify-between py-[20px] pr-[20px] w-full">
           <div className="flex flex-col h-full w-full justify-between">
             <div className="flex flex-col gap-[12px]">
-              <Typography className="text-xl leading-7 font-normal text-gr-800">{title}</Typography>
-              <Typography className="text-base leading-5 font-normal text-gr-500">{subTitle}</Typography>
+              <Typography className="text-xl leading-7 font-normal text-gray-800">{title}</Typography>
+              <Typography className="text-base leading-5 font-normal text-gray-500">{subTitle}</Typography>
             </div>
             <div className="flex items-center gap-[16px]">
               <div className="flex items-center">
@@ -58,10 +58,10 @@ export const OrderCard: FC<OrderCardProps> = ({
                     backgroundImage: `url(${logo})`
                   }}
                 />
-                <Typography className="text-sm font-light leading-4 text-gr-500">{name}</Typography>
+                <Typography className="text-sm font-light leading-4 text-gray-500">{name}</Typography>
               </div>
               <Button
-                className="flex p-0 justify-center items-center w-[40px] h-[40px] border-[1px] border-gr-600 rounded-[10px]"
+                className="flex p-0 justify-center items-center w-[40px] h-[40px] border-[1px] border-gray-600 rounded-[10px]"
                 variant="text"
               >
                 <CommentIcon />
@@ -71,8 +71,8 @@ export const OrderCard: FC<OrderCardProps> = ({
           <div className="flex flex-col justify-between items-start min-w-max">
             <div className="self-end">{flag}</div>
             <div className="flex flex-col self-end">
-              <Typography className="text-3xl leading-10 font-medium text-gr-900">{price}</Typography>
-              <Typography className="text-base leading-7 font-normal text-gr-600">
+              <Typography className="text-3xl leading-10 font-medium text-gray-900">{price}</Typography>
+              <Typography className="text-base leading-7 font-normal text-gray-600">
                 {priceDollar} / {priceTenge}
               </Typography>
             </div>

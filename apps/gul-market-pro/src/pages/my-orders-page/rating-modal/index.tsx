@@ -16,12 +16,12 @@ export const RatingModal: FC<{ onClose: () => void }> = ({ onClose }) => {
 
   return (
     <Card className="relative shadow-none rounded-[20px] p-[20px]">
-      <Typography className="text-xl leading-7 font-semibold text-gr-900">
+      <Typography className="text-xl leading-7 font-semibold text-gray-900">
         Оцените работу плантации “Название плантации”
       </Typography>
       <div className="flex flex-col gap-[12px]">
         <div className="flex flex-col gap-[8px]">
-          <Typography className="text-sm leading-5 font-normal text-gr-500">Качество</Typography>
+          <Typography className="text-sm leading-5 font-normal text-gray-500">Качество</Typography>
           <Rating
             value={formValues.quality}
             onChange={v => setFormValues(prev => ({ ...prev, quality: v }))}
@@ -50,7 +50,7 @@ export const RatingModal: FC<{ onClose: () => void }> = ({ onClose }) => {
           />
         </div>
         <div className="flex flex-col gap-[8px]">
-          <Typography className="text-sm leading-5 font-normal text-gr-500">Свежесть</Typography>
+          <Typography className="text-sm leading-5 font-normal text-gray-500">Свежесть</Typography>
           <Rating
             value={formValues.fresh}
             onChange={v => setFormValues(prev => ({ ...prev, fresh: v }))}
@@ -79,7 +79,7 @@ export const RatingModal: FC<{ onClose: () => void }> = ({ onClose }) => {
           />
         </div>
         <div className="flex flex-col gap-[8px]">
-          <Typography className="text-sm leading-5 font-normal text-gr-500">Доставка</Typography>
+          <Typography className="text-sm leading-5 font-normal text-gray-500">Доставка</Typography>
           <Rating
             value={formValues.delivery}
             onChange={v => setFormValues(prev => ({ ...prev, delivery: v }))}
@@ -109,7 +109,7 @@ export const RatingModal: FC<{ onClose: () => void }> = ({ onClose }) => {
         </div>
 
         <div className="flex flex-col gap-[8px]">
-          <Typography className="text-sm leading-5 font-medium text-gr-700">Отзыв</Typography>
+          <Typography className="text-sm leading-5 font-medium text-gray-700">Отзыв</Typography>
           <Textarea
             placeholder="Напишите свой отзыв, чтобы помочь другим покупателям"
             onChange={e => {

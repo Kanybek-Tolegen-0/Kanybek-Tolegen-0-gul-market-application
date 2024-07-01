@@ -15,7 +15,7 @@ export const DeliveryModal: FC<
   <Card className="relative shadow-none rounded-[20px]">
     <div className="flex">
       <div
-        className="flex flex-col max-w-[260px] bg-gr-100 p-[20px] justify-between"
+        className="flex flex-col max-w-[260px] bg-gray-100 p-[20px] justify-between"
         style={{ borderTopLeftRadius: '20px', borderBottomLeftRadius: '20px' }}
       >
         <div
@@ -25,13 +25,13 @@ export const DeliveryModal: FC<
           }}
         />
         <div className="flex flex-col">
-          <Typography className="text-xl leading-7 font-normal gr-800">{flowerName}</Typography>
-          <Typography className="text-xs font-normal text-gr-500">
+          <Typography className="text-xl leading-7 font-normal gray-800">{flowerName}</Typography>
+          <Typography className="text-xs font-normal text-gray-500">
             {boxes.reduce((acc, box, index) => `${acc} ${box}${index === boxes.length - 1 ? '' : ', '}`, '')}
           </Typography>
         </div>
-        <Typography className="text-base leading-5 font-normal text-gr-500">{address}</Typography>
-        <Typography className="text-base leading-5 font-normal text-gr-800">{delivery}</Typography>
+        <Typography className="text-base leading-5 font-normal text-gray-500">{address}</Typography>
+        <Typography className="text-base leading-5 font-normal text-gray-800">{delivery}</Typography>
       </div>
       <div className="px-[24px] py-[20px]">
         <ColumnStepper active={active} steps={steps} />
