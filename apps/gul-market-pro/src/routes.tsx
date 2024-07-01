@@ -9,7 +9,8 @@ import {
   RememberPasswordPage,
   NewPasswordPage,
   FlowersPage,
-  BasketPage
+  BasketPage,
+  MyOrdersPage
 } from './pages'
 import { MainPage } from './pages/main-page'
 import { CatalogPage } from './pages/catalog-page'
@@ -58,5 +59,9 @@ export const routes = createBrowserRouter([
   {
     path: '/basket',
     element: <BasketPage />
+  },
+  {
+    path: '/my-orders',
+    element: <MyOrdersPage />
   }
 ])
