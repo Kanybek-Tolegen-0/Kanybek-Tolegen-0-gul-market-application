@@ -9,7 +9,6 @@ export { RememberPasswordPage } from './remember-password-page'
 export { CatalogPage } from './catalog-page'
 
 export { RegisterPlantationPage } from './register-plantation-page'
-export { TestModal } from './test-modal'
 
 export { MyOrdersPage } from './my-orders-page'
 

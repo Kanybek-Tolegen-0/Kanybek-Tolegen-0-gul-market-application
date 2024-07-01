@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
-import { CompletedIcon, StepperActive } from '@design-system/ui'
 import { Typography } from '@material-tailwind/react'
+import { CompletedIcon, StepperActive } from '../../assets'
 
 export interface ColumnStepperProps {
   active: number
