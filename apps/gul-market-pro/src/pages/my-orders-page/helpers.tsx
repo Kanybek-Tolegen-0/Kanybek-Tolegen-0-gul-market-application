@@ -1,11 +1,41 @@
 import React from 'react'
-import { FLAG_LABELS, ORDER_ACTIONS } from './constants'
+import { FLAG_LABELS } from './constants'
 import { IOrders } from './types'
 import { Flag } from '@design-system/ui'
+import { Button } from '@material-tailwind/react'
 
-export const formatOrderData = (data: IOrders[]) =>
+function renderActions<T>(
+  handler: {
+    label: string
+    className: string
+    handler: (data: T) => void
+  }[],
+  data: T
+) {
+  return (
+    <div className="flex gap-[12px]">
+      {handler.map(({ label, className, handler }) => (
+        <Button key={label} className={className} onClick={() => handler(data)}>
+          {label}
+        </Button>
+      ))}
+    </div>
+  )
+}
+
+export const formatOrderData = (
+  data: IOrders[],
+  handlers: {
+    [key: string]: {
+      label: string
+      className: string
+      handler: (data: any) => void
+    }[]
+  }
+) =>
   data.map(({ name, flower, box_type, address, price, price_dollar, price_tenge, imageUrl, logo, status }) => {
-    const actions = ORDER_ACTIONS[status]
+    const handler = handlers && handlers[status]
+
     return {
       title: `${flower}  ${box_type}`,
       subTitle: address,
@@ -22,8 +52,8 @@ export const formatOrderData = (data: IOrders[]) =>
       price,
       priceDollar: price_dollar,
       priceTenge: price_tenge,
-      actions: actions
-        ? actions<IOrders>({
+      actions: handler
+        ? renderActions<IOrders>(handler, {
             name,
             flower,
             box_type,

@@ -70,7 +70,7 @@ export const OrderCard: FC<OrderCardProps> = ({
           </div>
           <div className="flex flex-col justify-between items-start min-w-max">
             <div className="self-end">{flag}</div>
-            <div className="flex flex-col">
+            <div className="flex flex-col self-end">
               <Typography className="text-3xl leading-10 font-medium text-gr-900">{price}</Typography>
               <Typography className="text-base leading-7 font-normal text-gr-600">
                 {priceDollar} / {priceTenge}

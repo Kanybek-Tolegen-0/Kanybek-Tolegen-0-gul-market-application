@@ -41,7 +41,9 @@ module.exports = withMT({
         'green-100': '#D1FAE5',
         'green-800': '#065F46',
         'red-100': '#FEE2E2',
-        'red-800': '#991B1B'
+        'red-800': '#991B1B',
+        'blue-100': '#DBEAFE',
+        'blue-800': '#1E40AF'
       },
       fontSize: {
         base: ['1rem', '1.25rem'],
