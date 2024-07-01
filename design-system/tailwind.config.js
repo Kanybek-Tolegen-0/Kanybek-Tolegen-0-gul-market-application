@@ -33,10 +33,15 @@ module.exports = withMT({
         'card-gr': 'rgba(241, 244, 248, 1)',
         'pk-100': '#FCE7F3',
         'pk-400': 'rgba(244, 114, 182, 1)',
+        'pink-500': '#EC4899',
         'pk-700': '#BE185D',
         'gr-400': 'rgba(156, 163, 175, 1)',
         'yellow-100': '#FEF3C7',
-        'yellow-800': '#92400E'
+        'yellow-800': '#92400E',
+        'green-100': '#D1FAE5',
+        'green-800': '#065F46',
+        'red-100': '#FEE2E2',
+        'red-800': '#991B1B'
       },
       fontSize: {
         base: ['1rem', '1.25rem'],

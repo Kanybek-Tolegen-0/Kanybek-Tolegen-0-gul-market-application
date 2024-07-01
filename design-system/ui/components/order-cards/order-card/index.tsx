@@ -12,6 +12,7 @@ interface OrderCardProps {
   priceDollar: string
   priceTenge: string
   flag: React.ReactNode
+  actions?: React.ReactNode
 }
 
 export const OrderCard: FC<OrderCardProps> = ({
@@ -23,11 +24,12 @@ export const OrderCard: FC<OrderCardProps> = ({
   price,
   priceDollar,
   priceTenge,
-  flag
+  flag,
+  actions
 }) => {
   return (
     <Card
-      className="p-0"
+      className="p-0 shadow-none bg-gr-50"
       style={{
         borderTopLeftRadius: '20px',
         borderBottomLeftRadius: '20px'
@@ -66,14 +68,15 @@ export const OrderCard: FC<OrderCardProps> = ({
               </Button>
             </div>
           </div>
-          <div className="flex flex-col justify-between">
-            {flag}
+          <div className="flex flex-col justify-between items-start min-w-max">
+            <div className="self-end">{flag}</div>
             <div className="flex flex-col">
               <Typography className="text-3xl leading-10 font-medium text-gr-900">{price}</Typography>
               <Typography className="text-base leading-7 font-normal text-gr-600">
                 {priceDollar} / {priceTenge}
               </Typography>
             </div>
+            {actions}
           </div>
         </div>
       </div>

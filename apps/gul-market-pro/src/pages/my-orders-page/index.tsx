@@ -14,7 +14,7 @@ export const MyOrdersPage = () => {
           <OrderTabs active={activeTab} tabs={tabs} onChange={onTabChange} />
           <div className="flex flex-col gap-[12px] mt-[12px]">
             {formatOrderData(orders).map(
-              ({ title, subTitle, imageUrl, logo, name, flag, price, priceDollar, priceTenge }, index) => (
+              ({ title, subTitle, imageUrl, logo, name, flag, price, priceDollar, priceTenge, actions }, index) => (
                 <OrderCard
                   key={index}
                   name={name}
@@ -26,6 +26,7 @@ export const MyOrdersPage = () => {
                   price={price}
                   priceDollar={priceDollar}
                   priceTenge={priceTenge}
+                  actions={actions}
                 />
               )
             )}
