@@ -24,7 +24,7 @@ const PlantationSection: FC<PlantationSectionProps> = ({ sectionData }) => {
               <img alt="plantation logo" src={logo} />
               <div className="flex flex-col gap-3 w-full">
                 <div className="flex justify-between font-normal !text-xsm">
-                  {newPlant && <button className="rounded-[4px] px-1 py-0.5 bg-pk-400 text-primary">Новая</button>}
+                  {newPlant && <button className="rounded-[4px] px-1 py-0.5 bg-pink-400 text-primary">Новая</button>}
                   <div className="flex items-center gap-1 h-4">
                     <StarIcon />
                     <Typography children={rating} className="text-gray-700 font-normal !text-xsm" />

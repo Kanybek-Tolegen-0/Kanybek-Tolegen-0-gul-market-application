@@ -10,3 +10,7 @@ export { CatalogPage } from './catalog-page'
 
 export { RegisterPlantationPage } from './register-plantation-page'
 export { TestModal } from './test-modal'
+
+export { MyOrdersPage } from './my-orders-page'
+
+export { Dashboard } from './dashboard'

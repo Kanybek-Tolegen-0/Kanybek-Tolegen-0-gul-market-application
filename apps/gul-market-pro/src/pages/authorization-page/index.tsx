@@ -34,7 +34,7 @@ export const AuthorizationPage: FunctionComponent = () => {
             </Container>
 
             <div className="flex justify-center gap-x-1 py-3">
-              <Typography className="text-base leading-6 font-normal text-gr-600">Уже есть аккаунт?</Typography>
+              <Typography className="text-base leading-6 font-normal text-gray-600">Уже есть аккаунт?</Typography>
               <Button className="normal-case px-2 py-0 text-base font-light text-brand" variant="text">
                 <Link to="/login">Войти</Link>
               </Button>
