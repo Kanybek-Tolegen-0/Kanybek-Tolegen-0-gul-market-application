@@ -2,17 +2,23 @@ import React, { FC } from 'react'
 import { Typography } from '@material-tailwind/react'
 import { PlantationSection } from '../../constants'
 import { fakePlantation, StarIcon } from '@design-system/ui'
+import { useNavigate } from 'react-router-dom'
 interface PlantationSectionProps {
   sectionData: PlantationSection
 }
 
 const PlantationSection: FC<PlantationSectionProps> = ({ sectionData }) => {
+  const navigate = useNavigate()
+
   const { title, buttonAdd, plantations } = sectionData
   return (
     <div>
       <div className="flex justify-between mb-8">
         <Typography children={title} className="font-normal text-3xl text-gray-800" />
-        <button className="rounded-[8px] px-3 py-1.5 bg-gray-100 font-normal text-base text-gray-900">
+        <button
+          className="rounded-[8px] px-3 py-1.5 bg-gray-100 font-normal text-base text-gray-900"
+          onClick={() => navigate('/catalog')}
+        >
           Смотреть все плантации {buttonAdd}
         </button>
       </div>
@@ -24,7 +30,9 @@ const PlantationSection: FC<PlantationSectionProps> = ({ sectionData }) => {
               <img alt="plantation logo" src={logo} />
               <div className="flex flex-col gap-3 w-full">
                 <div className="flex justify-between font-normal !text-xsm">
-                  {newPlant && <button className="rounded-[4px] px-1 py-0.5 bg-pink-400 text-primary">Новая</button>}
+                  {newPlant && (
+                    <button className="rounded-[4px] px-1 py-0.5 bg-pink-400 text-primary cursor-default">Новая</button>
+                  )}
                   <div className="flex items-center gap-1 h-4">
                     <StarIcon />
                     <Typography children={rating} className="text-gray-700 font-normal !text-xsm" />

@@ -1,15 +1,18 @@
 import React, { FC } from 'react'
 import { Typography } from '@material-tailwind/react'
 import { Category } from '../../constants'
+import { useNavigate } from 'react-router-dom'
 
 interface CategoryCardProps {
   category: Category
 }
 
 const CategoryCard: FC<CategoryCardProps> = ({ category }) => {
+  const navigate = useNavigate()
+
   const { name, firstImage, secondImage, thirdImage } = category
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col cursor-pointer" onClick={() => navigate('/catalog')}>
       <div className="flex gap-[7px] mb-4">
         <img src={firstImage} alt="first image" className="rounded-bl-base rounded-tl-base" />
         <div className="flex flex-col gap-2">

@@ -19,8 +19,8 @@ export const FavoritePage: FC = props => {
     setOpen(!open)
   }
   return (
-    <Layout fullHeader isLogged className="text-gray-50">
-      <Layout.Content className="flex flex-col mt-10 gap-10 !px-0 w-[1200px] mx-auto">
+    <Layout fullHeader isLogged className="text-gray-50 bg-gray-50 h-screen">
+      <Layout.Content className="flex flex-col mt-10 gap-10 !px-0 w-[1200px] mx-auto ">
         <Typography children={'Мои избранные'} className="font-normal text-5xl text-gray-900" />
         <Tabs value={activeTab}>
           <div className="flex justify-between py-[12px]">
@@ -42,7 +42,7 @@ export const FavoritePage: FC = props => {
               ))}
             </TabsHeader>
           </div>
-          <TabsBody className={`flex ${activeTab === 'searches' && 'flex-col'} gap-4 items-start h-screen`}>
+          <TabsBody className={`flex ${activeTab === 'searches' && 'flex-col'} gap-4 items-start`}>
             {activeTab === 'positions' ? (
               products.map((product, idx) => (
                 <ProductCard product={product} key={idx} onClick={() => handleOpen(product)} />

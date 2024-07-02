@@ -1,9 +1,10 @@
 import React, { FC } from 'react'
-import { Select as MaterialTailwindSelect, Option } from '@material-tailwind/react'
+import { Select as MaterialTailwindSelect, Option, Typography } from '@material-tailwind/react'
 
 interface OptionsProps {
   label: string
   value: string
+  soon?: boolean
 }
 
 export interface SelectProps {
@@ -24,9 +25,15 @@ export const Select: FC<SelectProps> = ({ className, onChange, options }) =>
       }}
       onChange={v => v && onChange && onChange(v)}
     >
-      {options.map(({ label, value }) => (
-        <Option key={value} value={value}>
+      {options.map(({ label, value, soon }) => (
+        <Option
+          key={value}
+          value={value}
+          className={` ${soon ? 'flex gap-3 items-center text-gray-500' : 'text-gray-700'}`}
+          disabled={soon}
+        >
           {label}
+          {soon && <span className={'text-gray-400'} children={' Скоро'} />}
         </Option>
       ))}
     </MaterialTailwindSelect>

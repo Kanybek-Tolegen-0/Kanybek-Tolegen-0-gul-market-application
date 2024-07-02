@@ -9,13 +9,17 @@ import {
   categoryImage4,
   categoryImage5,
   categoryImage6,
-  fakePlantation
+  ColombiaFlagImage,
+  EcuadorFlagImage,
+  fakePlantation,
+  KenyaFlagImage,
+  NetherlandFlagImage
 } from '@design-system/ui'
 export interface Catalog {
   categoryName: string
-  examples: string[]
   image: string
   size: { width: number; height: number }
+  ready: boolean
 }
 
 export interface Category {
@@ -48,28 +52,28 @@ export interface Data {
 const data: Data = {
   catalogs: [
     {
-      categoryName: 'Цветы',
-      examples: ['Розы', 'Хризантемы', 'Пионы'],
-      image: catalogImage1,
-      size: { width: 226, height: 234 }
+      categoryName: 'Эквадор',
+      image: EcuadorFlagImage,
+      size: { width: 228, height: 228 },
+      ready: true
     },
     {
-      categoryName: 'Зелень',
-      examples: ['Эквалипт', 'Что-то', 'Что-то'],
-      image: catalogImage2,
-      size: { width: 244, height: 163 }
+      categoryName: 'Голландия',
+      image: NetherlandFlagImage,
+      size: { width: 215, height: 215 },
+      ready: false
     },
     {
-      categoryName: 'Комнатные растения',
-      examples: ['Пальма комнатная', 'Денежное дерево'],
-      image: catalogImage3,
-      size: { width: 99, height: 208 }
+      categoryName: 'Коллумбия',
+      image: ColombiaFlagImage,
+      size: { width: 179, height: 179 },
+      ready: false
     },
     {
-      categoryName: 'Декор',
-      examples: ['Горшки', 'Удобрения', 'Средства по уходу'],
-      image: catalogImage4,
-      size: { width: 160, height: 160 }
+      categoryName: 'Кения',
+      image: KenyaFlagImage,
+      size: { width: 212, height: 212 },
+      ready: false
     }
   ],
   categories: [

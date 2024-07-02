@@ -19,6 +19,8 @@ export const Dashboard = () => {
           navigate('/login')
           handleLogin()
         }}
+        fullHeader
+        isLogged
       />
       <Outlet />
     </div>

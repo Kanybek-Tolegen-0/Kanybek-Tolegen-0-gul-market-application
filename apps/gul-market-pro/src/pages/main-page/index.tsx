@@ -13,7 +13,10 @@ export const MainPage: FC = props => {
   const navigate = useNavigate()
 
   const handlers: { [key: string]: () => void } = {
-    Цветы: () => navigate('/flowers')
+    Эквадор: () => navigate('/catalog'),
+    Голландия: () => navigate('/catalog'),
+    Коллумбия: () => navigate('/catalog'),
+    Кения: () => navigate('/catalog')
   }
 
   return (

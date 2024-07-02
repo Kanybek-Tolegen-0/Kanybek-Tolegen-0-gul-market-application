@@ -26,6 +26,9 @@ export const LoginPage: FunctionComponent = () => {
                           <Link to="/remember-password">Забыли пароль?</Link>
                         </Button>
                       }
+                      error={''}
+                      handleError={() => {}}
+                      name={''}
                     />
                   </div>
                   <BrandButton className="w-full" onClick={() => navigate('/choose-role')}>

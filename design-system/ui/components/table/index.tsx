@@ -7,9 +7,10 @@ interface ITable {
     renderCell?: (value: string | number | boolean | undefined) => Exclude<React.ReactNode, undefined>
   }[]
   items: Array<Array<string | number | undefined | boolean>>
+  itemOnClick?: (data: any) => void
 }
 
-export const Table: FC<ITable> = ({ headers, items }) => {
+export const Table: FC<ITable> = ({ headers, items, itemOnClick }) => {
   return (
     <table className="border-separate w-full">
       <thead>
@@ -23,7 +24,7 @@ export const Table: FC<ITable> = ({ headers, items }) => {
       </thead>
       <tbody>
         {items.map((it, m) => (
-          <tr key={m}>
+          <tr key={m} onClick={() => itemOnClick && itemOnClick(it)} className={'cursor-pointer'}>
             {headers.map((header, n) => {
               const cellValue = it[n]
               const renderCell = header?.renderCell

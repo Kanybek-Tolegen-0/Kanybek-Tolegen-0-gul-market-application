@@ -48,7 +48,15 @@ export const Header: FC<HeaderProps & NavProps> = ({ isLogged, tabs, fullHeader,
           <div className="flex items-center gap-4">
             {fullHeader ? (
               <>
-                <Select options={[{ label: 'one', value: 'one' }]} className="h-[38px]" />
+                <Select
+                  options={[
+                    { label: 'Эквадор', value: 'Эквадор' },
+                    { label: 'Аргентина', value: 'Аргентина' },
+                    { label: 'Бразилия', value: 'Бразилия', soon: true },
+                    { label: 'Пуэрто-Рико', value: 'Пуэрто-Рико', soon: true }
+                  ]}
+                  className="h-[38px]"
+                />
                 <SearchInput inputProps={{ placeholder: 'Искать товар или плантацию' }} className="h-[38px]" />
                 <div className="w-6 h-6">
                   <NotificationIcon />

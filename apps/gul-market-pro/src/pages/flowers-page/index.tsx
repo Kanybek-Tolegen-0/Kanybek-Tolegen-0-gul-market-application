@@ -31,9 +31,33 @@ import {
 } from './constants'
 import { IFilter } from '@design-system/ui/ui/@types'
 import ProductCard from '../catalog-page/parts/product-card'
-import data from '../catalog-page/constants'
+import data, { Product } from '../catalog-page/constants'
+import Modal from '@design-system/ui/ui/components/modal'
+import ProductModal from '../../components/product-modal'
 
 export const FlowersPage: FC = () => {
+  const [chosenProduct, setChosenProduct] = useState<Product>()
+  const [open, setOpen] = useState(false)
+
+  const handleOpen = (product?: Product): void => {
+    if (product) setChosenProduct(product)
+    setOpen(!open)
+  }
+
+  const handleNext = (): void => {
+    if (!chosenProduct) return
+    const currentIndex = data.products.findIndex(product => product.id === chosenProduct.id)
+    const nextIndex = (currentIndex + 1) % data.products.length
+    setChosenProduct(data.products[nextIndex])
+  }
+
+  const handlePrev = (): void => {
+    if (!chosenProduct) return
+    const currentIndex = data.products.findIndex(product => product.id === chosenProduct.id)
+    const prevIndex = (currentIndex - 1 + data.products.length) % data.products.length
+    setChosenProduct(data.products[prevIndex])
+  }
+
   const [activeTab, setActiveTab] = useState(TABS[0]?.value)
 
   const [filters, setFilters] = useState<IFilter[]>([])
@@ -190,7 +214,7 @@ export const FlowersPage: FC = () => {
                     style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)' }}
                   >
                     {data.products.map(product => (
-                      <ProductCard key={product.name} product={product} />
+                      <ProductCard key={product.name} product={product} onClick={() => handleOpen(product)} />
                     ))}
                   </div>
                 )
@@ -205,6 +229,15 @@ export const FlowersPage: FC = () => {
                   <MiniCard label="Название плантации" imgSrc={plantationImage} rating={4.76} showNewFlag />
                 </div>
               )}
+              <Modal
+                open={open}
+                handleOpen={handleOpen}
+                withArrows={true}
+                handleNext={handleNext}
+                handlePrev={handlePrev}
+              >
+                {chosenProduct && <ProductModal product={chosenProduct} />}
+              </Modal>
             </TabsBody>
           </Tabs>
         </ScreenTemplate>

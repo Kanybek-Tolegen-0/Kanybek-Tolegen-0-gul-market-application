@@ -49,3 +49,11 @@ export { default as tulpanImage4 } from './tulpan4.png'
 export { default as logoImage } from './logo.png'
 
 export { default as orderFlowerImage } from './order-flower.png'
+
+export { default as EcuadorFlagImage } from './Ecuador_flag.png'
+
+export { default as NetherlandFlagImage } from './Netherlands_flag.png'
+
+export { default as ColombiaFlagImage } from './Colombia_flag.png'
+
+export { default as KenyaFlagImage } from './Kenya_flag.png'

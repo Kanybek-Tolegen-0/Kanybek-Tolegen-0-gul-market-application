@@ -47,13 +47,13 @@ export const routes = createBrowserRouter([
         path: '/main-page',
         element: <MainPage />
       },
-      {
-        path: '/flowers',
-        element: <FlowersPage />
-      },
+      // {
+      //   path: '/flowers',
+      //   element: <FlowersPage />
+      // },
       {
         path: '/catalog',
-        element: <CatalogPage />
+        element: <FlowersPage />
       },
       {
         path: '/remember-password',

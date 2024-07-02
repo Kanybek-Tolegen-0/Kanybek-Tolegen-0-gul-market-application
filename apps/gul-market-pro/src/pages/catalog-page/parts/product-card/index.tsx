@@ -20,7 +20,10 @@ const ProductCard: FC<ProductCardProps> = ({ product, onClick }) => {
   const formattedName = formatNumber(priceT)
 
   return (
-    <div className="flex flex-col pb-5 w-fit rounded-base shadow-card cursor-pointer" onClick={onClick}>
+    <div
+      className="flex flex-col pb-5 w-fit rounded-base shadow-card cursor-pointer"
+      onClick={() => onClick && onClick()}
+    >
       <div className="relative mb-[15px]">
         <img src={images[0]} alt="product" width="100%" height={263} className="rounded-tr-base rounded-tl-base" />
         <div className="absolute rounded-lg p-1 bg-primary top-3 right-3">

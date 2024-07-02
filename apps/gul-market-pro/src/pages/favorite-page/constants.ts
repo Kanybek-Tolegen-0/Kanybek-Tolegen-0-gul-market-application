@@ -32,6 +32,7 @@ export interface Data {
 }
 
 export interface Product {
+  id: number
   images: string[]
   favorite: boolean
   name: string
@@ -69,6 +70,7 @@ export interface Search {
 const data: Data = {
   products: [
     {
+      id: 0,
       images: [productImage1, ''],
       favorite: false,
       name: 'Хризантемы' + ' в две строки',
@@ -83,6 +85,7 @@ const data: Data = {
       left: 100
     },
     {
+      id: 1,
       images: [productImage2, ''],
       favorite: false,
       name: 'Розы',
@@ -97,6 +100,7 @@ const data: Data = {
       left: 100
     },
     {
+      id: 2,
       images: [productImage3, tulpanImage1, tulpanImage2, tulpanImage3, tulpanImage4],
       favorite: false,
       name: 'Тюльпаны',
@@ -111,6 +115,7 @@ const data: Data = {
       left: 5
     },
     {
+      id: 3,
       images: [productImage4, ''],
       favorite: false,
       name: 'Пальма комнатная',
