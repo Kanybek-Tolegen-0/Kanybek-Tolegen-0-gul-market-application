@@ -8,7 +8,7 @@ import {
   PhoneNumberInput
 } from '@design-system/ui'
 import React, { ChangeEvent, FormEvent, FunctionComponent, useState } from 'react'
-import { Form, Link, useNavigate } from 'react-router-dom'
+import { Form, Link, useNavigate, useSubmit } from 'react-router-dom'
 import { Button, Typography } from '@material-tailwind/react'
 
 const initialFormValues = {
@@ -23,8 +23,8 @@ const initialFormErrors = {
   password: ''
 }
 
-export const AuthorizationPage: FunctionComponent = () => {
-  const navigate = useNavigate()
+const AuthorizationPage: FunctionComponent = () => {
+  const submit = useSubmit()
   const [formValues, setFormValues] = useState(initialFormValues)
   const [formErrors, setFormErrors] = useState(initialFormErrors)
 
@@ -41,7 +41,31 @@ export const AuthorizationPage: FunctionComponent = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const isError = Object.values(formErrors).every(v => v === '') && Object.values(formValues).every(v => v !== '')
-    isError && navigate('/register-plantation')
+    isError &&
+      submit(
+        {
+          email: 'asdfasdf@gmail.com',
+          password: 'Qwerty1234',
+          phone: '+77783577778',
+          name: 'Gul',
+          description: 'bla bla bla',
+          country: 'Kazakhstan',
+          city: 'Almaty',
+          longitude: 57.09878,
+          latitude: 65.12345,
+          work_schedule: {
+            days: {
+              Mon: { start: '09:00', end: '18:00' },
+              Tue: { start: '09:00', end: '18:00' },
+              Wed: { start: '09:00', end: '18:00' },
+              Thu: { start: '09:00', end: '18:00' },
+              Fri: { start: '09:00', end: '18:00' },
+              Sat: { start: '09:00', end: '18:00' }
+            }
+          }
+        },
+        { method: 'post', encType: 'application/json' }
+      )
   }
 
   return (
@@ -84,3 +108,5 @@ export const AuthorizationPage: FunctionComponent = () => {
     </Layout>
   )
 }
+
+export default AuthorizationPage

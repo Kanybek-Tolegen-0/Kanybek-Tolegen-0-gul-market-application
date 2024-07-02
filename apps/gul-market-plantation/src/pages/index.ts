@@ -1,4 +1,4 @@
-export { AuthorizationPage } from './authorization-page'
+export { authorizationPage } from './authorization-page'
 
 export { LoginPage } from './login-page'
 

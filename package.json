@@ -7,9 +7,13 @@
     "start:pro": "pnpm --filter gul-market-pro start",
     "start:plantation": "pnpm --filter gul-market-plantation start",
     "start:all": "pnpm --filter gul-market-pro start | pnpm --filter gul-market-plantation start",
-    "build": "ultra --recursive build",
+    "build:plantation": "pnpm i && pnpm --filter gul-market-plantation build",
+    "build:pro": "pnpm i && pnpm --filter gul-market-pro build",
+    "build": "pnpm --filter gul-market-plantation build && pnpm --filter gul-market-pro build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "update": "pnpm update --interactive --recursive --latest"
+    "update": "pnpm update --interactive --recursive --latest",
+    "deploy": "pnpm build && pnpm deploy:gh-pages",
+    "deploy:gh-pages": "gh-pages -d dist"
   },
   "ultra": {
     "concurrent": [
@@ -61,6 +65,7 @@
     "@2gis/mapgl": "1.47.1",
     "@2gis/mapgl-ruler": "2.0.8",
     "@pbe/react-yandex-maps": "1.2.5",
-    "react-router-dom": "6.23.1"
+    "react-router-dom": "6.23.1",
+    "gh-pages": "^3.2.3"
   }
 }
