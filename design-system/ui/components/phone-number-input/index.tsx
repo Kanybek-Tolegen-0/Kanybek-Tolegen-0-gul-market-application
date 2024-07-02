@@ -1,17 +1,24 @@
-import { Button, Menu, MenuHandler, MenuItem, MenuList } from '@material-tailwind/react'
+import { Button, Menu, MenuHandler, MenuItem, MenuList, Input } from '@material-tailwind/react'
 import React, { FC, useState } from 'react'
 import { countries } from './constants'
-import { Input } from '../input'
 import { Label } from '../label'
-import './../input/style.css'
+import { PatternFormat } from 'react-number-format'
+import './style.css'
+import { phoneNumberSchema } from './postSchema'
+import { ZodError } from 'zod'
+import { ErrorText } from '../error-text'
 
-export const PhoneNumberInput: FC<{ className?: string }> = ({ className }) => {
+export const PhoneNumberInput: FC<{
+  name: string
+  error: string
+  handleError: ({ name, errorMessage }: { name: string; errorMessage: string }) => void
+}> = ({ name, error, handleError }) => {
   const [countryId, setCountryId] = useState(0)
 
   return (
     <div className="flex flex-col w-full gap-2">
       <Label label="Номер телефона" />
-      <div className="flex align-center w-full gap-2">
+      <div className="flex items-start w-full gap-2">
         <Menu placement="bottom-start">
           {countries[countryId] ? (
             <MenuHandler>
@@ -46,7 +53,30 @@ export const PhoneNumberInput: FC<{ className?: string }> = ({ className }) => {
             })}
           </MenuList>
         </Menu>
-        <Input className="w-full" name="phone-number" />
+        <div className="flex flex-col gap-[4px] w-full">
+          <PatternFormat
+            className="rounded-md border border-gray-300 w-full"
+            name={name}
+            format="(###) ### ## ##"
+            customInput={Input}
+            onBlur={e => {
+              const { value } = e.target
+              try {
+                phoneNumberSchema.parse(value)
+                handleError({ name, errorMessage: '' })
+              } catch (err) {
+                if (err instanceof ZodError) {
+                  const errorMessage = err.errors[0]?.message
+                  console.log({ errorMessage })
+                  errorMessage && handleError({ name, errorMessage })
+                }
+              }
+            }}
+            error={Boolean(error)}
+            crossOrigin=""
+          />
+          {error ? <ErrorText text={error} /> : null}
+        </div>
       </div>
     </div>
   )

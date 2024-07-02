@@ -3,14 +3,13 @@ import {
   Container,
   EmailInput,
   flowerImage,
-  Input,
   Layout,
   PasswordInput,
   PhoneNumberInput
 } from '@design-system/ui'
-import { Button, Typography } from '@material-tailwind/react'
 import React, { ChangeEvent, FunctionComponent, useState } from 'react'
 import { Form, Link, useNavigate } from 'react-router-dom'
+import { Button, Typography } from '@material-tailwind/react'
 
 const initialFormValues = {
   email: '',
@@ -31,13 +30,13 @@ export const AuthorizationPage: FunctionComponent = () => {
 
   const handleFormChange = (e: ChangeEvent<HTMLFormElement>) => {
     const { name, value } = e.target
+
     setFormValues(prev => ({ ...prev, [name]: value }))
   }
 
   const handleError = ({ name, errorMessage }: { name: string; errorMessage: string }) => {
     setFormErrors(prev => ({ ...prev, [name]: errorMessage }))
   }
-
   return (
     <Layout>
       <Layout.Content className="pr-0 pt-10">
@@ -54,11 +53,11 @@ export const AuthorizationPage: FunctionComponent = () => {
               <Form className="w-full" onChange={handleFormChange} onSubmit={e => e.preventDefault()}>
                 <div className="flex flex-col gap-y-6">
                   <div className="flex flex-col gap-y-3">
-                    <EmailInput name="email" handleError={handleError} error={formErrors.email} />
-                    <PhoneNumberInput />
+                    <EmailInput name="email" error={formErrors.email} handleError={handleError} />
+                    <PhoneNumberInput name="phone" error={formErrors.phone} handleError={handleError} />
                     <PasswordInput name="password" error={formErrors.password} handleError={handleError} />
                   </div>
-                  <BrandButton className="w-full" onClick={() => navigate('/choose-role')}>
+                  <BrandButton className="w-full" onClick={() => navigate('/register-plantation')}>
                     Создать аккаунт
                   </BrandButton>
                 </div>
@@ -72,7 +71,7 @@ export const AuthorizationPage: FunctionComponent = () => {
               </Button>
             </div>
           </div>
-          <img className="max-w-[548px]" src={flowerImage} />
+          <img className="max-w-[548px]" src={flowerImage} alt="flower image" />
         </div>
       </Layout.Content>
     </Layout>
