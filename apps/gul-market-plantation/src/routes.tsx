@@ -1,7 +1,7 @@
 import React from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 import {
-  AuthorizationPage,
+  authorizationPage,
   CatalogPage,
   Dashboard,
   MainPage,
@@ -19,7 +19,8 @@ export const routes = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <AuthorizationPage />
+        element: <authorizationPage.Component />,
+        action: authorizationPage.action
       },
       {
         path: '/login',
