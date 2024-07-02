@@ -30,7 +30,7 @@ jobs:
           pnpm link @shared
       - name: Link @design-system/ui inside apps/gul-market-pro
         run: |
-          cd apps/gul-market-pro
+          cd apps/gul-market-plantation
           pnpm link @design-system/ui
       - name: Run unit tests
         run: |
