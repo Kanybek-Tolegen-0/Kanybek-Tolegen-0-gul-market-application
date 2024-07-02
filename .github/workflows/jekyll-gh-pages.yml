@@ -22,10 +22,27 @@ jobs:
         uses: actions/checkout@v3
       - name: Install pnpm
         run: npm install -g pnpm
+      - name: create link in shared
+        run: |
+          cd shared
+          pnpm link
+      - name: create link in shared
+        run: |
+          cd design-system
+          pnpm link
+      - name: link deps inside plantation
+        run: |
+          cd apps/gul-market-pro
+          pnpm link @shared^1.0.0
+          pnpm link @design-system/ui
+      - name: link deps inside pro
+        run: |
+          cd apps/gul-market-plantation
+          pnpm link @shared^1.0.0
+          pnpm link @design-system/ui
       - name: Install dependencies and run unit tests
         run: |
           pnpm install
-          pnpm link @shared^1.0.0
           pnpm run start:plantation
           pnpm run start:pro
 
