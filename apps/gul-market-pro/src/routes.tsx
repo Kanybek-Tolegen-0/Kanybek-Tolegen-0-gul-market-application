@@ -5,18 +5,19 @@ import {
   AuthorizationPage,
   IndividualPage,
   EntityPage,
-  LoginPage,
   RememberPasswordPage,
   NewPasswordPage,
   FlowersPage,
   BasketPage,
   ProfilePage,
-  MyOrdersPage
+  MyOrdersPage,
+  loginPage
 } from './pages'
 import { MainPage } from './pages/main-page'
 import { CatalogPage } from './pages/catalog-page'
 import { FavoritePage } from './pages/favorite-page'
 import { Dashboard } from './pages/dashboard'
+import { api } from './api'
 
 export const routes = createBrowserRouter([
   {
@@ -29,7 +30,8 @@ export const routes = createBrowserRouter([
       },
       {
         path: '/login',
-        element: <LoginPage />
+        element: <loginPage.Component />,
+        action: loginPage.action
       },
       {
         path: '/choose-role',

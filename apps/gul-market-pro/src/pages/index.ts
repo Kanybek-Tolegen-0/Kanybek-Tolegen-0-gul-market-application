@@ -6,7 +6,7 @@ export { IndividualPage } from './individual-page'
 
 export { EntityPage } from './entity-page'
 
-export { LoginPage } from './login-page'
+export { loginPage } from './login-page'
 
 export { RememberPasswordPage } from './remember-password-page'
 

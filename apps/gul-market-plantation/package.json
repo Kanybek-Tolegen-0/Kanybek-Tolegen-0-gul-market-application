@@ -7,6 +7,8 @@
     "start": "kill-port --port 4250; NODE_ENV=development webpack serve",
     "build": "NODE_ENV=production webpack",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "predeploy": "NODE_ENV=production webpack",
+    "deploy": "gh-pages -d build",
     "postinstall": "rm -rf node_modules/.cache"
   },
   "license": "MIT",
