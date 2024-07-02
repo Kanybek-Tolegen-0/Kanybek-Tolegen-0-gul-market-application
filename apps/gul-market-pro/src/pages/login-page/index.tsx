@@ -22,6 +22,9 @@ export const LoginPage: FunctionComponent = () => {
     const { name } = e.target // setFormValues(prev = > ({ ...prev, [name]: value }))
   }
 
+  const handleError = ({ name, errorMessage }: { name: string; errorMessage: string }) =>
+    setFormErrors(prev => ({ ...prev, [name]: errorMessage }))
+
   return (
     <Layout>
       <Layout.Content className="pr-0 pt-10">
@@ -39,13 +42,9 @@ export const LoginPage: FunctionComponent = () => {
                       navigate('/choose-role')
                     }}
                   >
-                    <EmailInput
-                      handleError={({ name, errorMessage }) =>
-                        setFormErrors(prev => ({ ...prev, [name]: errorMessage }))
-                      }
-                      error={formErrors.email}
-                    />
+                    <EmailInput name="email" handleError={handleError} error={formErrors.email} />
                     <PasswordInput
+                      name="password"
                       secondary={
                         <Button
                           className="normal-case px-2 py-0 text-sm leading-5 font-medium text-brand"
@@ -54,6 +53,8 @@ export const LoginPage: FunctionComponent = () => {
                           <Link to="/remember-password">Забыли пароль?</Link>
                         </Button>
                       }
+                      handleError={handleError}
+                      error={formErrors.password}
                     />
                   </Form>
                   <BrandButton type="submit" form="login-form" className="w-full">

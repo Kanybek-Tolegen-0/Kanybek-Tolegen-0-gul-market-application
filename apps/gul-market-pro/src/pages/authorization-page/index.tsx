@@ -1,10 +1,42 @@
-import { BrandButton, Container, flowerImage, Input, Layout, PasswordInput, PhoneNumberInput } from '@design-system/ui'
+import {
+  BrandButton,
+  Container,
+  EmailInput,
+  flowerImage,
+  Input,
+  Layout,
+  PasswordInput,
+  PhoneNumberInput
+} from '@design-system/ui'
 import { Button, Typography } from '@material-tailwind/react'
-import React, { FunctionComponent } from 'react'
+import React, { ChangeEvent, FunctionComponent, useState } from 'react'
 import { Form, Link, useNavigate } from 'react-router-dom'
+
+const initialFormValues = {
+  email: '',
+  phone: '',
+  password: ''
+}
+
+const initialFormErrors = {
+  email: '',
+  phone: '',
+  password: ''
+}
 
 export const AuthorizationPage: FunctionComponent = () => {
   const navigate = useNavigate()
+  const [formValues, setFormValues] = useState(initialFormValues)
+  const [formErrors, setFormErrors] = useState(initialFormErrors)
+
+  const handleFormChange = (e: ChangeEvent<HTMLFormElement>) => {
+    const { name, value } = e.target
+    setFormValues(prev => ({ ...prev, [name]: value }))
+  }
+
+  const handleError = ({ name, errorMessage }: { name: string; errorMessage: string }) => {
+    setFormErrors(prev => ({ ...prev, [name]: errorMessage }))
+  }
 
   return (
     <Layout>
@@ -19,12 +51,12 @@ export const AuthorizationPage: FunctionComponent = () => {
             </div>
 
             <Container className="w-full min-w-[488px]">
-              <Form className="w-full" onSubmit={e => e.preventDefault()}>
+              <Form className="w-full" onChange={handleFormChange} onSubmit={e => e.preventDefault()}>
                 <div className="flex flex-col gap-y-6">
                   <div className="flex flex-col gap-y-3">
-                    <Input name="email" label="Электронная почта" className="w-full" />
+                    <EmailInput name="email" handleError={handleError} error={formErrors.email} />
                     <PhoneNumberInput />
-                    <PasswordInput />
+                    <PasswordInput name="password" error={formErrors.password} handleError={handleError} />
                   </div>
                   <BrandButton className="w-full" onClick={() => navigate('/choose-role')}>
                     Создать аккаунт
