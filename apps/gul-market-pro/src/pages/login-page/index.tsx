@@ -1,6 +1,6 @@
 import { BrandButton, Container, EmailInput, flowerImage, Layout, PasswordInput } from '@design-system/ui'
 import { Button, Typography } from '@material-tailwind/react'
-import React, { ChangeEvent, FunctionComponent, useState } from 'react'
+import React, { ChangeEvent, FormEvent, FunctionComponent, useState } from 'react'
 import { Form, Link, useNavigate } from 'react-router-dom'
 
 const initialFormValues = {
@@ -19,11 +19,18 @@ export const LoginPage: FunctionComponent = () => {
   const [formErrors, setFormErrors] = useState(initialFormErrors)
 
   const handleFormChange = (e: ChangeEvent<HTMLFormElement>) => {
-    const { name } = e.target // setFormValues(prev = > ({ ...prev, [name]: value }))
+    const { name, value } = e.target
+    setFormValues(prev => ({ ...prev, [name]: value }))
   }
 
   const handleError = ({ name, errorMessage }: { name: string; errorMessage: string }) =>
     setFormErrors(prev => ({ ...prev, [name]: errorMessage }))
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const isError = Object.values(formErrors).every(v => v === '') && Object.values(formValues).every(v => v !== '')
+    isError && navigate('/choose-role')
+  }
 
   return (
     <Layout>
@@ -32,16 +39,9 @@ export const LoginPage: FunctionComponent = () => {
           <div className="flex flex-col max-w-[488px] gap-y-4">
             <Typography className="text-3xl font-bold">Войти</Typography>
             <Container className="w-full min-w-[488px]">
-              <Form id="login-form" className="w-full" onSubmit={e => e.preventDefault()}>
+              <Form id="login-form" className="w-full" onSubmit={handleSubmit}>
                 <div className="flex flex-col gap-y-6">
-                  <Form
-                    className="flex flex-col gap-y-5"
-                    onChange={handleFormChange}
-                    onSubmit={e => {
-                      e.preventDefault()
-                      navigate('/choose-role')
-                    }}
-                  >
+                  <Form className="flex flex-col gap-y-5" onChange={handleFormChange} onSubmit={handleSubmit}>
                     <EmailInput name="email" handleError={handleError} error={formErrors.email} />
                     <PasswordInput
                       name="password"

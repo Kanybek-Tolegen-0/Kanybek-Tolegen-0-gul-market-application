@@ -44,7 +44,7 @@ export const routes = createBrowserRouter([
         element: <EntityPage />
       },
       {
-        path: '/main-page',
+        path: '/main',
         element: <MainPage />
       },
       // {

@@ -16,7 +16,6 @@ export const EmailInput: FC<{
         label="Электронная почта"
         onBlur={e => {
           const { value } = e.target
-          console.log(value)
           try {
             emailSchema.parse(value)
             handleError({ name, errorMessage: '' })

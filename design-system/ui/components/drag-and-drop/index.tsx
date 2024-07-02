@@ -57,7 +57,6 @@ export const DragAndDrop: FC = () => {
     setFileUrl('')
 
     const input = document.getElementById('file-input') as HTMLInputElement
-    console.log(input)
     if (input) {
       input.value = ''
     }

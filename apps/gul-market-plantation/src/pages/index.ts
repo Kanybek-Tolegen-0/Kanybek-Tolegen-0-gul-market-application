@@ -13,3 +13,5 @@ export { RegisterPlantationPage } from './register-plantation-page'
 export { MyOrdersPage } from './my-orders-page'
 
 export { Dashboard } from './dashboard'
+
+export { MainPage } from './main-page'

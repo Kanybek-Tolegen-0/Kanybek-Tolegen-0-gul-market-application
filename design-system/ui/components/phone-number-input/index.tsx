@@ -67,7 +67,6 @@ export const PhoneNumberInput: FC<{
               } catch (err) {
                 if (err instanceof ZodError) {
                   const errorMessage = err.errors[0]?.message
-                  console.log({ errorMessage })
                   errorMessage && handleError({ name, errorMessage })
                 }
               }

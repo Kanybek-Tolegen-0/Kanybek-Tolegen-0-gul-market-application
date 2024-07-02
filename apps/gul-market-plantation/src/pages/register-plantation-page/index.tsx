@@ -74,7 +74,7 @@ export const RegisterPlantationPage: FC = props => {
               {!isLastStep ? (
                 <BrandButton onClick={handleNext}>Далее</BrandButton>
               ) : (
-                <Link to="/main-page">
+                <Link to="/main">
                   <BrandButton>Завершить создание плантации</BrandButton>
                 </Link>
               )}

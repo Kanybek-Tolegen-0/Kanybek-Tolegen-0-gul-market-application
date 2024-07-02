@@ -4,6 +4,7 @@ import {
   AuthorizationPage,
   CatalogPage,
   Dashboard,
+  MainPage,
   MyOrdersPage,
   NewPasswordPage,
   RegisterPlantationPage,
@@ -43,6 +44,10 @@ export const routes = createBrowserRouter([
       {
         path: '/my-orders',
         element: <MyOrdersPage />
+      },
+      {
+        path: '/main',
+        element: <MainPage />
       }
     ]
   }

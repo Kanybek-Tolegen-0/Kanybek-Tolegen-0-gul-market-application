@@ -38,7 +38,7 @@ export const ChooseRolePage: FC = props => {
             className={
               'text-base font-medium text-gray-700 bg-secondary rounded-lg py-[21px] px-[13px] h-12 flex justify-center items-center self-end'
             }
-            to="/main-page"
+            to="/main"
           >
             Пропустить
           </Link>
