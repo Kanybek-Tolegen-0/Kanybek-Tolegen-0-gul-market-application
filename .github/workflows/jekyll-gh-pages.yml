@@ -20,21 +20,41 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
       - name: Install pnpm
         run: npm install -g pnpm
-      - name: Install dependencies
-        run: pnpm install
+
       - name: Link @shared inside apps/gul-market-pro
         run: |
           cd apps/gul-market-pro
-          pnpm link @shared
+          pnpm link ../../shared
+
       - name: Link @design-system/ui inside apps/gul-market-pro
         run: |
+          cd apps/gul-market-pro
+          pnpm link ../../design-system/ui
+
+      - name: Link @shared inside apps/gul-market-plantation
+        run: |
           cd apps/gul-market-plantation
-          pnpm link @design-system/ui
-      - name: Run unit tests
+          pnpm link ../../shared
+
+      - name: Link @design-system/ui inside apps/gul-market-plantation
+        run: |
+          cd apps/gul-market-plantation
+          pnpm link ../../design-system/ui
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run unit tests for gul-market-pro
         run: |
           cd apps/gul-market-pro
+          pnpm run test
+
+      - name: Run unit tests for gul-market-plantation
+        run: |
+          cd apps/gul-market-plantation
           pnpm run test
 
   deploy:
@@ -56,27 +76,19 @@ jobs:
       - name: Link @shared inside apps/gul-market-pro
         run: |
           cd apps/gul-market-pro
-          pnpm link @shared
+          pnpm link ../../shared
 
       - name: Link @design-system/ui inside apps/gul-market-pro
         run: |
           cd apps/gul-market-pro
-          pnpm link @design-system/ui
+          pnpm link ../../design-system/ui
 
-      - name: Build app1
-        run: pnpm build:pro
+      - name: Link @shared inside apps/gul-market-plantation
+        run: |
+          cd apps/gul-market-plantation
+          pnpm link ../../shared
 
-      - name: Build app2
-        run: pnpm build:plantation
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: 'dist'
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v2
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v1
+      - name: Link @design-system/ui inside apps/gul-market-plantation
+        run: |
+          cd apps/gul-market-plantation
+          pnpm link ../../design-system/ui
