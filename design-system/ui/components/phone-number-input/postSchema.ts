@@ -1,7 +1,6 @@
 import zod, { ZodIssueCode } from 'zod'
 
 export const phoneNumberSchema = zod.string().superRefine((val, ctx) => {
-  console.log({ val })
   if (val.length === 0) {
     ctx.addIssue({
       code: ZodIssueCode.custom,

@@ -7,7 +7,7 @@ import {
   PasswordInput,
   PhoneNumberInput
 } from '@design-system/ui'
-import React, { ChangeEvent, FunctionComponent, useState } from 'react'
+import React, { ChangeEvent, FormEvent, FunctionComponent, useState } from 'react'
 import { Form, Link, useNavigate } from 'react-router-dom'
 import { Button, Typography } from '@material-tailwind/react'
 
@@ -34,11 +34,16 @@ export const AuthorizationPage: FunctionComponent = () => {
     setFormValues(prev => ({ ...prev, [name]: value }))
   }
 
-  console.log({ formValues })
-
   const handleError = ({ name, errorMessage }: { name: string; errorMessage: string }) => {
     setFormErrors(prev => ({ ...prev, [name]: errorMessage }))
   }
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const isError = Object.values(formErrors).every(v => v === '') && Object.values(formValues).every(v => v !== '')
+    isError && navigate('/register-plantation')
+  }
+
   return (
     <Layout>
       <Layout.Content className="pr-0 pt-10">
@@ -52,14 +57,14 @@ export const AuthorizationPage: FunctionComponent = () => {
             </div>
 
             <Container className="w-full min-w-[488px]">
-              <Form className="w-full" onChange={handleFormChange} onSubmit={e => e.preventDefault()}>
+              <Form id="auth-form" className="w-full" onChange={handleFormChange} onSubmit={handleSubmit}>
                 <div className="flex flex-col gap-y-6">
                   <div className="flex flex-col gap-y-3">
                     <EmailInput name="email" error={formErrors.email} handleError={handleError} />
                     <PhoneNumberInput name="phone" error={formErrors.phone} handleError={handleError} />
                     <PasswordInput name="password" error={formErrors.password} handleError={handleError} />
                   </div>
-                  <BrandButton className="w-full" onClick={() => navigate('/register-plantation')}>
+                  <BrandButton form="auth-form" type="submit" className="w-full">
                     Создать аккаунт
                   </BrandButton>
                 </div>

@@ -10,7 +10,7 @@ export const Dashboard = () => {
     <div className="flex flex-col min-h-[100vh]">
       <Header
         tabs={[
-          { label: 'Главная', link: '/main-page' },
+          { label: 'Главная', link: '/main' },
           { label: 'Каталог', link: '/catalog' },
           { label: 'Заказы', link: '/my-orders' },
           { label: 'Рекламация', link: '' }
