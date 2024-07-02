@@ -25,21 +25,23 @@ jobs:
       - name: create link in shared
         run: |
           cd shared
-          npm link
+          npm link -g
       - name: create link in shared
         run: |
           cd design-system
-          npm link
+          npm link -g
       - name: link deps inside plantation
         run: |
-          cd apps/gul-market-pro
+          cd apps
+          cd gul-market-pro
           pnpm link @shared^1.0.0
-          pnpm link @design-system/ui
+          pnpm link @design-system/ui^1.0.0
       - name: link deps inside pro
         run: |
-          cd apps/gul-market-plantation
+          cd apps
+          cd gul-market-plantation
           pnpm link @shared^1.0.0
-          pnpm link @design-system/ui
+          pnpm link @design-system/ui^1.0.0
       - name: Install dependencies and run unit tests
         run: |
           pnpm install
