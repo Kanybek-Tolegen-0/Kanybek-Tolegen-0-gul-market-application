@@ -32,7 +32,7 @@ jobs:
       - name: Link @design-system/ui inside apps/gul-market-pro
         run: |
           cd apps/gul-market-pro
-          pnpm link ../../design-system/ui
+          pnpm link ../../design-system
 
       - name: Link @shared inside apps/gul-market-plantation
         run: |
@@ -42,7 +42,7 @@ jobs:
       - name: Link @design-system/ui inside apps/gul-market-plantation
         run: |
           cd apps/gul-market-plantation
-          pnpm link ../../design-system/ui
+          pnpm link ../../design-system
 
       - name: Install dependencies
         run: pnpm install
