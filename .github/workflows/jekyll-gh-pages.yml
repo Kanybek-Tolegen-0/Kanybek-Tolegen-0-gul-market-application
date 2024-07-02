@@ -27,9 +27,9 @@ jobs:
         uses: actions/checkout@v3
       - name: Install dependencies and run unit tests
         run: |
-          pnpm i
-          pnpm start:plantation
-          pnpm start:pro
+          npm i
+          npm run start:plantation
+          npm run start:pro
 
   deploy:
     environment:
