@@ -25,11 +25,11 @@ jobs:
       - name: create link in shared
         run: |
           cd shared
-          npm link -g
+          npm link --local
       - name: create link in shared
         run: |
           cd design-system
-          npm link -g
+          npm link --local
       - name: link deps inside plantation
         run: |
           cd apps
