@@ -22,6 +22,7 @@ export const PasswordInput: FC<{ className?: string; label?: string; secondary?:
         <Label label={label || 'Придумайте пароль'} />
       )}
       <Input
+        name="password"
         type={show ? 'text' : 'password'}
         className={`${className} input rounded-md border border-gray-300`}
         icon={
