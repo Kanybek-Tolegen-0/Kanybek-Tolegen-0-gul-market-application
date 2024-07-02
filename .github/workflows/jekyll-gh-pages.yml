@@ -27,9 +27,9 @@ jobs:
         uses: actions/checkout@v3
       - name: Install dependencies and run unit tests
         run: |
-          npm ci
-          nx run start:plantation
-          nx run start:pro
+          pnpm i
+          pnpm start:plantation
+          pnpm start:pro
 
   deploy:
     environment:
@@ -44,10 +44,10 @@ jobs:
         run: npm ci
       - name: Build app1
         run: |
-          nx run build:pro
+          pnpm build:pro
       - name: Build app2
         run: |
-          nx run build:plantation
+          pnpm build:plantation
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
