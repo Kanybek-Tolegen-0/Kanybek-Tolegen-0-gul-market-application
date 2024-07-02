@@ -25,11 +25,11 @@ jobs:
       - name: create link in shared
         run: |
           cd shared
-          pnpm link
+          npm link
       - name: create link in shared
         run: |
           cd design-system
-          pnpm link
+          npm link
       - name: link deps inside plantation
         run: |
           cd apps/gul-market-pro
