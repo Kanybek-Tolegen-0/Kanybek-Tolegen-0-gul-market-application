@@ -25,6 +25,7 @@ jobs:
       - name: Install dependencies and run unit tests
         run: |
           pnpm install
+          pnpm link @shared^1.0.0
           pnpm run start:plantation
           pnpm run start:pro
 
