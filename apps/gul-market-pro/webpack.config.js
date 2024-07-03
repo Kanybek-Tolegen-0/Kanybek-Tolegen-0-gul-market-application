@@ -112,5 +112,8 @@ module.exports = env => ({
       assets: path.resolve(__dirname, './assets')
     },
     extensions: ['.tsx', '.ts', '.js', '.svg']
+  },
+  performance: {
+    maxAssetSize: 500000
   }
 })
