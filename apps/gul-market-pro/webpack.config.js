@@ -21,7 +21,7 @@ module.exports = env => ({
     publicPath: RELEASE_PATH
   },
   devServer: {
-    port: 4251,
+    port: 80,
     hot: true,
     historyApiFallback: true
   },
