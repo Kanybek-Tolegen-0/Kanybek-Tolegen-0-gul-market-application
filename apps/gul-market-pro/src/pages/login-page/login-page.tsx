@@ -1,7 +1,7 @@
 import { BrandButton, Container, EmailInput, flowerImage, Layout, PasswordInput } from '@design-system/ui'
 import { Button, Typography } from '@material-tailwind/react'
 import React, { ChangeEvent, FormEvent, FunctionComponent, useState } from 'react'
-import { Form, Link, useNavigate, useSubmit } from 'react-router-dom'
+import { Form, Link, useNavigate } from 'react-router-dom'
 
 const initialFormValues = {
   email: '',
@@ -17,7 +17,6 @@ const LoginPage: FunctionComponent = () => {
   const navigate = useNavigate()
   const [formValues, setFormValues] = useState(initialFormValues)
   const [formErrors, setFormErrors] = useState(initialFormErrors)
-  const submit = useSubmit()
 
   const handleFormChange = (e: ChangeEvent<HTMLFormElement>) => {
     const { name, value } = e.target
@@ -30,7 +29,6 @@ const LoginPage: FunctionComponent = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const isError = Object.values(formErrors).every(v => v === '') && Object.values(formValues).every(v => v !== '')
-    submit({ data: '' }, { method: 'post', encType: 'application/json' })
     isError && navigate('/choose-role')
   }
 
