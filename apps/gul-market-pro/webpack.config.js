@@ -114,6 +114,7 @@ module.exports = env => ({
     extensions: ['.tsx', '.ts', '.js', '.svg']
   },
   performance: {
-    maxAssetSize: 500000
+    maxAssetSize: Infinity,
+    maxEntrypointSize: Infinity
   }
 })
