@@ -73,7 +73,7 @@ const LoginPage: FunctionComponent = () => {
               </Button>
             </div>
           </div>
-          <img className="max-w-[548px]" src={flowerImage} />
+          <img className="max-w-[548px]" src={flowerImage} alt={'flower image'} />
         </div>
       </Layout.Content>
     </Layout>

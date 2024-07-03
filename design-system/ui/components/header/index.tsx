@@ -51,7 +51,7 @@ export const Header: FC<HeaderProps & NavProps> = ({ isLogged, tabs, fullHeader,
                 <Select
                   options={[
                     { label: 'Эквадор', value: 'Эквадор' },
-                    { label: 'Аргентина', value: 'Аргентина' },
+                    { label: 'Аргентина', value: 'Аргентина', soon: true },
                     { label: 'Бразилия', value: 'Бразилия', soon: true },
                     { label: 'Пуэрто-Рико', value: 'Пуэрто-Рико', soon: true }
                   ]}
