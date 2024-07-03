@@ -49,7 +49,7 @@ export const PasswordInput: FC<{
           }
         }}
         error={Boolean(error)}
-        crossOrigin
+        crossOrigin=""
       />
       {error ? <ErrorText text={error} /> : null}
     </div>

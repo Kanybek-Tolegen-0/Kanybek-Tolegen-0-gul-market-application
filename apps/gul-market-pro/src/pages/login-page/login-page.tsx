@@ -30,8 +30,8 @@ const LoginPage: FunctionComponent = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const isError = Object.values(formErrors).every(v => v === '') && Object.values(formValues).every(v => v !== '')
-    isError && navigate('/choose-role')
     submit({ data: '' }, { method: 'post', encType: 'application/json' })
+    isError && navigate('/choose-role')
   }
 
   return (

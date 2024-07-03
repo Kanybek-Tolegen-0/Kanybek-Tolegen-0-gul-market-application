@@ -111,6 +111,6 @@ module.exports = env => ({
     alias: {
       assets: path.resolve(__dirname, './assets')
     },
-    extensions: ['.tsx', '.ts', '.js']
+    extensions: ['.tsx', '.ts', '.js', '.svg']
   }
 })
