@@ -2,7 +2,7 @@ name: DEV pipeline
 
 on:
   push:
-    branches: ['main']
+    # branches: ['main']
 
 jobs:
   deployment-gul-market-plantation:
