@@ -14,55 +14,48 @@ import { Nav, NavProps } from '../nav'
 import { Select } from '../select'
 import { SearchInput } from '../search-input'
 import { BrandButton } from '../brand-button'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 interface HeaderProps {
   fullHeader?: boolean
   isLogged?: boolean
+  renderCountryOptions?: () => JSX.Element
   handleLogin: () => void
 }
 
-export const Header: FC<HeaderProps & NavProps> = ({ isLogged, tabs, fullHeader, handleLogin }) => {
+export const Header: FC<HeaderProps & NavProps> = ({
+  isLogged,
+  tabs,
+  fullHeader,
+  renderCountryOptions,
+  handleLogin
+}) => {
   const [openMenu, setOpenMenu] = React.useState(false)
 
   const handleMenu = () => {
     setOpenMenu(!openMenu)
   }
 
+  const countryOptions = renderCountryOptions && renderCountryOptions()
+
   return (
-    <div className={`flex justify-between h-[72px] px-[${fullHeader ? '32px' : '120px'}] gap-[86px] py-4 bg-primary`}>
+    <div className={`flex justify-between h-[72px] px-[${isLogged ? '32px' : '120px'}] gap-[86px] py-4 bg-primary`}>
       <div className="flex gap-8 items-center">
         <div className="flex items-center gap-3 h-[50px]">
-          {fullHeader ? <img src={fakeShopImage} alt={'profile'} className={'h-[50px] w-[50px]'} /> : <LogoIcon />}
-          {fullHeader ? (
+          {isLogged ? <img src={fakeShopImage} alt={'profile'} className={'h-[50px] w-[50px]'} /> : <LogoIcon />}
+          {isLogged ? (
             <Typography
               children="Название магазина в три строки"
               className="w-[106px] font-normal text-sm text-gray-500 h-[50px]"
             />
           ) : null}
         </div>
-        {fullHeader ? <Nav tabs={tabs} /> : null}
+        {isLogged ? <Nav tabs={tabs} /> : null}
       </div>
       <div>
         {isLogged ? (
           <div className="flex items-center gap-4">
-            {fullHeader ? (
-              <>
-                <Select
-                  options={[
-                    { label: 'Эквадор', value: 'Эквадор' },
-                    { label: 'Аргентина', value: 'Аргентина', soon: true },
-                    { label: 'Бразилия', value: 'Бразилия', soon: true },
-                    { label: 'Пуэрто-Рико', value: 'Пуэрто-Рико', soon: true }
-                  ]}
-                  className="h-[38px]"
-                />
-                <SearchInput inputProps={{ placeholder: 'Искать товар или плантацию' }} className="h-[38px]" />
-                <div className="w-6 h-6">
-                  <NotificationIcon />
-                </div>
-              </>
-            ) : null}
+            {countryOptions && isLogged ? countryOptions : null}
             <div>
               <Menu placement="bottom-start" open={openMenu} handler={handleMenu}>
                 <MenuHandler

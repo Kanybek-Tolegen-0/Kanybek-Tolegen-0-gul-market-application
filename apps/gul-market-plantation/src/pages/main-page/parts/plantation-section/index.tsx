@@ -20,7 +20,7 @@ const PlantationSection: FC<PlantationSectionProps> = ({ sectionData }) => {
         {plantations.map((plant, idx) => {
           const { logo, newPlant, name, specification, rating } = plant
           return (
-            <div className="flex gap-3 w-[386px] rounded-base p-3 bg-gray-50 items-center">
+            <div key={name + idx} className="flex gap-3 w-[386px] rounded-base p-3 bg-gray-50 items-center">
               <img alt="plantation logo" src={logo} />
               <div className="flex flex-col gap-3 w-full">
                 <div className="flex justify-between font-normal !text-xsm">

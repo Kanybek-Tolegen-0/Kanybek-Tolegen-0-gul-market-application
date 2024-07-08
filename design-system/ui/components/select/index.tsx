@@ -9,11 +9,12 @@ interface OptionsProps {
 
 export interface SelectProps {
   className?: string
+  value?: string
   onChange?: (v: string) => void
   options?: OptionsProps[]
 }
 
-export const Select: FC<SelectProps> = ({ className, onChange, options }) =>
+export const Select: FC<SelectProps> = ({ value, className, onChange, options }) =>
   options ? (
     <MaterialTailwindSelect
       className={`rounded-[6px] border px-[13px] py-[9px] border-gray-300 z-10 ${className}`}
@@ -23,6 +24,7 @@ export const Select: FC<SelectProps> = ({ className, onChange, options }) =>
       containerProps={{
         className: '!p-0'
       }}
+      value={value}
       onChange={v => v && onChange && onChange(v)}
     >
       {options.map(({ label, value, soon }) => (
