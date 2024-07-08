@@ -18,12 +18,13 @@ module.exports = env => ({
   entry: './src/index.tsx',
   output: {
     path: path.resolve(__dirname, 'dist', ...RELEASE_PATH.split('/')),
-    publicPath: RELEASE_PATH
+    publicPath: '/plants/'
   },
   devServer: {
     port: 4250,
     hot: true,
-    historyApiFallback: true
+    historyApiFallback: true,
+    allowedHosts: "all",
   },
   optimization: {
     minimizer: [`...`, isProd && new CssMinimizerPlugin()].filter(Boolean)
