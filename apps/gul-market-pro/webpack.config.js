@@ -24,7 +24,7 @@ module.exports = env => ({
     port: 4251,
     hot: true,
     historyApiFallback: true,
-    allowedHosts: ['.gulmarket.com']
+    allowedHosts: "all",
   },
   optimization: {
     minimizer: [`...`, isProd && new CssMinimizerPlugin()].filter(Boolean)
