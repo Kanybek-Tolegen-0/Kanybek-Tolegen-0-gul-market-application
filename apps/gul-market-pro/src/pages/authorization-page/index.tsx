@@ -41,7 +41,6 @@ export const AuthorizationPage: FunctionComponent = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const isError = Object.values(formErrors).every(v => v === '') && Object.values(formValues).every(v => v !== '')
-    isError && navigate('/main')
   }
 
   return (
