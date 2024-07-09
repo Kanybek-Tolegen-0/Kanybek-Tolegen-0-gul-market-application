@@ -1,8 +1,7 @@
-import { DeliveryIcon, AmountController, useTimer } from '@design-system/ui'
+import { DeliveryIcon, AmountController, useTimer, formatTimer } from '@design-system/ui'
 import { Button, Card, Typography } from '@material-tailwind/react'
 import React, { FC, useState } from 'react'
 import { BasketACardBaseProps } from '../types'
-import { formatTimer } from 'shared'
 
 export const BasketPassedCard: FC<BasketACardBaseProps> = ({
   imgSrc,

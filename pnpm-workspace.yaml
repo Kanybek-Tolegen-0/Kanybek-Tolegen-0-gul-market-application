@@ -1,4 +1,3 @@
 packages:
-  - "apps/**"
-  - "design-system"
-  - "shared"
+  - 'apps/**'
+  - 'design-system'

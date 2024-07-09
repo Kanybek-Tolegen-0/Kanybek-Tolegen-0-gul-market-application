@@ -1,8 +1,7 @@
-import { BrandButton, Container, flowerImage, Input, Layout, useTimer } from '@design-system/ui'
+import { BrandButton, Container, flowerImage, Input, Layout, useTimer, formatTimer } from '@design-system/ui'
 import { Button, Typography } from '@material-tailwind/react'
 import React, { FunctionComponent, useState } from 'react'
 import { Form, Link } from 'react-router-dom'
-import { formatTimer } from 'shared'
 
 export const RememberPasswordPage: FunctionComponent = () => {
   const [email, setEmail] = useState('')

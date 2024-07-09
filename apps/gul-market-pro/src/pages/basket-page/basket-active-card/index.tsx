@@ -1,7 +1,6 @@
-import { AmountController, DeliveryIcon, useTimer } from '@design-system/ui'
+import { AmountController, DeliveryIcon, useTimer, formatTimer } from '@design-system/ui'
 import { Card, Typography } from '@material-tailwind/react'
 import React, { FC } from 'react'
-import { formatTimer } from 'shared'
 import { BasketACardBaseProps } from '../types'
 
 export interface BasketActiveCardProps extends BasketACardBaseProps {
