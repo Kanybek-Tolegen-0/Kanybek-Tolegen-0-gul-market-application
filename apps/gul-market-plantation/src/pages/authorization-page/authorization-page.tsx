@@ -44,25 +44,9 @@ const AuthorizationPage: FunctionComponent = () => {
     isError &&
       submit(
         {
-          email: 'asdfasdf@gmail.com',
-          password: 'Qwerty1234',
-          phone: '+77783577778',
-          name: 'Gul',
-          description: 'bla bla bla',
-          country: 'Kazakhstan',
-          city: 'Almaty',
-          longitude: 57.09878,
-          latitude: 65.12345,
-          work_schedule: {
-            days: {
-              Mon: { start: '09:00', end: '18:00' },
-              Tue: { start: '09:00', end: '18:00' },
-              Wed: { start: '09:00', end: '18:00' },
-              Thu: { start: '09:00', end: '18:00' },
-              Fri: { start: '09:00', end: '18:00' },
-              Sat: { start: '09:00', end: '18:00' }
-            }
-          }
+          email: formValues.email,
+          password: formValues.password,
+          phone: formValues.phone
         },
         { method: 'post', encType: 'application/json' }
       )

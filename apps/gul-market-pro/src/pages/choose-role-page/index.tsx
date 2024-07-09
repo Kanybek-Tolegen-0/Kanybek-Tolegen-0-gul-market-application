@@ -3,11 +3,13 @@ import { Typography } from '@material-tailwind/react'
 import React from 'react'
 import { individualImage, Layout } from '@design-system/ui'
 import { Container } from '@design-system/ui'
-import { Link } from 'react-router-dom'
+import { Link, useLoaderData } from 'react-router-dom'
 import { entityImage } from '@design-system/ui'
 import './style.css'
 
 export const ChooseRolePage: FC = props => {
+  const data = useLoaderData()
+  console.log(data)
   return (
     <Layout>
       <Layout.Content>

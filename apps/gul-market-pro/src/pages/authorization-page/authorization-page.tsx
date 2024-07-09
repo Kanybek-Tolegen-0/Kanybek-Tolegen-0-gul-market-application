@@ -46,7 +46,7 @@ const AuthorizationPage: FunctionComponent = () => {
         {
           email: formValues.email,
           password: formValues.password,
-          phone: formValues.password
+          phone: formValues.phone
         },
         { method: 'post', encType: 'application/json' }
       )

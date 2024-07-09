@@ -17,6 +17,7 @@ import { MainPage } from './pages/main-page'
 import { CatalogPage } from './pages/catalog-page'
 import { FavoritePage } from './pages/favorite-page'
 import { Dashboard } from './pages/dashboard'
+import { api } from './api'
 
 export const routes = createBrowserRouter([
   {
@@ -35,7 +36,14 @@ export const routes = createBrowserRouter([
       },
       {
         path: '/choose-role',
-        element: <ChooseRolePage />
+        element: <ChooseRolePage />,
+        loader: async () => {
+          const response = await api.get('/api/onboarding')
+          if (!response) {
+            throw new Error('Network response was not ok')
+          }
+          return response
+        }
       },
       {
         path: '/individual',
