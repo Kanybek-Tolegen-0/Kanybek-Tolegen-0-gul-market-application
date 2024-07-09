@@ -10,13 +10,13 @@ export const action = async ({ request }: { request: Request }) => {
         idToken: string
         refreshToken: string
       }
-    }> = await api.post('/api/plantation-signup', body)
+    }> = await api.post('/api/pro-user-signup', body)
     const {
       tokens: { idToken, refreshToken }
     } = response.data
     localStorage.setItem(idToken, idToken)
     localStorage.setItem(refreshToken, refreshToken)
-    return redirect('/register-plantation')
+    return redirect('/choose-role')
   } catch (e) {
     console.error(e)
   }
