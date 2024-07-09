@@ -14,7 +14,7 @@ import {
 
 export const routes = createBrowserRouter([
   {
-    path: '/',
+    path: '/plants/',
     element: <Dashboard />,
     children: [
       {
@@ -28,27 +28,27 @@ export const routes = createBrowserRouter([
         action: loginPage.action
       },
       {
-        path: '/remember-password',
+        path: '/plants/remember-password',
         element: <RememberPasswordPage />
       },
       {
-        path: '/new-password',
+        path: '/plants/new-password',
         element: <NewPasswordPage />
       },
       {
-        path: '/catalog',
+        path: '/plants/catalog',
         element: <CatalogPage />
       },
       {
-        path: '/register-plantation',
+        path: '/plants/register-plantation',
         element: <RegisterPlantationPage />
       },
       {
-        path: '/my-orders',
+        path: '/plants/my-orders',
         element: <MyOrdersPage />
       },
       {
-        path: '/main',
+        path: '/plants/main',
         element: <MainPage />
       }
     ]
