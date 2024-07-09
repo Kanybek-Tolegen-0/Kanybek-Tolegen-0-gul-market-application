@@ -14,8 +14,8 @@ export const action = async ({ request }: { request: Request }) => {
     const {
       tokens: { idToken, refreshToken }
     } = response.data
-    localStorage.setItem(idToken, idToken)
-    localStorage.setItem(refreshToken, refreshToken)
+    localStorage.setItem('idToken', idToken)
+    localStorage.setItem('refreshToken', refreshToken)
     return redirect('/choose-role')
   } catch (e) {
     console.error(e)

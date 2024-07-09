@@ -38,7 +38,11 @@ export const routes = createBrowserRouter([
         path: '/choose-role',
         element: <ChooseRolePage />,
         loader: async () => {
-          const response = await api.get('/api/onboarding')
+          const response = await api.get('/api/onboarding', {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('idToken')}`
+            }
+          })
           if (!response) {
             throw new Error('Network response was not ok')
           }
