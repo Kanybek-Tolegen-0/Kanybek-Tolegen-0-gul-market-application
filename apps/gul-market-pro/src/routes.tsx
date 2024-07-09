@@ -2,7 +2,6 @@ import { createBrowserRouter } from 'react-router-dom'
 import React from 'react'
 import {
   ChooseRolePage,
-  AuthorizationPage,
   IndividualPage,
   EntityPage,
   RememberPasswordPage,
@@ -11,7 +10,8 @@ import {
   BasketPage,
   ProfilePage,
   MyOrdersPage,
-  loginPage
+  loginPage,
+  authorizationPage
 } from './pages'
 import { MainPage } from './pages/main-page'
 import { CatalogPage } from './pages/catalog-page'
@@ -25,11 +25,13 @@ export const routes = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <AuthorizationPage />
+        element: <authorizationPage.Component />,
+        action: authorizationPage.action
       },
       {
         path: '/login',
-        element: <loginPage.Component />
+        element: <loginPage.Component />,
+        action: loginPage.action
       },
       {
         path: '/choose-role',

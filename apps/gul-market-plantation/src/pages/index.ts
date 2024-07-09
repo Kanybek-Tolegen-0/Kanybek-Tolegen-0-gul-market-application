@@ -1,6 +1,6 @@
 export { authorizationPage } from './authorization-page'
 
-export { LoginPage } from './login-page'
+export { loginPage } from './login-page'
 
 export { NewPasswordPage } from './new-password-page'
 

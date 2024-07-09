@@ -1,6 +1,6 @@
 export { ChooseRolePage } from './choose-role-page'
 
-export { AuthorizationPage } from './authorization-page'
+export { authorizationPage } from './authorization-page'
 
 export { IndividualPage } from './individual-page'
 

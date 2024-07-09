@@ -4,13 +4,13 @@ import {
   authorizationPage,
   CatalogPage,
   Dashboard,
+  loginPage,
   MainPage,
   MyOrdersPage,
   NewPasswordPage,
   RegisterPlantationPage,
   RememberPasswordPage
 } from './pages'
-import { LoginPage } from './pages'
 
 export const routes = createBrowserRouter([
   {
@@ -23,8 +23,9 @@ export const routes = createBrowserRouter([
         action: authorizationPage.action
       },
       {
-        path: '/plants/login',
-        element: <LoginPage />
+        path: '/login',
+        element: <loginPage.Component />,
+        action: loginPage.action
       },
       {
         path: '/plants/remember-password',
