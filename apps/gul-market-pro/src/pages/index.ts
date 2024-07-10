@@ -12,7 +12,7 @@ export { RememberPasswordPage } from './remember-password-page'
 
 export { NewPasswordPage } from './new-password-page'
 
-export { FlowersPage } from './flowers-page'
+export { flowersPage } from './flowers-page'
 
 export { BasketPage } from './basket-page'
 

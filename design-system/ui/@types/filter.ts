@@ -1,5 +1,5 @@
 export interface IFilter {
-  label: React.ReactNode
-  value: string | { min: number; max: number }
+  label: string
+  value: number | string | { min: number; max: number } | (string | number | { min: number; max: number })[]
   name: string
 }

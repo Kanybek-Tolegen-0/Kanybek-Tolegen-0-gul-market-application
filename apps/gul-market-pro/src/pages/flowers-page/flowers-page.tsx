@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import {
   Layout,
   ButtonTabs,
@@ -34,8 +34,33 @@ import ProductCard from '../catalog-page/parts/product-card'
 import data, { Product } from '../catalog-page/constants'
 import Modal from '@design-system/ui/ui/components/modal'
 import ProductModal from '../../components/product-modal'
+import { useActionData, useSubmit } from 'react-router-dom'
 
-export const FlowersPage: FC = () => {
+interface Products {
+  filtered_products?: {
+    delivery: {
+      id: number
+      farm_box: string
+      box_size: string
+      mixed: boolean
+      species: string
+      product: string
+      color: string
+      length: string
+      price: number
+      boxes: number
+      packing: number
+      plantation_id: number
+    }[]
+  }
+}
+
+const FlowersPage: FC = () => {
+  const actionData = useActionData() as Products
+
+  const submit = useSubmit()
+  const [filterValues, setFilterValues] = useState<{ [key: string]: number | string[] }>({})
+
   const [chosenProduct, setChosenProduct] = useState<Product>()
   const [open, setOpen] = useState(false)
 
@@ -70,6 +95,19 @@ export const FlowersPage: FC = () => {
 
       return isExist ? prev.filter(({ value }) => value !== newValue) : [...prev, { label, value: newValue, name }]
     })
+
+    setFilterValues(prev => {
+      const arr = { ...prev }
+
+      if (Array.isArray(arr[name])) {
+        const isExist = arr[name].some(value => value === newValue)
+        arr[name] = isExist ? arr[name].filter(val => val !== newValue) : [...arr[name], newValue as string]
+      } else {
+        arr[name] = [newValue as string]
+      }
+
+      return arr
+    })
   }
 
   const handleDoubleSliderChange = ({
@@ -92,6 +130,21 @@ export const FlowersPage: FC = () => {
           )
         : [...prev, { label: `${metric} ${min}-${max}`, value: { min, max }, name: checkName }]
     })
+
+    setFilterValues(prev => {
+      const value = prev[checkName]
+      const obj = { ...prev }
+
+      if (value) {
+        delete obj[`${checkName}_start`]
+        delete obj[`${checkName}_end`]
+      } else {
+        obj[`${checkName}_start`] = min
+        obj[`${checkName}_end`] = max
+      }
+
+      return obj
+    })
   }
 
   const handleColorSelectChange = ({
@@ -110,7 +163,26 @@ export const FlowersPage: FC = () => {
         ? prev.map(pr => (pr.name === checkName ? { label, value, name: checkName } : pr))
         : [...prev, { label, value, name: checkName }]
     })
+
+    setFilterValues(prev => {
+      const arr = { ...prev }
+
+      if (Array.isArray(arr[checkName])) {
+        const isExist = arr[checkName].some(val => val === value)
+        arr[checkName] = isExist ? arr[checkName].filter(val => val !== value) : [...arr[checkName], value as string]
+      } else {
+        arr[checkName] = [value as string]
+      }
+
+      return arr
+    })
   }
+
+  useEffect(() => {
+    submit(filterValues, { method: 'post', encType: 'application/json' })
+  }, [filterValues])
+
+  console.log({ filterValues })
 
   return (
     <Layout fullHeader isLogged>
@@ -150,39 +222,55 @@ export const FlowersPage: FC = () => {
               <Filter>
                 <Chips
                   filters={filters}
-                  onChange={({ value: rmValue }) => setFilters(prev => prev.filter(({ value }) => value !== rmValue))}
-                  onReset={() => setFilters([])}
+                  onChange={({ value: rmValue, name }) => {
+                    setFilters(prev => prev.filter(({ value }) => value !== rmValue))
+                    name === 'size'
+                      ? setFilterValues(prev => {
+                          const next = { ...prev }
+                          delete next['size_start']
+                          delete next['size_end']
+
+                          return next
+                        })
+                      : setFilterValues(prev => {
+                          const next = { ...prev }
+                          delete next[name]
+                          return next
+                        })
+                  }}
+                  onReset={() => {
+                    setFilters([]), setFilterValues({})
+                  }}
                 />
                 <div className="flex flex-col gap-8 max-w-max">
                   <FilterPart label="Тип цветов" collapsable>
                     <CheckboxGroup
-                      name="flower-type"
+                      name="flower_type"
                       options={FILTER_PART_FLOWER_TYPE_OPTIONS}
                       filters={filters}
                       inputProps={{
                         placeholder: 'Поиск'
                       }}
                       onCheckboxChange={handleCheckboxChange}
-                      showButton
                     />
                   </FilterPart>
                   <FilterPart label="Сорт цветов">
                     <CheckboxGroup
-                      name="flower-type"
+                      name="flower_species"
                       options={FILTER_PART_FLOWER_SORT_OPTIONS}
                       filters={filters}
                       inputProps={{ placeholder: 'Поиск' }}
                       onCheckboxChange={handleCheckboxChange}
                     />
                   </FilterPart>
-                  <FilterPart className="max-w-min" label="Цена за штуку">
+                  {/* <FilterPart className="max-w-min" label="Цена за штуку">
                     <DoubleSlider name="cost" metric={'$'} min={1} max={100} onChange={handleDoubleSliderChange} />
-                  </FilterPart>
+                  </FilterPart> */}
 
                   <FilterPart label="Размер">
-                    <DoubleSlider name="size" metric={'см'} min={30} max={120} onChange={handleDoubleSliderChange} />
+                    <DoubleSlider name="size" metric={'см'} min={20} max={100} onChange={handleDoubleSliderChange} />
                   </FilterPart>
-                  <FilterPart label="Доставка">
+                  {/* <FilterPart label="Доставка">
                     <CheckboxGroup
                       name="delivery"
                       options={FILTER_PART_FLOWER_DELIVERY_OPTIONS}
@@ -190,10 +278,10 @@ export const FlowersPage: FC = () => {
                       inputProps={{ placeholder: 'Поиск' }}
                       onCheckboxChange={handleCheckboxChange}
                     />
-                  </FilterPart>
+                  </FilterPart> */}
                   <FilterPart label="Тип коробки">
                     <CheckboxGroup
-                      name="box-type"
+                      name="box_type"
                       filters={filters}
                       options={FILTER_PART_FLOWER_BOX_TYPE_OPTIONS}
                       inputProps={{ placeholder: 'Поиск' }}
@@ -207,7 +295,13 @@ export const FlowersPage: FC = () => {
               </Filter>
               {activeTab === 'positions' ? (
                 active === 'list' ? (
-                  <Table headers={TABLE_HEADERS} items={itemsAdapter({ data: TABLE_DATA, headers: TABLE_HEADERS })} />
+                  <Table
+                    headers={TABLE_HEADERS}
+                    items={itemsAdapter({
+                      data: actionData?.filtered_products?.delivery || [],
+                      headers: TABLE_HEADERS
+                    })}
+                  />
                 ) : (
                   <div
                     className="gap-x-4 gap-y-4 w-full"
@@ -245,3 +339,5 @@ export const FlowersPage: FC = () => {
     </Layout>
   )
 }
+
+export default FlowersPage

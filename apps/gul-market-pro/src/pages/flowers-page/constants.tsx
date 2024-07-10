@@ -24,27 +24,22 @@ export const FILTER_SELECT_OPTIONS = [
 ]
 
 export const FILTER_PART_FLOWER_TYPE_OPTIONS = [
-  { label: 'Гвоздика', value: 'Гвоздика' },
-  { label: 'Розы', value: 'Розы' },
-  { label: 'Гортензия', value: 'Гортензия' },
-  { label: 'Спрей', value: 'Спрей' }
+  // { label: 'Розы', value: 'Roses' },
+  { label: 'Гортензия', value: 'Hydrangea' }
 ]
 
 export const FILTER_PART_FLOWER_SORT_OPTIONS = {
-  carnation: {
-    label: 'Гвоздика',
-    options: [
-      { label: 'Deep blue', value: 'Deep blue' },
-      { label: 'Deep red', value: 'Deep red' }
-    ]
-  },
-  rose: {
-    label: 'Розы',
-    options: [
-      { label: 'Deep blue', value: 'Deep blue' },
-      { label: 'Deep red', value: 'Deep red' }
-    ]
+  Hydrangea: {
+    label: 'Гортензия',
+    options: [{ label: 'Гортензия', value: 'Hydrangea' }]
   }
+  // Roses: {
+  //   label: 'Розы',
+  //   options: [
+  //     { label: 'Deep blue', value: 'Deep blue' },
+  //     { label: 'Deep red', value: 'Deep red' }
+  //   ]
+  // }
 }
 
 export const FILTER_PART_FLOWER_DELIVERY_OPTIONS = [
@@ -156,10 +151,25 @@ export const TABLE_DATA = [
   }
 ]
 
+const a = {
+  id: 4,
+  farm_box: '3 Q',
+  box_size: 'HB',
+  mixed: false,
+  species: 'Hydrangea',
+  product: 'DALLAS 60CM N 25ST QUCT',
+  color: 'White',
+  length: '60cm',
+  price: 1,
+  boxes: 1,
+  packing: 1,
+  plantation_id: 1
+}
+
 export const TABLE_HEADERS: THeader = [
-  { label: 'Плантация', key: 'plantation' },
-  { label: 'Тип', key: 'type' },
-  { label: 'Сорт', key: 'sort' },
+  { label: 'Плантация', key: 'product' },
+  { label: 'Тип', key: 'species' },
+  { label: 'Сорт', key: 'species' },
   {
     label: 'Цвет',
     key: 'color',
@@ -172,12 +182,12 @@ export const TABLE_HEADERS: THeader = [
       </div>
     )
   },
-  { label: 'Размер', key: 'size' },
-  { label: 'Цена, $', key: 'cost_dollar' },
-  { label: 'Цена, тг', key: 'cost_tenge' },
-  { label: 'Коробка', key: 'box_type' },
-  { label: 'Пакинг', key: 'paking' },
-  { label: 'Кол-во', key: 'amount' },
+  { label: 'Размер', key: 'length' },
+  { label: 'Цена, $', key: 'price' },
+  // { label: 'Цена, тг', key: 'cost_tenge' },
+  { label: 'Коробка', key: 'box_size' },
+  { label: 'Пакинг', key: 'packing' },
+  { label: 'Кол-во', key: 'boxes' },
   {
     label: '',
     key: 'is_like',

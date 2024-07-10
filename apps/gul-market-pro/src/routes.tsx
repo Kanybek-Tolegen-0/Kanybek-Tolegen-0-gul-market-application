@@ -5,7 +5,7 @@ import {
   EntityPage,
   RememberPasswordPage,
   NewPasswordPage,
-  FlowersPage,
+  flowersPage,
   BasketPage,
   ProfilePage,
   MyOrdersPage,
@@ -17,7 +17,6 @@ import { MainPage } from './pages/main-page'
 import { CatalogPage } from './pages/catalog-page'
 import { FavoritePage } from './pages/favorite-page'
 import { Dashboard } from './pages/dashboard'
-import { api } from './api'
 
 export const routes = createBrowserRouter([
   {
@@ -57,7 +56,8 @@ export const routes = createBrowserRouter([
       // },
       {
         path: '/catalog',
-        element: <FlowersPage />
+        element: <flowersPage.Component />,
+        action: flowersPage.action
       },
       {
         path: '/remember-password',
