@@ -1,7 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 import React from 'react'
 import {
-  ChooseRolePage,
   IndividualPage,
   EntityPage,
   RememberPasswordPage,
@@ -11,7 +10,8 @@ import {
   ProfilePage,
   MyOrdersPage,
   loginPage,
-  authorizationPage
+  authorizationPage,
+  chooseRolePage
 } from './pages'
 import { MainPage } from './pages/main-page'
 import { CatalogPage } from './pages/catalog-page'
@@ -36,18 +36,8 @@ export const routes = createBrowserRouter([
       },
       {
         path: '/choose-role',
-        element: <ChooseRolePage />,
-        loader: async () => {
-          const response = await api.get('/api/onboarding', {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem('idToken')}`
-            }
-          })
-          if (!response) {
-            throw new Error('Network response was not ok')
-          }
-          return response
-        }
+        element: <chooseRolePage.Component />,
+        loader: chooseRolePage.loader
       },
       {
         path: '/individual',

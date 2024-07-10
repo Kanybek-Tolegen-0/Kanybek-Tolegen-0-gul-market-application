@@ -6,7 +6,9 @@ import { FC } from 'react'
 export interface IContent {
   title: string
   description: string
-  stepForm: FC
+  stepForm: FC<any>
+  initialFormValues: {}
+  initialFormErrors: {}
 }
 
 export interface IStep {
@@ -28,18 +30,36 @@ const steps_content: IContent[] = [
   {
     title: 'Город проживания',
     description: 'Введите адрес, чтобы получать уведомления о лучших предложениях в Вашем городе',
-    stepForm: ResidentialAddress
+    stepForm: ResidentialAddress,
+    initialFormValues: {
+      city: ''
+    },
+    initialFormErrors: {
+      city: ''
+    }
   },
   {
     title: 'ФИО',
     description:
       'Введите полностью Ваши ФИО, они будут использованы для оформления заказов и дальнейшего взаимодействия с Вами',
-    stepForm: FullName
+    stepForm: FullName,
+    initialFormValues: {
+      name: '',
+      surname: '',
+      patronym: ''
+    },
+    initialFormErrors: {
+      name: '',
+      surname: '',
+      patronym: ''
+    }
   },
   {
     title: 'Поздравляем',
     description: 'Вы создали аккаунт',
-    stepForm: Completed
+    stepForm: Completed,
+    initialFormValues: {},
+    initialFormErrors: {}
   }
 ]
 

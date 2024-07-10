@@ -1,41 +1,37 @@
-import React, { FC, useEffect } from 'react'
-import { Input, Typography } from '@material-tailwind/react'
-import { Map } from '../../../../components/map'
-// import { YMaps, Map as YMap } from '@pbe/react-yandex-maps'
+import React, { ChangeEvent, FC, FormEvent, useEffect, useState } from 'react'
+import { Typography } from '@material-tailwind/react'
+import { Map } from '../../../../components'
+import { StringInput } from '@design-system/ui'
+import { Simulate } from 'react-dom/test-utils'
+import error = Simulate.error
 
-const ResidentialAddress: FC = props => {
-  // const mapOptions = {
-  //   suppressMapOpenBlock: true,
-  //   yandexMapDisablePoiInteractivity: true,
-  //   suppressObsoleteBrowserNotifier: true,
-  //   supressMapOpenBlock: true
-  // }
-
+const ResidentialAddress: FC<{
+  formValues: { [key: string]: string }
+  formErrors: { [key: string]: string }
+  handleFormChange: (e: ChangeEvent<HTMLInputElement>) => void
+  handleError: ({ name, errorMessage }: { name: string; errorMessage: string }) => void
+}> = ({ formValues, formErrors, handleError, handleFormChange }) => {
   return (
     <>
       <div>
         <Typography children="Город проживания" className="font-medium text-sm text-gray-700 mr-auto mb-1" />
-        <Input
+
+        <StringInput
           className="!border-gray-300 focus:!border-[1px] rounded-md py-[9px] px-[13px] text-tip_bold"
           labelProps={{
             className: 'before:content-none after:content-none'
           }}
-          crossOrigin=""
+          name="city"
+          value={formValues.city}
+          onChange={handleFormChange}
+          error={formErrors.city!}
+          handleError={handleError}
+          handleFormChange={handleFormChange}
         />
       </div>
       <div className="w-[566px] h-[242px] rounded-base overflow-hidden">
         <Map />
       </div>
-      {/*Яндекс карт*/}
-      {/*<YMaps>*/}
-      {/*  <div className="w-[566px] h-[242px] rounded-base overflow-hidden">*/}
-      {/*    <YMap*/}
-      {/*      style={{ width: '100%', height: '100%' }}*/}
-      {/*      defaultState={{ center: [43.238949, 76.889709], zoom: 13 }}*/}
-      {/*      options={mapOptions}*/}
-      {/*    />*/}
-      {/*  </div>*/}
-      {/*</YMaps>*/}
     </>
   )
 }

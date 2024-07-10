@@ -33,7 +33,7 @@ export const Map: FunctionComponent<IMapProps> = React.memo(
           center: [76.889709, 43.238949],
           zoom: 13,
           zoomControl: false,
-          key: '8e342245-f776-4647-b92b-45b36e82a790'
+          key: '2772c116-d322-4a37-b835-3e3c9ca5bbd4'
         })
         const rulerControl = new RulerControl(mapRef.current, {
           position: 'centerRight',
@@ -62,7 +62,7 @@ export const Map: FunctionComponent<IMapProps> = React.memo(
     }, [])
 
     return (
-      <div style={{ width: '100%', height: '100%' }}>
+      <div style={{ width: 'auto', height: '100%' }}>
         <div style={{ width: '100%', height: '100%' }}>
           <div id="map-container" style={{ width: '100%', height: '100%' }}></div>
         </div>

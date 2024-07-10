@@ -1,4 +1,4 @@
-export { ChooseRolePage } from './choose-role-page'
+export { chooseRolePage } from './choose-role-page'
 
 export { authorizationPage } from './authorization-page'
 

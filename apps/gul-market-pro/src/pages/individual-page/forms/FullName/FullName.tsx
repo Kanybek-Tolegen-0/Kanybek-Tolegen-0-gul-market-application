@@ -1,41 +1,61 @@
-import React, { FC } from 'react'
-import { Container } from '@design-system/ui'
+import React, { ChangeEvent, FC } from 'react'
+import { Container, StringInput } from '@design-system/ui'
 import { Input, Typography } from '@material-tailwind/react'
 
-interface IFullNameFormProps {}
+interface IFullNameFormProps {
+  formValues: { [key: string]: string }
+  formErrors: { [key: string]: string }
+  handleFormChange: (e: ChangeEvent<HTMLInputElement>) => void
+  handleError: ({ name, errorMessage }: { name: string; errorMessage: string }) => void
+}
 
-const FullName: FC<IFullNameFormProps> = props => {
+const FullName: FC<IFullNameFormProps> = ({ formValues, formErrors, handleError, handleFormChange }) => {
   return (
     <div className={'flex flex-col gap-5'}>
       <div>
         <Typography children="Ваша фамилия" className="font-medium text-sm text-gray-700 mr-auto mb-1" />
-        <Input
+        <StringInput
           className="!border-gray-300 focus:!border-[1px] rounded-md py-[9px] px-[13px] text-tip_bold"
           labelProps={{
             className: 'before:content-none after:content-none'
           }}
-          crossOrigin=""
+          name="surname"
+          value={formValues.surname}
+          onChange={handleFormChange}
+          error={formErrors.surname!}
+          handleError={handleError}
+          handleFormChange={handleFormChange}
         />
       </div>
       <div>
         <Typography children="Ваше имя" className="font-medium text-sm text-gray-700 mr-auto mb-1" />
-        <Input
+        <StringInput
           className="!border-gray-300 focus:!border-[1px] rounded-md py-[9px] px-[13px] text-tip_bold"
           labelProps={{
             className: 'before:content-none after:content-none'
           }}
-          crossOrigin=""
+          name="name"
+          value={formValues.name}
+          onChange={handleFormChange}
+          error={formErrors.name!}
+          handleError={handleError}
+          handleFormChange={handleFormChange}
         />
       </div>
 
       <div>
         <Typography children="Ваше Отчество" className="font-medium text-sm text-gray-700 mr-auto mb-1" />
-        <Input
+        <StringInput
           className="!border-gray-300 focus:!border-[1px] rounded-md py-[9px] px-[13px] text-tip_bold"
           labelProps={{
             className: 'before:content-none after:content-none'
           }}
-          crossOrigin=""
+          name="patronym"
+          value={formValues.patronym}
+          onChange={handleFormChange}
+          error={formErrors.patronym!}
+          handleError={handleError}
+          handleFormChange={handleFormChange}
         />
       </div>
     </div>
