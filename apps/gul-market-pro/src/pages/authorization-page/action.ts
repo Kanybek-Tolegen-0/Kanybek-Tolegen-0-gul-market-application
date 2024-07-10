@@ -16,8 +16,9 @@ export const action = async ({ request }: { request: Request }) => {
     } = response.data
     localStorage.setItem(idToken, idToken)
     localStorage.setItem(refreshToken, refreshToken)
+
     return redirect('/choose-role')
   } catch (e) {
-    console.error(e)
+    return e
   }
 }
