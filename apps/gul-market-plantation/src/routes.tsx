@@ -23,7 +23,7 @@ export const routes = createBrowserRouter([
         action: authorizationPage.action
       },
       {
-        path: '/login',
+        path: 'plants/plants/login',
         element: <loginPage.Component />,
         action: loginPage.action
       },
