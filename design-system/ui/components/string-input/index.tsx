@@ -8,7 +8,7 @@ interface StringInputProps extends Omit<InputProps, 'name' | 'onBlur' | 'error'>
   name: string
   label?: string
   handleError: ({ name, errorMessage }: { name: string; errorMessage: string }) => void
-  handleFormChange: (e: ChangeEvent<HTMLInputElement>) => void
+  handleFormChange: (e: ChangeEvent<HTMLInputElement>, addressIndex?: number) => void
   error: string
   className: string
 }
@@ -20,15 +20,19 @@ export const StringInput: FC<StringInputProps> = ({
   label,
   className,
   labelProps,
-  handleFormChange
+  handleFormChange,
+  value
 }) => {
   return (
     <div className="flex flex-col gap-[2px]">
       <Input
         name={name}
         label={label && label}
+        value={value}
         onBlur={e => {
           const { value } = e.target
+          console.log(value)
+          console.log(name)
           try {
             stringSchema.parse(value)
             handleError({ name, errorMessage: '' })

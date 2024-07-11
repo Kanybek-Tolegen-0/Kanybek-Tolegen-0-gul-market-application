@@ -21,7 +21,6 @@ const FullName: FC<IFullNameFormProps> = ({ formValues, formErrors, handleError,
           }}
           name="surname"
           value={formValues.surname}
-          onChange={handleFormChange}
           error={formErrors.surname!}
           handleError={handleError}
           handleFormChange={handleFormChange}
@@ -36,7 +35,6 @@ const FullName: FC<IFullNameFormProps> = ({ formValues, formErrors, handleError,
           }}
           name="name"
           value={formValues.name}
-          onChange={handleFormChange}
           error={formErrors.name!}
           handleError={handleError}
           handleFormChange={handleFormChange}
@@ -52,7 +50,6 @@ const FullName: FC<IFullNameFormProps> = ({ formValues, formErrors, handleError,
           }}
           name="patronym"
           value={formValues.patronym}
-          onChange={handleFormChange}
           error={formErrors.patronym!}
           handleError={handleError}
           handleFormChange={handleFormChange}

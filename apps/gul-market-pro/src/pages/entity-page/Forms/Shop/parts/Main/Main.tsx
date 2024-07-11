@@ -1,26 +1,40 @@
-import React, { FunctionComponent, useState } from 'react'
+import React, { ChangeEvent, FunctionComponent, useState } from 'react'
 import { Input, Textarea, Typography } from '@material-tailwind/react'
-import { PlusIcon } from '@design-system/ui'
+import { PlusIcon, StringInput } from '@design-system/ui'
+import { Shop } from '../../../../types'
 
-interface MainProps {}
+interface MainProps {
+  mainValues: Shop
+  mainErrors: Shop
+  shopHandleFormChange: (e: ChangeEvent<HTMLInputElement>, addressIndex?: number) => void
+  handleError: ({ name, errorMessage }: { name: string; errorMessage: string }) => void
+}
 
-const Main: FunctionComponent<MainProps> = props => {
-  const [filials, setFilials] = useState<number[]>([0])
-
+const Main: FunctionComponent<MainProps> = ({ mainValues, mainErrors, handleError, shopHandleFormChange }) => {
+  const [mainAddresses, setMainAddresses] = useState<string[]>(mainValues.addresses || ['', ''])
+  const [mainAddressErrors, setMainAddressErrors] = useState<string[]>(mainErrors.addresses || ['', ''])
   const addMainComponent = () => {
-    setFilials(prevFilials => [...prevFilials, prevFilials.length])
+    setMainAddresses(prevAddresses => [...prevAddresses, ''])
+    setMainAddressErrors(prevAddresses => [...prevAddresses, ''])
+  }
+  const addressesHandleFormChange = (e: ChangeEvent<HTMLInputElement>, addressIndex: number) => {
+    shopHandleFormChange(e, addressIndex)
   }
 
   return (
     <>
       <div>
         <Typography children="Название магазина" className="font-medium text-sm text-gray-700 mr-auto mb-1" />
-        <Input
+        <StringInput
           className="!border-gray-300 focus:!border-[1px] rounded-md py-[9px] px-[13px] text-tip_bold"
           labelProps={{
             className: 'before:content-none after:content-none'
           }}
-          crossOrigin=""
+          name="name"
+          value={mainValues.name}
+          handleFormChange={shopHandleFormChange}
+          error={mainErrors.name!}
+          handleError={handleError}
         />
       </div>
       <div>
@@ -34,15 +48,19 @@ const Main: FunctionComponent<MainProps> = props => {
           resize
         />
       </div>
-      {filials.map((_, index) => (
-        <div key={index}>
+      {mainAddresses.map((eachAddress, addressIndex) => (
+        <div key={addressIndex}>
           <Typography children="Адрес филиала" className="font-medium text-sm text-gray-700 mr-auto mb-1" />
-          <Input
+          <StringInput
             className="!border-gray-300 focus:!border-[1px] rounded-md py-[9px] px-[13px] text-tip_bold"
             labelProps={{
               className: 'before:content-none after:content-none'
             }}
-            crossOrigin=""
+            name="addresses"
+            value={eachAddress}
+            handleFormChange={e => addressesHandleFormChange(e, addressIndex)}
+            error={mainAddressErrors[addressIndex]!}
+            handleError={handleError}
           />
         </div>
       ))}
