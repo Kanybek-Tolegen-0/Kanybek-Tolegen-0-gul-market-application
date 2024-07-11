@@ -1,25 +1,23 @@
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import { Color } from './color'
 
 export const ColorSelect: FC<{
   name: string
-  options: { label: string; value: string }[]
+  options: { label: string; value: string; color: string }[]
+  selectedColors: string[]
   onChange: ({ label, value, name }: { label: string; value: string; name: string }) => void
-}> = ({ name, options, onChange }) => {
-  const [active, setActive] = useState(options[0])
-
+}> = ({ name, selectedColors, options, onChange }) => {
   return (
     <div className="flex flex-col gap-3">
-      {options.map(({ label, value }) => (
+      {options.map(({ label, value, color }) => (
         <Color
           key={value}
-          active={active?.value === value}
-          onChange={option => {
-            setActive(option)
+          active={selectedColors.includes(value)}
+          onChange={() => {
             onChange({ label, value, name })
           }}
           label={label}
-          value={value}
+          value={color}
         />
       ))}
     </div>

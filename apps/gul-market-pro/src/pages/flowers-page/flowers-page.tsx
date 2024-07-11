@@ -36,8 +36,49 @@ import Modal from '@design-system/ui/ui/components/modal'
 import ProductModal from '../../components/product-modal'
 import { useActionData, useSubmit } from 'react-router-dom'
 
+function transform(input: { [key: string]: string[] }) {
+  interface Option {
+    label: string
+    value: string
+  }
+
+  interface OutputType {
+    [key: string]: {
+      label: string
+      options: Option[]
+    }
+  }
+
+  const output: OutputType = {}
+
+  for (const key in input) {
+    if (input.hasOwnProperty(key)) {
+      output[key] = {
+        label: key,
+        options: input[key]
+          ? input[key].map(value => ({
+              label: value,
+              value: value
+            }))
+          : []
+      }
+    }
+  }
+
+  return output
+}
+
+const FLOWER_TYPE_LABELS: { [key: string]: string } = {
+  Roses: 'Розы',
+  Hydrangea: 'Гортензия'
+}
+
 interface Products {
   filtered_products?: {
+    flower_types?: string[]
+    flower_species?: {
+      [key: string]: string[]
+    }
     delivery: {
       id: number
       farm_box: string
@@ -59,7 +100,10 @@ const FlowersPage: FC = () => {
   const actionData = useActionData() as Products
 
   const submit = useSubmit()
-  const [filterValues, setFilterValues] = useState<{ [key: string]: number | string[] }>({})
+  const [filterValues, setFilterValues] = useState<{ [key: string]: number | string[] }>({
+    size_start: 20,
+    size_end: 100
+  })
 
   const [chosenProduct, setChosenProduct] = useState<Product>()
   const [open, setOpen] = useState(false)
@@ -246,7 +290,12 @@ const FlowersPage: FC = () => {
                   <FilterPart label="Тип цветов" collapsable>
                     <CheckboxGroup
                       name="flower_type"
-                      options={FILTER_PART_FLOWER_TYPE_OPTIONS}
+                      options={
+                        actionData?.filtered_products?.flower_types?.map(type => ({
+                          label: String(FLOWER_TYPE_LABELS[type]),
+                          value: type
+                        })) || []
+                      }
                       filters={filters}
                       inputProps={{
                         placeholder: 'Поиск'
@@ -257,7 +306,11 @@ const FlowersPage: FC = () => {
                   <FilterPart label="Сорт цветов">
                     <CheckboxGroup
                       name="flower_species"
-                      options={FILTER_PART_FLOWER_SORT_OPTIONS}
+                      options={
+                        actionData?.filtered_products?.flower_species
+                          ? transform(actionData?.filtered_products?.flower_species)
+                          : FILTER_PART_FLOWER_SORT_OPTIONS
+                      }
                       filters={filters}
                       inputProps={{ placeholder: 'Поиск' }}
                       onCheckboxChange={handleCheckboxChange}
@@ -289,7 +342,12 @@ const FlowersPage: FC = () => {
                     />
                   </FilterPart>
                   <FilterPart label="Цвет" collapsable>
-                    <ColorSelect name="color" options={FILTER_PART_COLOR_OPTIONS} onChange={handleColorSelectChange} />
+                    <ColorSelect
+                      name="color"
+                      selectedColors={Array.isArray(filterValues?.color) ? filterValues?.color : []}
+                      options={FILTER_PART_COLOR_OPTIONS}
+                      onChange={handleColorSelectChange}
+                    />
                   </FilterPart>
                 </div>
               </Filter>

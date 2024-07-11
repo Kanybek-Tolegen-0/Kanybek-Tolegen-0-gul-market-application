@@ -54,14 +54,14 @@ export const CheckboxGroup = React.forwardRef<HTMLInputElement, CheckboxGroupPro
                     label={label}
                     value={optionValue}
                     className={'pl-0'}
-                    checked={Boolean(filters.find(({ value: filterValue }) => `${key}:${optionValue}` === filterValue))}
+                    checked={Boolean(filters.find(({ value: filterValue }) => optionValue === filterValue))}
                     labelProps={{
                       className: 'text-sm leading-none font-normal text-gray-800'
                     }}
                     onChange={() =>
                       onCheckboxChange({
-                        label: `${value.label}:${optionValue}`,
-                        value: `${key}:${optionValue}`,
+                        label: optionValue,
+                        value: optionValue,
                         name
                       })
                     }
