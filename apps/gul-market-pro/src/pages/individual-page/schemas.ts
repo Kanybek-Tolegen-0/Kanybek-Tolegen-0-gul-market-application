@@ -1,9 +1,12 @@
-import { z } from 'zod'
+import { z, ZodIssueCode } from 'zod'
 
-const addressSchema = z.object({
-  city: z.string(),
-  street: z.string(),
-  house: z.string()
+const addressSchema = z.string().superRefine((val, ctx) => {
+  if (val.length === 0) {
+    ctx.addIssue({
+      code: ZodIssueCode.custom,
+      message: 'Это обязательное поле'
+    })
+  }
 })
 
 const dayScheduleSchema = z.object({
@@ -24,7 +27,14 @@ const workScheduleSchema = z.object({
 })
 
 export const shopSchema = z.object({
-  name: z.string(),
+  name: z.string().superRefine((val, ctx) => {
+    if (val.length === 0) {
+      ctx.addIssue({
+        code: ZodIssueCode.custom,
+        message: 'Это обязательное поле'
+      })
+    }
+  }),
   description: z.string(),
   addresses: z.array(addressSchema),
   work_schedule: workScheduleSchema

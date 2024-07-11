@@ -40,7 +40,8 @@ const EntityPage: FC = props => {
 
   const submit = useSubmit()
   const [searchParams, setSearchParams] = useSearchParams()
-
+  console.log('values', formValues)
+  console.log('errors', formErrors)
   useEffect(() => {
     setFormValues(content.initialFormValues)
     setFormErrors(content.initialFormErrors)
@@ -85,9 +86,7 @@ const EntityPage: FC = props => {
 
   const handleFormChange = (e: ChangeEvent<HTMLInputElement>, shopIndex?: number, addressIndex?: number) => {
     const { name, value } = e.target
-    console.log('formValues', formValues)
-    console.log('formErrors', formErrors)
-    if (Array.isArray(formValues) && shopIndex && addressIndex) {
+    if (Array.isArray(formValues)) {
       setFormValues(prev => {
         const newFormValues = [...(prev as FormValues[])]
         if (name === 'addresses') {
@@ -105,8 +104,33 @@ const EntityPage: FC = props => {
     }
   }
 
-  const handleError = ({ name, errorMessage }: { name: string; errorMessage: string }) => {
-    setFormErrors(prev => ({ ...prev, [name]: errorMessage }))
+  const handleError = (
+    {
+      name,
+      errorMessage
+    }: {
+      name: string
+      errorMessage: string
+    },
+    shopIndex?: number,
+    addressIndex?: number
+  ) => {
+    if (Array.isArray(formValues)) {
+      setFormErrors(prev => {
+        const newFormValues = [...(prev as FormValues[])]
+        if (name === 'addresses') {
+          const currentShop = newFormValues[shopIndex!]
+          const currentShopAddresses = [...(currentShop?.addresses as unknown as string[])]
+          currentShopAddresses![addressIndex!] = errorMessage
+          newFormValues[shopIndex!] = { ...newFormValues[shopIndex!], [name]: currentShopAddresses }
+        } else {
+          newFormValues[shopIndex!] = { ...newFormValues[shopIndex!], [name]: errorMessage }
+        }
+        return newFormValues
+      })
+    } else {
+      setFormErrors(prev => ({ ...prev, [name]: errorMessage }))
+    }
   }
 
   const handleNext = (e: FormEvent<HTMLFormElement>) => {
@@ -165,7 +189,9 @@ const EntityPage: FC = props => {
                     <Container key={shopIndex} className={'flex-col mb-6 min-w-[630px]'}>
                       <StepForm
                         shopFormValues={shopValues}
+                        setFormValues={setFormValues}
                         shopFormErrors={formErrors[shopIndex]}
+                        setFormErrors={setFormErrors}
                         handleFormChange={handleFormChange}
                         handleError={handleError}
                         shopIndex={shopIndex}

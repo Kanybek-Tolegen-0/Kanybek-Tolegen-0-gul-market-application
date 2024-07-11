@@ -7,20 +7,46 @@ interface MainProps {
   mainValues: Shop
   mainErrors: Shop
   shopHandleFormChange: (e: ChangeEvent<HTMLInputElement>, addressIndex?: number) => void
-  handleError: ({ name, errorMessage }: { name: string; errorMessage: string }) => void
+  shopHandleFormError: (
+    {
+      name,
+      errorMessage
+    }: {
+      name: string
+      errorMessage: string
+    },
+    addressIndex?: number
+  ) => void
+  setFormValues: React.Dispatch<React.SetStateAction<Shop[]>>
+  setFormErrors: React.Dispatch<React.SetStateAction<Shop[]>>
+  shopIndex?: number
 }
 
-const Main: FunctionComponent<MainProps> = ({ mainValues, mainErrors, handleError, shopHandleFormChange }) => {
-  const [mainAddresses, setMainAddresses] = useState<string[]>(mainValues.addresses || ['', ''])
-  const [mainAddressErrors, setMainAddressErrors] = useState<string[]>(mainErrors.addresses || ['', ''])
+const Main: FunctionComponent<MainProps> = ({
+  mainValues,
+  mainErrors,
+  shopHandleFormError,
+  shopHandleFormChange,
+  setFormValues,
+  setFormErrors,
+  shopIndex
+}) => {
+  //! addMainComponent Не работает, просим проявить терпение
   const addMainComponent = () => {
-    setMainAddresses(prevAddresses => [...prevAddresses, ''])
-    setMainAddressErrors(prevAddresses => [...prevAddresses, ''])
+    // setFormValues(prev => [...prev, (prev[shopIndex!] = mainValues)])
+    // setFormErrors(prev => [...prev, (prev[shopIndex!] = mainErrors)])
   }
   const addressesHandleFormChange = (e: ChangeEvent<HTMLInputElement>, addressIndex: number) => {
     shopHandleFormChange(e, addressIndex)
   }
-
+  const addressesHandleFormError = (
+    { name, errorMessage }: { name: string; errorMessage: string },
+    addressIndex?: number
+  ) => {
+    console.log('on main address', addressIndex)
+    shopHandleFormError({ name, errorMessage }, addressIndex)
+  }
+  console.log('Addresses', mainValues.addresses)
   return (
     <>
       <div>
@@ -34,7 +60,7 @@ const Main: FunctionComponent<MainProps> = ({ mainValues, mainErrors, handleErro
           value={mainValues.name}
           handleFormChange={shopHandleFormChange}
           error={mainErrors.name!}
-          handleError={handleError}
+          handleError={addressesHandleFormError}
         />
       </div>
       <div>
@@ -48,7 +74,7 @@ const Main: FunctionComponent<MainProps> = ({ mainValues, mainErrors, handleErro
           resize
         />
       </div>
-      {mainAddresses.map((eachAddress, addressIndex) => (
+      {mainValues.addresses.map((eachAddress, addressIndex) => (
         <div key={addressIndex}>
           <Typography children="Адрес филиала" className="font-medium text-sm text-gray-700 mr-auto mb-1" />
           <StringInput
@@ -59,8 +85,9 @@ const Main: FunctionComponent<MainProps> = ({ mainValues, mainErrors, handleErro
             name="addresses"
             value={eachAddress}
             handleFormChange={e => addressesHandleFormChange(e, addressIndex)}
-            error={mainAddressErrors[addressIndex]!}
-            handleError={handleError}
+            error={mainErrors.addresses[addressIndex]!}
+            handleError={addressesHandleFormError}
+            addressIndex={addressIndex}
           />
         </div>
       ))}
