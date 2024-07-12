@@ -3,7 +3,7 @@ import { Button, IconButton, Typography } from '@material-tailwind/react'
 import { StepHeader } from '../../components'
 import { configs } from './constants'
 import { BrandButton, Container, Layout } from '@design-system/ui'
-import { createSearchParams, Link, useSearchParams, useSubmit } from 'react-router-dom'
+import { createSearchParams, Form, Link, useSearchParams, useSubmit } from 'react-router-dom'
 import { ChevronLeftIcon } from '@design-system/ui'
 import { GMStepper } from '@design-system/ui'
 import './style.css'
@@ -24,11 +24,7 @@ const EntityPage: FC = props => {
   const [activeStep, setActiveStep] = React.useState(0)
   const [isLastStep, setIsLastStep] = React.useState(false)
   const [isFirstStep, setIsFirstStep] = React.useState(false)
-  const [shops, setShops] = useState<number[]>([0, 1])
 
-  const addShop = () => {
-    setShops(prevShops => [...prevShops, prevShops.length])
-  }
   const { steps_content, stepper_configs } = configs
 
   const content = steps_content[activeStep]!
@@ -37,27 +33,30 @@ const EntityPage: FC = props => {
 
   const [formValues, setFormValues] = useState<FormValues | FormValues[]>(content.initialFormValues)
   const [formErrors, setFormErrors] = useState<FormErrors | FormErrors[]>(content.initialFormErrors)
-
   const submit = useSubmit()
   const [searchParams, setSearchParams] = useSearchParams()
-  console.log('values', formValues)
-  console.log('errors', formErrors)
-  useEffect(() => {
-    setFormValues(content.initialFormValues)
-    setFormErrors(content.initialFormErrors)
-  }, [activeStep, content.initialFormValues, content.initialFormErrors])
 
   const validateForm = () => {
-    const errors: FormErrors = {}
+    const errorsObject: FormErrors = {}
+    const errorsArray: FormErrors[] = []
+
     if (Array.isArray(formValues)) {
-      try {
-        shopsSchema.safeParse(formValues)
-      } catch (err) {
-        if (err instanceof ZodError) {
-          console.log(err)
-        } else {
-          console.log(err)
-        }
+      const result = shopsSchema.safeParse(formValues)
+      if (!result.success) {
+        result.error.errors.forEach(error => {
+          const { path, message } = error
+          const [index, ...restPath] = path
+          const key = restPath.join('.')
+          const Shops = formErrors
+          if (key.startsWith('addresses')) {
+            const [name, addressIndex] = key.split('.')
+            Shops[index][name][addressIndex] = message
+          } else {
+            Shops[index][key] = message
+          }
+          setFormErrors(Shops)
+          return !Object.values(errorsObject).some(error => error)
+        })
       }
     } else {
       Object.keys(formValues).forEach(key => {
@@ -65,16 +64,16 @@ const EntityPage: FC = props => {
           stringSchema.parse(formValues[key])
         } catch (err) {
           if (err instanceof ZodError) {
-            errors[key] = err.errors[0]?.message || ''
+            errorsObject[key] = err.errors[0]?.message || ''
           } else {
-            errors[key] = 'Invalid value'
+            errorsObject[key] = 'Invalid value'
           }
         }
       })
+      setFormErrors(errorsObject)
+      return !Object.values(errorsObject).some(error => error)
     }
-
-    setFormErrors(errors)
-    return !Object.values(errors).some(error => error)
+    console.log(formErrors)
   }
 
   const handlePrev = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -84,53 +83,13 @@ const EntityPage: FC = props => {
     }
   }
 
-  const handleFormChange = (e: ChangeEvent<HTMLInputElement>, shopIndex?: number, addressIndex?: number) => {
+  const handleFormChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
-    if (Array.isArray(formValues)) {
-      setFormValues(prev => {
-        const newFormValues = [...(prev as FormValues[])]
-        if (name === 'addresses') {
-          const currentShop = newFormValues[shopIndex!]
-          const currentShopAddresses = [...(currentShop?.addresses as unknown as string[])]
-          currentShopAddresses![addressIndex!] = value
-          newFormValues[shopIndex!] = { ...newFormValues[shopIndex!], [name]: currentShopAddresses }
-        } else {
-          newFormValues[shopIndex!] = { ...newFormValues[shopIndex!], [name]: value }
-        }
-        return newFormValues
-      })
-    } else {
-      setFormValues(prev => ({ ...prev, [name]: value }))
-    }
+    setFormValues(prev => ({ ...prev, [name]: value }))
   }
 
-  const handleError = (
-    {
-      name,
-      errorMessage
-    }: {
-      name: string
-      errorMessage: string
-    },
-    shopIndex?: number,
-    addressIndex?: number
-  ) => {
-    if (Array.isArray(formValues)) {
-      setFormErrors(prev => {
-        const newFormValues = [...(prev as FormValues[])]
-        if (name === 'addresses') {
-          const currentShop = newFormValues[shopIndex!]
-          const currentShopAddresses = [...(currentShop?.addresses as unknown as string[])]
-          currentShopAddresses![addressIndex!] = errorMessage
-          newFormValues[shopIndex!] = { ...newFormValues[shopIndex!], [name]: currentShopAddresses }
-        } else {
-          newFormValues[shopIndex!] = { ...newFormValues[shopIndex!], [name]: errorMessage }
-        }
-        return newFormValues
-      })
-    } else {
-      setFormErrors(prev => ({ ...prev, [name]: errorMessage }))
-    }
+  const handleError = ({ name, errorMessage }: { name: string; errorMessage: string }) => {
+    setFormErrors(prev => ({ ...prev, [name]: errorMessage }))
   }
 
   const handleNext = (e: FormEvent<HTMLFormElement>) => {
@@ -158,7 +117,16 @@ const EntityPage: FC = props => {
       }
     }
   }
+  //! Пока не трогать
+  const addShop = () => {
+    // setFormValues(prev => [...(prev as FormValues[]), content.initialFormValues])
+    // setFormErrors(prev => [...(prev as FormErrors[]), content.initialFormErrors])
+  }
 
+  useEffect(() => {
+    setFormValues(content.initialFormValues)
+    setFormErrors(content.initialFormErrors)
+  }, [activeStep, content.initialFormValues, content.initialFormErrors])
   return (
     <Layout>
       <Layout.Content>
@@ -171,7 +139,7 @@ const EntityPage: FC = props => {
             isFirstStep={setIsFirstStep}
           />
           <StepHeader title={content.title} description={content.description} />
-          <div>
+          <Form onSubmit={handleNext} method="put">
             {activeStep !== 1 ? (
               <Container className={'flex-col mb-6 min-w-[630px]'}>
                 <StepForm
@@ -187,15 +155,7 @@ const EntityPage: FC = props => {
                   Array.isArray(formErrors) &&
                   formValues.map((shopValues, shopIndex) => (
                     <Container key={shopIndex} className={'flex-col mb-6 min-w-[630px]'}>
-                      <StepForm
-                        shopFormValues={shopValues}
-                        setFormValues={setFormValues}
-                        shopFormErrors={formErrors[shopIndex]}
-                        setFormErrors={setFormErrors}
-                        handleFormChange={handleFormChange}
-                        handleError={handleError}
-                        shopIndex={shopIndex}
-                      />
+                      <StepForm shopFormValues={shopValues} shopFormErrors={formErrors[shopIndex]} />
                     </Container>
                   ))}
                 <Button
@@ -229,14 +189,12 @@ const EntityPage: FC = props => {
                 </button>
               )}
               {!isLastStep ? (
-                <BrandButton onClick={handleNext}>Далее</BrandButton>
+                <BrandButton type="submit">Далее</BrandButton>
               ) : (
-                <Link to="/main">
-                  <BrandButton>Завершить создание аккаунта</BrandButton>
-                </Link>
+                <BrandButton type="submit">Завершить создание аккаунта</BrandButton>
               )}
             </div>
-          </div>
+          </Form>
         </div>
       </Layout.Content>
     </Layout>

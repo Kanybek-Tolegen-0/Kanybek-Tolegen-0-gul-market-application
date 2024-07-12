@@ -1,52 +1,42 @@
-import React, { ChangeEvent, FunctionComponent, useState } from 'react'
+import React, { ChangeEvent, FunctionComponent, useEffect, useState } from 'react'
 import { Input, Textarea, Typography } from '@material-tailwind/react'
 import { PlusIcon, StringInput } from '@design-system/ui'
 import { Shop } from '../../../../types'
+import * as test from 'node:test'
 
 interface MainProps {
   mainValues: Shop
   mainErrors: Shop
-  shopHandleFormChange: (e: ChangeEvent<HTMLInputElement>, addressIndex?: number) => void
-  shopHandleFormError: (
-    {
-      name,
-      errorMessage
-    }: {
-      name: string
-      errorMessage: string
-    },
-    addressIndex?: number
-  ) => void
-  setFormValues: React.Dispatch<React.SetStateAction<Shop[]>>
-  setFormErrors: React.Dispatch<React.SetStateAction<Shop[]>>
-  shopIndex?: number
 }
 
-const Main: FunctionComponent<MainProps> = ({
-  mainValues,
-  mainErrors,
-  shopHandleFormError,
-  shopHandleFormChange,
-  setFormValues,
-  setFormErrors,
-  shopIndex
-}) => {
-  //! addMainComponent Не работает, просим проявить терпение
+const Main: FunctionComponent<MainProps> = ({ mainValues, mainErrors }) => {
+  const [val, sVal] = useState(mainValues)
+  const [err, sErr] = useState(mainErrors)
+  const testHandleChange = (e: ChangeEvent<HTMLInputElement>, addressIndex?: number) => {
+    const { name, value } = e.target
+    if (name === 'addresses') {
+      const currentAddresses = val.addresses
+      currentAddresses[addressIndex!] = value
+      sVal(prev => ({ ...prev, [name]: currentAddresses }))
+    } else {
+      sVal(prev => ({ ...prev, [name]: value }))
+    }
+  }
+  const testHandleError = ({ name, errorMessage }: { name: string; errorMessage: string }, addressIndex?: number) => {
+    if (name === 'addresses') {
+      const currentAddresses = err.addresses
+      currentAddresses[addressIndex!] = errorMessage
+      sErr(prev => ({ ...prev, [name]: currentAddresses }))
+    } else {
+      sErr(prev => ({ ...prev, [name]: errorMessage }))
+    }
+  }
+
   const addMainComponent = () => {
-    // setFormValues(prev => [...prev, (prev[shopIndex!] = mainValues)])
-    // setFormErrors(prev => [...prev, (prev[shopIndex!] = mainErrors)])
+    sVal(prev => ({ ...prev, addresses: [...prev.addresses, ''] }))
+    sErr(prev => ({ ...prev, addresses: [...prev.addresses, ''] }))
   }
-  const addressesHandleFormChange = (e: ChangeEvent<HTMLInputElement>, addressIndex: number) => {
-    shopHandleFormChange(e, addressIndex)
-  }
-  const addressesHandleFormError = (
-    { name, errorMessage }: { name: string; errorMessage: string },
-    addressIndex?: number
-  ) => {
-    console.log('on main address', addressIndex)
-    shopHandleFormError({ name, errorMessage }, addressIndex)
-  }
-  console.log('Addresses', mainValues.addresses)
+
   return (
     <>
       <div>
@@ -57,10 +47,10 @@ const Main: FunctionComponent<MainProps> = ({
             className: 'before:content-none after:content-none'
           }}
           name="name"
-          value={mainValues.name}
-          handleFormChange={shopHandleFormChange}
-          error={mainErrors.name!}
-          handleError={addressesHandleFormError}
+          value={val.name}
+          handleFormChange={testHandleChange}
+          error={err.name}
+          handleError={testHandleError}
         />
       </div>
       <div>
@@ -74,7 +64,7 @@ const Main: FunctionComponent<MainProps> = ({
           resize
         />
       </div>
-      {mainValues.addresses.map((eachAddress, addressIndex) => (
+      {val.addresses.map((eachAddress, addressIndex) => (
         <div key={addressIndex}>
           <Typography children="Адрес филиала" className="font-medium text-sm text-gray-700 mr-auto mb-1" />
           <StringInput
@@ -84,9 +74,9 @@ const Main: FunctionComponent<MainProps> = ({
             }}
             name="addresses"
             value={eachAddress}
-            handleFormChange={e => addressesHandleFormChange(e, addressIndex)}
-            error={mainErrors.addresses[addressIndex]!}
-            handleError={addressesHandleFormError}
+            handleFormChange={e => testHandleChange(e, addressIndex)}
+            error={err.addresses[addressIndex]!}
+            handleError={testHandleError}
             addressIndex={addressIndex}
           />
         </div>

@@ -40,6 +40,4 @@ export const shopSchema = z.object({
   work_schedule: workScheduleSchema
 })
 
-export const shopsSchema = z.object({
-  shops: z.array(shopSchema)
-})
+export const shopsSchema = z.array(shopSchema)

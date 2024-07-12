@@ -33,9 +33,6 @@ export const StringInput: FC<StringInputProps> = ({
         value={value}
         onBlur={e => {
           const { value } = e.target
-          console.log(value)
-          console.log(name)
-          console.log('on input address', addressIndex)
           try {
             stringSchema.parse(value)
             handleError({ name, errorMessage: '' }, addressIndex)

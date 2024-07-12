@@ -72,9 +72,75 @@ const steps_content: IContent[] = [
             }
           }
         }
+      },
+      {
+        name: '',
+        description: '',
+        addresses: ['', ''],
+        work_schedule: {
+          days: {
+            Mon: {
+              start: '',
+              end: ''
+            },
+            Tue: {
+              start: '',
+              end: ''
+            },
+            Wed: {
+              start: '',
+              end: ''
+            },
+            Thu: {
+              start: '',
+              end: ''
+            },
+            Fri: {
+              start: '',
+              end: ''
+            },
+            Sat: {
+              start: '',
+              end: ''
+            }
+          }
+        }
       }
     ],
     initialFormErrors: [
+      {
+        name: '',
+        description: '',
+        addresses: ['', ''],
+        work_schedule: {
+          days: {
+            Mon: {
+              start: '',
+              end: ''
+            },
+            Tue: {
+              start: '',
+              end: ''
+            },
+            Wed: {
+              start: '',
+              end: ''
+            },
+            Thu: {
+              start: '',
+              end: ''
+            },
+            Fri: {
+              start: '',
+              end: ''
+            },
+            Sat: {
+              start: '',
+              end: ''
+            }
+          }
+        }
+      },
       {
         name: '',
         description: '',
