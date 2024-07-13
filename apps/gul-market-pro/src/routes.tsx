@@ -6,7 +6,7 @@ import {
   flowersPage,
   BasketPage,
   ProfilePage,
-  MyOrdersPage,
+  myOrdersPage,
   loginPage,
   authorizationPage,
   chooseRolePage,
@@ -83,7 +83,8 @@ export const routes = createBrowserRouter([
       },
       {
         path: '/my-orders',
-        element: <MyOrdersPage />
+        element: <myOrdersPage.Component />,
+        action: myOrdersPage.action
       }
     ]
   }
