@@ -8,7 +8,7 @@ interface OrderCardProps {
   subTitle: string
   imageUrl: string
   logo: string
-  price: string
+  total_price: string
   priceDollar: string
   priceTenge: string
   flag: React.ReactNode
@@ -21,7 +21,7 @@ export const OrderCard: FC<OrderCardProps> = ({
   subTitle,
   imageUrl,
   logo,
-  price,
+  total_price,
   priceDollar,
   priceTenge,
   flag,
@@ -71,7 +71,7 @@ export const OrderCard: FC<OrderCardProps> = ({
           <div className="flex flex-col justify-between items-start min-w-max">
             <div className="self-end">{flag}</div>
             <div className="flex flex-col self-end">
-              <Typography className="text-3xl leading-10 font-medium text-gray-900">{price}</Typography>
+              <Typography className="text-3xl leading-10 font-medium text-gray-900">{total_price}</Typography>
               <Typography className="text-base leading-7 font-normal text-gray-600">
                 {priceDollar} / {priceTenge}
               </Typography>

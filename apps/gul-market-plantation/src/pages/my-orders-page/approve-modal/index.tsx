@@ -1,6 +1,6 @@
 import { CrossBigIcon, SuccessIcon } from '@design-system/ui'
 import { Button, Card, Typography } from '@material-tailwind/react'
-import React, { FC } from 'react'
+import React, { Dispatch, FC, SetStateAction } from 'react'
 
 interface ApproveModalProps {
   imageUrl: string

@@ -33,38 +33,43 @@ export const formatOrderData = (
     }[]
   }
 ) =>
-  data.map(({ name, flower, box_type, address, price, price_dollar, price_tenge, imageUrl, logo, status }) => {
-    const handler = handlers && handlers[status]
-
-    return {
-      title: `${flower}  ${box_type}`,
-      subTitle: address,
+  data.map(
+    ({
+      order_id,
+      name,
+      species,
+      box_size,
+      delivery_address,
+      total_price,
+      price_dollar,
+      price_tenge,
       imageUrl,
       logo,
-      name,
-      flag: FLAG_LABELS[status] ? (
-        <Flag
-          label={FLAG_LABELS[status]?.label}
-          color={FLAG_LABELS[status]?.color}
-          bgColor={FLAG_LABELS[status]?.bgColor}
-        />
-      ) : null,
-      price,
-      priceDollar: price_dollar,
-      priceTenge: price_tenge,
-      actions: handler
-        ? renderActions<IOrders>(handler, {
-            name,
-            flower,
-            box_type,
-            address,
-            price,
-            price_dollar,
-            price_tenge,
-            imageUrl,
-            logo,
-            status
-          })
-        : null
+      status
+    }) => {
+      const handler = handlers && handlers[status]
+
+      return {
+        title: `${species}  ${box_size}`,
+        subTitle: delivery_address,
+        imageUrl,
+        logo,
+        name,
+        flag: FLAG_LABELS[status] ? (
+          <Flag
+            label={FLAG_LABELS[status]?.label}
+            color={FLAG_LABELS[status]?.color}
+            bgColor={FLAG_LABELS[status]?.bgColor}
+          />
+        ) : null,
+        total_price,
+        priceDollar: price_dollar,
+        priceTenge: price_tenge,
+        actions: handler
+          ? renderActions<Pick<IOrders, 'order_id'>>(handler, {
+              order_id
+            })
+          : null
+      }
     }
-  })
+  )

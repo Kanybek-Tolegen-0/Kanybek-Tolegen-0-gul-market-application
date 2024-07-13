@@ -16,8 +16,12 @@ export const action = async ({ request }: { request: Request }) => {
     } = response.data
     localStorage.setItem('idToken', idToken)
     localStorage.setItem('refreshToken', refreshToken)
-    return redirect('/register-plantation')
+    return redirect('/my-orders')
   } catch (e) {
     console.error(e)
+    //! Убрать позже
+    return redirect('/my-orders')
+
+    // return e
   }
 }

@@ -1,17 +1,18 @@
 export enum ORDER_STATUS {
-  PENDING_RESPONSE = 'PENDING_RESPONSE',
-  PLANTATION_DECLINED = 'PLANTATION_DECLINED',
-  PLANTATION_APPROVED = 'PLANTATION_APPROVED',
+  PENDING = 'pending',
+  PLANTATION_DECLINED = 'plantation_declined',
+  APPROVED = 'approved',
   KARGO_DECLINED = 'KARGO_DECLINED',
   COMPLETED = 'COMPLETED'
 }
 
 export interface IOrders {
+  order_id: number
   name: string
-  flower: string
-  box_type: string
-  address: string
-  price: string
+  species: string
+  box_size: string
+  delivery_address: string
+  total_price: string
   price_dollar: string
   price_tenge: string
   imageUrl: string

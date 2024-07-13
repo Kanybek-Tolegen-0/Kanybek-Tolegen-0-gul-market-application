@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { Dispatch, FC, SetStateAction } from 'react'
 import { CrossBigIcon } from '@design-system/ui'
 import { Button, Card, Textarea, Typography } from '@material-tailwind/react'
 
