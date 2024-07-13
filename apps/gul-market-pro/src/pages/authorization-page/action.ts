@@ -19,5 +19,6 @@ export const action = async ({ request }: { request: Request }) => {
     return redirect('/choose-role')
   } catch (e) {
     console.error(e)
+    return e
   }
 }
