@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Layout, OrderCard, orderFlowerImage, OrderTabs, ScreenTemplate, useTabs } from '@design-system/ui'
 import { boxes, orders, steps, tabs } from './constants'
 import { IOrders, ORDER_STATUS } from './types'
@@ -6,10 +6,12 @@ import { formatOrderData } from './helpers'
 import { Dialog } from '@material-tailwind/react'
 import { RatingModal } from './rating-modal'
 import { DeliveryModal } from './delivery-modal'
+import { useSubmit } from 'react-router-dom'
 
 const activeStep = 2
 
-export const MyOrdersPage = () => {
+const MyOrdersPage = () => {
+  const submit = useSubmit()
   const { activeTab, onTabChange } = useTabs<ORDER_STATUS>({ tabs })
 
   const [deliveryModalOpen, setDeliveryModalOpen] = useState(false)
@@ -50,6 +52,10 @@ export const MyOrdersPage = () => {
       }
     ]
   }
+
+  useEffect(() => {
+    submit({}, { method: 'post', encType: 'application/json' })
+  }, [])
 
   return (
     <>
@@ -100,3 +106,5 @@ export const MyOrdersPage = () => {
     </>
   )
 }
+
+export default MyOrdersPage

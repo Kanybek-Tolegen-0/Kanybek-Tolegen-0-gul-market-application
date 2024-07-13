@@ -18,4 +18,4 @@ export { BasketPage } from './basket-page'
 
 export { ProfilePage } from './profile-page'
 
-export { MyOrdersPage } from './my-orders-page'
+export { myOrdersPage } from './my-orders-page'
