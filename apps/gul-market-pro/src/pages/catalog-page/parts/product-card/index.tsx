@@ -1,23 +1,23 @@
 import React, { FC } from 'react'
 import { Product } from '../../constants'
 import { Typography } from '@material-tailwind/react'
-import { HeartIcon } from '@design-system/ui'
+import { fakeShopImage, HeartIcon } from '@design-system/ui'
 
 interface ProductCardProps {
-  product: Product
+  eachProduct: Product
   onClick?: () => void
 }
 
-const ProductCard: FC<ProductCardProps> = ({ product, onClick }) => {
+const ProductCard: FC<ProductCardProps> = ({ eachProduct, onClick }) => {
   const [chosenProduct, setChosenProduct] = React.useState({})
 
-  const { name, images, favorite, priceD, priceT } = product
+  const { product, images, price, tenge_price } = eachProduct
 
   const formatNumber = (num: number): string => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
   }
 
-  const formattedName = formatNumber(priceT)
+  const formattedName = formatNumber(tenge_price)
 
   return (
     <div
@@ -25,17 +25,17 @@ const ProductCard: FC<ProductCardProps> = ({ product, onClick }) => {
       onClick={() => onClick && onClick()}
     >
       <div className="relative mb-[15px]">
-        <img src={images[0]} alt="product" width="100%" height={263} className="rounded-tr-base rounded-tl-base" />
+        <img src={fakeShopImage} alt="product" width="100%" height={263} className="rounded-tr-base rounded-tl-base" />
         <div className="absolute rounded-lg p-1 bg-primary top-3 right-3">
           <HeartIcon />
         </div>
       </div>
       <div className="px-3">
-        <Typography children={name} className="font-normal text-base text-gray-900 mb-4" />
+        <Typography children={product} className="font-normal text-base text-gray-900 mb-4" />
         <div className="flex justify-between items-center">
           <Typography children={formattedName + ' ₸'} className="font-normal text-sm text-gray-800" />
           <div className="py-[1px] px-[8px] rounded-lg bg-gray-100">
-            <Typography children={'$ ' + priceD} className="font-medium text-xl text-gray-900" />
+            <Typography children={'$ ' + price} className="font-medium text-xl text-gray-900" />
           </div>
         </div>
       </div>

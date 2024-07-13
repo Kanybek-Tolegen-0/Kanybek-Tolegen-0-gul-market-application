@@ -7,10 +7,11 @@ import { ErrorText } from '../error-text'
 interface StringInputProps extends Omit<InputProps, 'name' | 'onBlur' | 'error'> {
   name: string
   label?: string
-  handleError: ({ name, errorMessage }: { name: string; errorMessage: string }) => void
+  handleError: ({ name, errorMessage }: { name: string; errorMessage: string }, addressIndex?: number) => void
   handleFormChange: (e: ChangeEvent<HTMLInputElement>, addressIndex?: number) => void
   error: string
   className: string
+  addressIndex?: number
 }
 
 export const StringInput: FC<StringInputProps> = ({
@@ -21,7 +22,8 @@ export const StringInput: FC<StringInputProps> = ({
   className,
   labelProps,
   handleFormChange,
-  value
+  value,
+  addressIndex
 }) => {
   return (
     <div className="flex flex-col gap-[2px]">
@@ -31,15 +33,13 @@ export const StringInput: FC<StringInputProps> = ({
         value={value}
         onBlur={e => {
           const { value } = e.target
-          console.log(value)
-          console.log(name)
           try {
             stringSchema.parse(value)
-            handleError({ name, errorMessage: '' })
+            handleError({ name, errorMessage: '' }, addressIndex)
           } catch (err) {
             if (err instanceof ZodError) {
               const errorMessage = err.errors[0]?.message
-              errorMessage && handleError({ name: name, errorMessage })
+              errorMessage && handleError({ name: name, errorMessage }, addressIndex)
             }
           }
         }}

@@ -34,7 +34,7 @@ import ProductCard from '../catalog-page/parts/product-card'
 import data, { Product } from '../catalog-page/constants'
 import Modal from '@design-system/ui/ui/components/modal'
 import ProductModal from '../../components/product-modal'
-import { useActionData, useSubmit } from 'react-router-dom'
+import { createSearchParams, useActionData, useSearchParams, useSubmit } from 'react-router-dom'
 
 function transform(input: { [key: string]: string[] }) {
   interface Option {
@@ -79,25 +79,13 @@ interface Products {
     flower_species?: {
       [key: string]: string[]
     }
-    delivery: {
-      id: number
-      farm_box: string
-      box_size: string
-      mixed: boolean
-      species: string
-      product: string
-      color: string
-      length: string
-      price: number
-      boxes: number
-      packing: number
-      plantation_id: number
-    }[]
+    delivery: Product[]
   }
 }
 
 const FlowersPage: FC = () => {
   const actionData = useActionData() as Products
+  const [searchParams, setSearchParams] = useSearchParams()
 
   const submit = useSubmit()
   const [filterValues, setFilterValues] = useState<{ [key: string]: number | string[] }>({
@@ -109,22 +97,37 @@ const FlowersPage: FC = () => {
   const [open, setOpen] = useState(false)
 
   const handleOpen = (product?: Product): void => {
-    if (product) setChosenProduct(product)
+    if (product) {
+      setChosenProduct(product)
+      const newSearchParams: Record<string, string> = {}
+      searchParams.forEach((value, key) => {
+        newSearchParams[key] = value
+      })
+      newSearchParams['chosen_product_id'] = product?.id.toString()
+      setSearchParams(createSearchParams(newSearchParams))
+    } else {
+      searchParams.delete('chosen_product_id')
+      setSearchParams(searchParams)
+    }
     setOpen(!open)
   }
 
   const handleNext = (): void => {
     if (!chosenProduct) return
-    const currentIndex = data.products.findIndex(product => product.id === chosenProduct.id)
-    const nextIndex = (currentIndex + 1) % data.products.length
-    setChosenProduct(data.products[nextIndex])
+    if (actionData.filtered_products) {
+      const currentIndex = actionData.filtered_products.delivery.findIndex(product => product.id === chosenProduct.id)
+      const nextIndex = (currentIndex + 1) % actionData.filtered_products.delivery.length
+      setChosenProduct(actionData.filtered_products.delivery[nextIndex])
+    }
   }
 
   const handlePrev = (): void => {
     if (!chosenProduct) return
-    const currentIndex = data.products.findIndex(product => product.id === chosenProduct.id)
-    const prevIndex = (currentIndex - 1 + data.products.length) % data.products.length
-    setChosenProduct(data.products[prevIndex])
+    if (actionData.filtered_products) {
+      const currentIndex = actionData.filtered_products.delivery.findIndex(product => product.id === chosenProduct.id)
+      const prevIndex = (currentIndex - 1 + actionData.filtered_products.delivery.length) % data.products.length
+      setChosenProduct(actionData.filtered_products.delivery[prevIndex])
+    }
   }
 
   const [activeTab, setActiveTab] = useState(TABS[0]?.value)
@@ -223,11 +226,37 @@ const FlowersPage: FC = () => {
   }
 
   useEffect(() => {
-    submit(filterValues, { method: 'post', encType: 'application/json' })
-  }, [filterValues])
+    submit({ type: 'filter', submitData: filterValues }, { method: 'post', encType: 'application/json' })
+  }, [filterValues, searchParams])
 
   console.log({ filterValues })
 
+  const makeOrder = (
+    plantation_id: any,
+    delivery_id: any,
+    delivery_address: any,
+    quantity: any,
+    price_for_one: any,
+    tenge_price_for_one: any,
+    total_price: any,
+    total_tenge_price: any
+  ): any => {
+    const data = {
+      orders: [
+        {
+          plantation_id: plantation_id,
+          delivery_id: delivery_id,
+          delivery_address: delivery_address,
+          quantity: quantity,
+          price_for_one: price_for_one,
+          tenge_price_for_one: tenge_price_for_one,
+          total_price: total_price,
+          total_tenge_price: total_tenge_price
+        }
+      ]
+    }
+    submit({ type: 'order', submitData: data }, { method: 'post', encType: 'application/json' })
+  }
   return (
     <Layout fullHeader isLogged>
       <Layout.Content className="bg-white">
@@ -359,14 +388,20 @@ const FlowersPage: FC = () => {
                       data: actionData?.filtered_products?.delivery || [],
                       headers: TABLE_HEADERS
                     })}
+                    normalItems={actionData?.filtered_products?.delivery}
+                    itemOnClick={handleOpen}
                   />
                 ) : (
                   <div
                     className="gap-x-4 gap-y-4 w-full"
                     style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)' }}
                   >
-                    {data.products.map(product => (
-                      <ProductCard key={product.name} product={product} onClick={() => handleOpen(product)} />
+                    {actionData?.filtered_products?.delivery.map(eachProduct => (
+                      <ProductCard
+                        key={eachProduct.product}
+                        eachProduct={eachProduct}
+                        onClick={() => handleOpen(eachProduct)}
+                      />
                     ))}
                   </div>
                 )
@@ -388,7 +423,7 @@ const FlowersPage: FC = () => {
                 handleNext={handleNext}
                 handlePrev={handlePrev}
               >
-                {chosenProduct && <ProductModal product={chosenProduct} />}
+                {chosenProduct && <ProductModal makeOrder={makeOrder} />}
               </Modal>
             </TabsBody>
           </Tabs>

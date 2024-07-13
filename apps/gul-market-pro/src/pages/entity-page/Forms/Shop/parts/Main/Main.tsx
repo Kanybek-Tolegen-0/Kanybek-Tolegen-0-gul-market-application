@@ -1,24 +1,40 @@
-import React, { ChangeEvent, FunctionComponent, useState } from 'react'
+import React, { ChangeEvent, FunctionComponent, useEffect, useState } from 'react'
 import { Input, Textarea, Typography } from '@material-tailwind/react'
 import { PlusIcon, StringInput } from '@design-system/ui'
 import { Shop } from '../../../../types'
+import * as test from 'node:test'
 
 interface MainProps {
   mainValues: Shop
   mainErrors: Shop
-  shopHandleFormChange: (e: ChangeEvent<HTMLInputElement>, addressIndex?: number) => void
-  handleError: ({ name, errorMessage }: { name: string; errorMessage: string }) => void
 }
 
-const Main: FunctionComponent<MainProps> = ({ mainValues, mainErrors, handleError, shopHandleFormChange }) => {
-  const [mainAddresses, setMainAddresses] = useState<string[]>(mainValues.addresses || ['', ''])
-  const [mainAddressErrors, setMainAddressErrors] = useState<string[]>(mainErrors.addresses || ['', ''])
-  const addMainComponent = () => {
-    setMainAddresses(prevAddresses => [...prevAddresses, ''])
-    setMainAddressErrors(prevAddresses => [...prevAddresses, ''])
+const Main: FunctionComponent<MainProps> = ({ mainValues, mainErrors }) => {
+  const [val, sVal] = useState(mainValues)
+  const [err, sErr] = useState(mainErrors)
+  const testHandleChange = (e: ChangeEvent<HTMLInputElement>, addressIndex?: number) => {
+    const { name, value } = e.target
+    if (name === 'addresses') {
+      const currentAddresses = val.addresses
+      currentAddresses[addressIndex!] = value
+      sVal(prev => ({ ...prev, [name]: currentAddresses }))
+    } else {
+      sVal(prev => ({ ...prev, [name]: value }))
+    }
   }
-  const addressesHandleFormChange = (e: ChangeEvent<HTMLInputElement>, addressIndex: number) => {
-    shopHandleFormChange(e, addressIndex)
+  const testHandleError = ({ name, errorMessage }: { name: string; errorMessage: string }, addressIndex?: number) => {
+    if (name === 'addresses') {
+      const currentAddresses = err.addresses
+      currentAddresses[addressIndex!] = errorMessage
+      sErr(prev => ({ ...prev, [name]: currentAddresses }))
+    } else {
+      sErr(prev => ({ ...prev, [name]: errorMessage }))
+    }
+  }
+
+  const addMainComponent = () => {
+    sVal(prev => ({ ...prev, addresses: [...prev.addresses, ''] }))
+    sErr(prev => ({ ...prev, addresses: [...prev.addresses, ''] }))
   }
 
   return (
@@ -31,10 +47,10 @@ const Main: FunctionComponent<MainProps> = ({ mainValues, mainErrors, handleErro
             className: 'before:content-none after:content-none'
           }}
           name="name"
-          value={mainValues.name}
-          handleFormChange={shopHandleFormChange}
-          error={mainErrors.name!}
-          handleError={handleError}
+          value={val.name}
+          handleFormChange={testHandleChange}
+          error={err.name}
+          handleError={testHandleError}
         />
       </div>
       <div>
@@ -48,7 +64,7 @@ const Main: FunctionComponent<MainProps> = ({ mainValues, mainErrors, handleErro
           resize
         />
       </div>
-      {mainAddresses.map((eachAddress, addressIndex) => (
+      {val.addresses.map((eachAddress, addressIndex) => (
         <div key={addressIndex}>
           <Typography children="Адрес филиала" className="font-medium text-sm text-gray-700 mr-auto mb-1" />
           <StringInput
@@ -58,9 +74,10 @@ const Main: FunctionComponent<MainProps> = ({ mainValues, mainErrors, handleErro
             }}
             name="addresses"
             value={eachAddress}
-            handleFormChange={e => addressesHandleFormChange(e, addressIndex)}
-            error={mainAddressErrors[addressIndex]!}
-            handleError={handleError}
+            handleFormChange={e => testHandleChange(e, addressIndex)}
+            error={err.addresses[addressIndex]!}
+            handleError={testHandleError}
+            addressIndex={addressIndex}
           />
         </div>
       ))}

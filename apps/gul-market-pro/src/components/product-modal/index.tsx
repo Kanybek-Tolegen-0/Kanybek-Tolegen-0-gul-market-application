@@ -1,55 +1,88 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import {
-  HeartIcon,
   BrandButton,
-  StarIcon,
-  fakePlantation,
   ChevronRightIcon,
+  fakePlantation,
+  fakeShopImage,
+  HeartIcon,
   MinusIcon,
+  OptionProps,
   PlusIcon,
-  OptionProps
+  StarIcon
 } from '@design-system/ui'
 import { Typography } from '@material-tailwind/react'
-import { Product } from '../../pages/catalog-page/constants'
+import { ProductCard } from '../../pages/catalog-page/constants'
 import NestedSelect from '@design-system/ui/ui/components/nested-select'
+import { api } from '../../api'
+import { useSearchParams, useSubmit } from 'react-router-dom'
 
 interface ProductModalProps {
-  product: Product
+  // product: Product
+  makeOrder: (
+    plantation_id: any,
+    delivery_id: any,
+    delivery_address: any,
+    quantity: any,
+    price_for_one: any,
+    tenge_price_for_one: any,
+    total_price: any,
+    total_tenge_price: any
+  ) => void
 }
 
-const ProductModal: FC<ProductModalProps> = ({ product }) => {
-  const { images, name, priceD, priceT, variety, color, collected, growth, box, packing, left } = product
+const ProductModal: FC<ProductModalProps> = ({ makeOrder }) => {
+  const [card, setCard] = useState<ProductCard>()
   const [count, setCount] = useState<number>(0)
   const [stock, setStock] = useState<string>('')
   const [chosenImageIndex, setChosenImageIndex] = useState<number>(0)
+  const [searchParams, setSearchParams] = useSearchParams()
+  const submit = useSubmit()
+  const product_id = searchParams.get('chosen_product_id')
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await api.get(`/api/show-pro-user-card/${product_id}`)
+        setCard(response.data.card)
+      } catch (e) {
+        console.log(e)
+      }
+    }
+
+    fetchData()
+  }, [product_id])
+
+  if (!card) {
+    return <div>Loading...</div>
+  }
+
+  const { flowers_left, tenge_price, addresses, delivery } = card!
+  const { box_size, species, product, color, length, price, packing, collected, id, plantation_id } = delivery
+
   const handleSelectChange = (value: string) => {
     setStock(value)
   }
-  const totalPrice = priceT * count
-  // const totalLeft = left - count
 
-  const options: OptionProps[] = [
-    {
-      label: 'Алматы',
-      value: 'Алматы',
-      options: [
-        { label: 'Абая 20', value: 'Абая 20' },
-        { label: 'Сатпаева 140', value: 'Сатпаева 140' },
-        { label: 'Сейфуллина 550', value: 'Сейфуллина 550' },
-        { label: 'Райымбека 100', value: 'Райымбека 100' }
-      ]
-    },
-    {
-      label: 'Астана',
-      value: 'Астана',
-      options: [
-        { label: 'Адрес 1', value: 'Адрес 1' },
-        { label: 'Адрес 2', value: 'Адрес 2' },
-        { label: 'Адрес 3', value: 'Адрес 3' },
-        { label: 'Адрес 4', value: 'Адрес 4' }
-      ]
+  const createOption = (val: string, subOptions?: string[]): OptionProps => {
+    const newOptions: OptionProps[] = []
+    subOptions?.map(option => {
+      newOptions.push(createOption(option))
+    })
+    return {
+      label: val,
+      value: val,
+      options: newOptions
     }
-  ]
+  }
+
+  const options: OptionProps[] = []
+
+  addresses?.map(({ city, street, house }) => {
+    const newOption = createOption(city, [street + ' ' + house])
+    options.push(newOption)
+  })
+  const totalPrice_tenge = tenge_price * count
+  const totalPrice = price * count
 
   const AdditionalOption = (
     <div className="text-center flex flex-col gap-3 items-center">
@@ -64,17 +97,19 @@ const ProductModal: FC<ProductModalProps> = ({ product }) => {
       <BrandButton className="">Добавить адрес</BrandButton>
     </div>
   )
+
+  const imagesDemo = [fakeShopImage, fakeShopImage, fakeShopImage, fakeShopImage, fakeShopImage]
   return (
     <div className="flex flex-col p-5 gap-5">
       <div className="flex gap-5">
         <div className="flex flex-col gap-5 ">
           <img
-            src={images[chosenImageIndex]}
+            src={imagesDemo[chosenImageIndex]}
             alt="chosen image"
             className="w-[406px] h-[478px] rounded-base object-cover"
           />
           <div className="flex gap-3">
-            {images.map((image, i) => (
+            {imagesDemo.map((image, i) => (
               <img
                 src={image}
                 alt={`product image ${i + 1}`}
@@ -88,19 +123,19 @@ const ProductModal: FC<ProductModalProps> = ({ product }) => {
         <div className="flex flex-col gap-8 w-[334px]">
           <div className="flex flex-col gap-5 ">
             <div className="flex justify-between">
-              <Typography children={name} className="font-normal text-xl text-gray-800" />
+              <Typography children={product} className="font-normal text-xl text-gray-800" />
               <HeartIcon />
             </div>
             <div className="flex items-end gap-2">
-              <Typography children={'$ ' + priceD} className="font-medium text-4xl text-gray-900" />
+              <Typography children={'$ ' + price} className="font-medium text-4xl text-gray-900" />
               <Typography children="/" className="font-medium text-2xl text-tip_bold" />
-              <Typography children={priceT + ' ₸'} className="font-medium text-2xl text-tip_bold" />
+              <Typography children={tenge_price + ' ₸'} className="font-medium text-2xl text-tip_bold" />
             </div>
             <div className="flex flex-col gap-2">
               <div className="flex gap-6">
                 <div className="flex gap-2 items-center">
                   <Typography children="Сорт" className="font-normal !text-little text-gray-500" />
-                  <Typography children={variety} className="font-normal !text-little text-gray-900" />
+                  <Typography children={species} className="font-normal !text-little text-gray-900" />
                 </div>
                 <div className="flex gap-2 items-center">
                   <Typography children="Цвет" className="font-normal !text-little text-gray-500" />
@@ -110,15 +145,15 @@ const ProductModal: FC<ProductModalProps> = ({ product }) => {
               <div className="flex gap-6">
                 <div className="flex gap-2 items-center">
                   <Typography children="Собрано" className="font-normal !text-little text-gray-500" />
-                  <Typography children={collected} className="font-normal !text-little text-gray-900" />
+                  <Typography children={collected || 'not given'} className="font-normal !text-little text-gray-900" />
                 </div>
                 <div className="flex gap-2 items-center">
                   <Typography children="Рост" className="font-normal !text-little text-gray-500" />
-                  <Typography children={growth} className="font-normal !text-little text-gray-900" />
+                  <Typography children={length} className="font-normal !text-little text-gray-900" />
                 </div>
                 <div className="flex gap-2 items-center">
                   <Typography children="Коробка" className="font-normal !text-little text-gray-500" />
-                  <Typography children={box} className="font-normal !text-little text-gray-900" />
+                  <Typography children={box_size} className="font-normal !text-little text-gray-900" />
                 </div>
               </div>
               <div className="flex gap-2 items-center">
@@ -136,16 +171,19 @@ const ProductModal: FC<ProductModalProps> = ({ product }) => {
                   className="cursor-pointer"
                 />
                 <Typography children={count} className="font-medium text-sm text-gray-700 select-none" />
-                <PlusIcon onClick={() => setCount(left - count === 0 ? count : count + 1)} className="cursor-pointer" />
+                <PlusIcon
+                  onClick={() => setCount(flowers_left - count === 0 ? count : count + 1)}
+                  className="cursor-pointer"
+                />
               </div>
               <div className="flex flex-col gap-0.5 ">
-                <Typography children={left - count} className="font-medium text-sm text-gray-900 select-none" />
+                <Typography children={flowers_left - count} className="font-medium text-sm text-gray-900 select-none" />
                 <Typography children="осталось в наличии" className="font-normal text-xs text-gray-500 select-none" />
               </div>
             </div>
             <Typography
-              children={totalPrice + ' ₸'}
-              className={`font-medium text-4xl ${totalPrice > 0 ? 'text-gray-900' : 'text-gray-500'}`}
+              children={totalPrice_tenge + ' ₸'}
+              className={`font-medium text-4xl ${totalPrice_tenge > 0 ? 'text-gray-900' : 'text-gray-500'}`}
             />
             <div className="flex flex-col gap-3">
               <NestedSelect options={options} onChange={handleSelectChange} className="w-full max-w-md">
@@ -153,9 +191,12 @@ const ProductModal: FC<ProductModalProps> = ({ product }) => {
               </NestedSelect>
 
               <BrandButton
-                children={count === 0 || stock === '' ? 'Добавьте нужное кол-во коробок' : 'Заказать'}
+                children={count === 0 ? 'Добавьте нужное кол-во коробок' : stock === '' ? 'Выберите адрес' : 'Заказать'}
                 className={`h-[50px] font-medium text-base ${count === 0 || stock === '' ? 'opacity-50' : ''}`}
                 disabled={count === 0 || stock === ''}
+                onClick={() =>
+                  makeOrder(plantation_id, id, stock, count, price, tenge_price, totalPrice, totalPrice_tenge)
+                }
               />
               {stock && (
                 <>
