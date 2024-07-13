@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-
 interface ITable {
   headers: {
     label: string
@@ -8,9 +7,10 @@ interface ITable {
   }[]
   items: Array<Array<string | number | undefined | boolean>>
   itemOnClick?: (data: any) => void
+  normalItems: any
 }
 
-export const Table: FC<ITable> = ({ headers, items, itemOnClick }) => {
+export const Table: FC<ITable> = ({ headers, items, itemOnClick, normalItems }) => {
   return (
     <table className="border-separate w-full">
       <thead>
@@ -24,7 +24,7 @@ export const Table: FC<ITable> = ({ headers, items, itemOnClick }) => {
       </thead>
       <tbody>
         {items.map((it, m) => (
-          <tr key={m} onClick={() => itemOnClick && itemOnClick(it)} className={'cursor-pointer'}>
+          <tr key={m} onClick={() => itemOnClick && itemOnClick(normalItems[m])} className={'cursor-pointer'}>
             {headers.map((header, n) => {
               const cellValue = it[n]
               const renderCell = header?.renderCell
