@@ -19,3 +19,5 @@ export interface IOrders {
   logo: string
   status: ORDER_STATUS
 }
+
+export type OrderStatus = (typeof ORDER_STATUS)[keyof typeof ORDER_STATUS]
