@@ -2,9 +2,9 @@ export { chooseRolePage } from './choose-role-page'
 
 export { authorizationPage } from './authorization-page'
 
-export { IndividualPage } from './individual-page'
+export { individualPage } from './individual-page'
 
-export { EntityPage } from './entity-page'
+export { entityPage } from './entity-page'
 
 export { loginPage } from './login-page'
 

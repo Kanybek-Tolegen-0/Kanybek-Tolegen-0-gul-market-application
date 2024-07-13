@@ -11,6 +11,41 @@ const ResidentialAddress: FC<{
   handleFormChange: (e: ChangeEvent<HTMLInputElement>) => void
   handleError: ({ name, errorMessage }: { name: string; errorMessage: string }) => void
 }> = ({ formValues, formErrors, handleError, handleFormChange }) => {
+  const [suggestions, setSuggestions] = useState<string[]>([])
+  const [selectedAddress, setSelectedAddress] = useState<string>('')
+  async function fetchSuggestions(query: string) {
+    try {
+      const response = await fetch(
+        `https://catalog.api.2gis.com/3.0/suggests?q=${query}&key=785a6d32-f76c-4256-b9a3-334bf5c074fb`
+      )
+      const data = await response.json()
+      if (data.result && data.result.items.length > 0) {
+        setSuggestions(data.result.items.map((item: any) => item.full_name))
+      } else {
+        setSuggestions([])
+      }
+    } catch (error) {
+      console.error('Ошибка при получении подсказок:', error)
+      setSuggestions([])
+    }
+  }
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    handleFormChange(e)
+    setSelectedAddress('')
+    fetchSuggestions(e.target.value)
+  }
+
+  const handleAddressSelect = (address: string) => {
+    handleFormChange({ target: { name: 'city', value: address } } as ChangeEvent<HTMLInputElement>)
+    setSuggestions([])
+    setSelectedAddress(address)
+  }
+
+  const setAddress = (address: string) => {
+    handleFormChange({ target: { name: 'city', value: address } } as ChangeEvent<HTMLInputElement>)
+  }
+
   return (
     <>
       <div>
@@ -23,14 +58,22 @@ const ResidentialAddress: FC<{
           }}
           name="city"
           value={formValues.city}
-          onChange={handleFormChange}
+          handleFormChange={handleInputChange}
           error={formErrors.city!}
           handleError={handleError}
-          handleFormChange={handleFormChange}
         />
+        {suggestions.length > 0 && (
+          <ul className="suggestions">
+            {suggestions.map((suggestion, index) => (
+              <li className={'cursor-pointer'} key={index} onClick={() => handleAddressSelect(suggestion)}>
+                {suggestion}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
       <div className="w-[566px] h-[242px] rounded-base overflow-hidden">
-        <Map />
+        <Map setAddress={setAddress} inputValue={selectedAddress} />
       </div>
     </>
   )

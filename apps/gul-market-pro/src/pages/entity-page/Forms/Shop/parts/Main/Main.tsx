@@ -1,26 +1,56 @@
-import React, { FunctionComponent, useState } from 'react'
+import React, { ChangeEvent, FunctionComponent, useEffect, useState } from 'react'
 import { Input, Textarea, Typography } from '@material-tailwind/react'
-import { PlusIcon } from '@design-system/ui'
+import { PlusIcon, StringInput } from '@design-system/ui'
+import { Shop } from '../../../../types'
+import * as test from 'node:test'
 
-interface MainProps {}
+interface MainProps {
+  mainValues: Shop
+  mainErrors: Shop
+}
 
-const Main: FunctionComponent<MainProps> = props => {
-  const [filials, setFilials] = useState<number[]>([0])
+const Main: FunctionComponent<MainProps> = ({ mainValues, mainErrors }) => {
+  const [val, sVal] = useState(mainValues)
+  const [err, sErr] = useState(mainErrors)
+  const testHandleChange = (e: ChangeEvent<HTMLInputElement>, addressIndex?: number) => {
+    const { name, value } = e.target
+    if (name === 'addresses') {
+      const currentAddresses = val.addresses
+      currentAddresses[addressIndex!] = value
+      sVal(prev => ({ ...prev, [name]: currentAddresses }))
+    } else {
+      sVal(prev => ({ ...prev, [name]: value }))
+    }
+  }
+  const testHandleError = ({ name, errorMessage }: { name: string; errorMessage: string }, addressIndex?: number) => {
+    if (name === 'addresses') {
+      const currentAddresses = err.addresses
+      currentAddresses[addressIndex!] = errorMessage
+      sErr(prev => ({ ...prev, [name]: currentAddresses }))
+    } else {
+      sErr(prev => ({ ...prev, [name]: errorMessage }))
+    }
+  }
 
   const addMainComponent = () => {
-    setFilials(prevFilials => [...prevFilials, prevFilials.length])
+    sVal(prev => ({ ...prev, addresses: [...prev.addresses, ''] }))
+    sErr(prev => ({ ...prev, addresses: [...prev.addresses, ''] }))
   }
 
   return (
     <>
       <div>
         <Typography children="Название магазина" className="font-medium text-sm text-gray-700 mr-auto mb-1" />
-        <Input
+        <StringInput
           className="!border-gray-300 focus:!border-[1px] rounded-md py-[9px] px-[13px] text-tip_bold"
           labelProps={{
             className: 'before:content-none after:content-none'
           }}
-          crossOrigin=""
+          name="name"
+          value={val.name}
+          handleFormChange={testHandleChange}
+          error={err.name}
+          handleError={testHandleError}
         />
       </div>
       <div>
@@ -34,15 +64,20 @@ const Main: FunctionComponent<MainProps> = props => {
           resize
         />
       </div>
-      {filials.map((_, index) => (
-        <div key={index}>
+      {val.addresses.map((eachAddress, addressIndex) => (
+        <div key={addressIndex}>
           <Typography children="Адрес филиала" className="font-medium text-sm text-gray-700 mr-auto mb-1" />
-          <Input
+          <StringInput
             className="!border-gray-300 focus:!border-[1px] rounded-md py-[9px] px-[13px] text-tip_bold"
             labelProps={{
               className: 'before:content-none after:content-none'
             }}
-            crossOrigin=""
+            name="addresses"
+            value={eachAddress}
+            handleFormChange={e => testHandleChange(e, addressIndex)}
+            error={err.addresses[addressIndex]!}
+            handleError={testHandleError}
+            addressIndex={addressIndex}
           />
         </div>
       ))}

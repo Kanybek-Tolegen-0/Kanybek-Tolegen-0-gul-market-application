@@ -6,7 +6,9 @@ import ShopCreated from './Forms/ShopCreated/ShopCreated'
 export interface IContent {
   title: string
   description: string
-  stepForm: FC
+  stepForm: FC<any>
+  initialFormValues: {} | []
+  initialFormErrors: {} | []
 }
 
 export interface IStep {
@@ -28,18 +30,158 @@ const steps_content: IContent[] = [
   {
     title: 'Адрес магазина',
     description: 'Введите адрес вашего основного магазина, если у вас их несколько',
-    stepForm: ShopAddress
+    stepForm: ShopAddress,
+    initialFormValues: { city: '' },
+    initialFormErrors: { city: '' }
   },
   {
     title: 'Информация о магазине',
     description:
       'Предоставьте информацию о магазине, чтобы покупателям и поставщикам было понятно с кем они коммуницируют и у кого покупают товар',
-    stepForm: Shop
+    stepForm: Shop,
+    initialFormValues: [
+      {
+        name: '',
+        description: '',
+        addresses: ['', ''],
+        work_schedule: {
+          days: {
+            Mon: {
+              start: '',
+              end: ''
+            },
+            Tue: {
+              start: '',
+              end: ''
+            },
+            Wed: {
+              start: '',
+              end: ''
+            },
+            Thu: {
+              start: '',
+              end: ''
+            },
+            Fri: {
+              start: '',
+              end: ''
+            },
+            Sat: {
+              start: '',
+              end: ''
+            }
+          }
+        }
+      },
+      {
+        name: '',
+        description: '',
+        addresses: ['', ''],
+        work_schedule: {
+          days: {
+            Mon: {
+              start: '',
+              end: ''
+            },
+            Tue: {
+              start: '',
+              end: ''
+            },
+            Wed: {
+              start: '',
+              end: ''
+            },
+            Thu: {
+              start: '',
+              end: ''
+            },
+            Fri: {
+              start: '',
+              end: ''
+            },
+            Sat: {
+              start: '',
+              end: ''
+            }
+          }
+        }
+      }
+    ],
+    initialFormErrors: [
+      {
+        name: '',
+        description: '',
+        addresses: ['', ''],
+        work_schedule: {
+          days: {
+            Mon: {
+              start: '',
+              end: ''
+            },
+            Tue: {
+              start: '',
+              end: ''
+            },
+            Wed: {
+              start: '',
+              end: ''
+            },
+            Thu: {
+              start: '',
+              end: ''
+            },
+            Fri: {
+              start: '',
+              end: ''
+            },
+            Sat: {
+              start: '',
+              end: ''
+            }
+          }
+        }
+      },
+      {
+        name: '',
+        description: '',
+        addresses: ['', ''],
+        work_schedule: {
+          days: {
+            Mon: {
+              start: '',
+              end: ''
+            },
+            Tue: {
+              start: '',
+              end: ''
+            },
+            Wed: {
+              start: '',
+              end: ''
+            },
+            Thu: {
+              start: '',
+              end: ''
+            },
+            Fri: {
+              start: '',
+              end: ''
+            },
+            Sat: {
+              start: '',
+              end: ''
+            }
+          }
+        }
+      }
+    ]
   },
   {
     title: 'Поздравляем',
     description: 'Вы создали аккаунт',
-    stepForm: ShopCreated
+    stepForm: ShopCreated,
+    initialFormValues: {},
+    initialFormErrors: {}
   }
 ]
 
