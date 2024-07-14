@@ -11,7 +11,6 @@ interface ITable {
 }
 
 export const Table: FC<ITable> = ({ headers, items, itemOnClick, normalItems }) => {
-  console.log(items)
   return (
     <table className="border-separate w-full">
       <thead>

@@ -126,7 +126,6 @@ const EntityPage: FC = props => {
     setFormErrors(content.initialFormErrors)
   }, [activeStep])
   if (Array.isArray(formValues) && Array.isArray(formErrors)) {
-    console.log('formValues-----', formValues[0])
     console.log('formErrors-----', formErrors[0])
   }
 

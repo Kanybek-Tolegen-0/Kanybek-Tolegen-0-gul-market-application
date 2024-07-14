@@ -16,12 +16,13 @@ import {
 import { MainPage } from './pages/main-page'
 import { CatalogPage } from './pages/catalog-page'
 import { FavoritePage } from './pages/favorite-page'
-import { Dashboard } from './pages/dashboard'
+import { dashboard } from './pages/dashboard'
 
 export const routes = createBrowserRouter([
   {
     path: '/',
-    element: <Dashboard />,
+    element: <dashboard.Component />,
+    loader: dashboard.loader,
     children: [
       {
         index: true,

@@ -21,6 +21,7 @@ interface HeaderProps {
   isLogged?: boolean
   renderCountryOptions?: () => JSX.Element
   handleLogin: () => void
+  loaderData: any
 }
 
 export const Header: FC<HeaderProps & NavProps> = ({
@@ -28,8 +29,10 @@ export const Header: FC<HeaderProps & NavProps> = ({
   tabs,
   fullHeader,
   renderCountryOptions,
-  handleLogin
+  handleLogin,
+  loaderData
 }) => {
+  const { wallet } = loaderData
   const [openMenu, setOpenMenu] = React.useState(false)
 
   const handleMenu = () => {
@@ -71,7 +74,7 @@ export const Header: FC<HeaderProps & NavProps> = ({
                   <div className={'rounded-xl p-3 flex flex-col gap-3 text-gray-50 mb-1'}>
                     <div className={'flex flex-col gap-1 '}>
                       <Typography children={'На вашем счету'} className="font-normal text-xs text-gray-500" />
-                      <Typography children={'99 329 440 ₸'} className=" font-bold text-2xl text-gray-900" />
+                      <Typography children={wallet} className=" font-bold text-2xl text-gray-900" />
                     </div>
                     <BrandButton className={'font-medium text-sm h-[38px] flex items-center'}>
                       Пополнить счет
@@ -90,7 +93,13 @@ export const Header: FC<HeaderProps & NavProps> = ({
                     </MenuItem>
                   </Link>
                   <Link to={'/login'}>
-                    <MenuItem className="flex gap-2 items-center px-0 ">
+                    <MenuItem
+                      className="flex gap-2 items-center px-0 "
+                      onClick={() => {
+                        localStorage.removeItem('idToken')
+                        localStorage.removeItem('refreshToken')
+                      }}
+                    >
                       <ExitIcon />
                       <Typography children={'Выйти'} className={'font-normal text-sm text-gray-900'} />
                     </MenuItem>

@@ -9,7 +9,6 @@ import './style.css'
 
 const ChooseRolePage: FC = props => {
   const data = useLoaderData()
-  console.log(data)
   return (
     <Layout>
       <Layout.Content>

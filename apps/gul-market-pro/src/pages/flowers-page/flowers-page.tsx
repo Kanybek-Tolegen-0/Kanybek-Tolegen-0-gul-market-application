@@ -95,7 +95,7 @@ const FlowersPage: FC = () => {
 
   const [chosenProduct, setChosenProduct] = useState<Product>()
   const [open, setOpen] = useState(false)
-
+  const [openDecisionModal, setOpenDesicionModal] = useState(false)
   const handleOpen = (product?: Product): void => {
     if (product) {
       setChosenProduct(product)
@@ -229,9 +229,7 @@ const FlowersPage: FC = () => {
     submit({ type: 'filter', submitData: filterValues }, { method: 'post', encType: 'application/json' })
   }, [filterValues, searchParams])
 
-  console.log({ filterValues })
-
-  const makeOrder = (
+  const Pay = (
     plantation_id: any,
     delivery_id: any,
     delivery_address: any,
@@ -257,6 +255,12 @@ const FlowersPage: FC = () => {
     }
     submit({ type: 'order', submitData: data }, { method: 'post', encType: 'application/json' })
   }
+
+  const makeOrder = (enough: boolean) => {
+    if (enough) {
+    }
+  }
+
   return (
     <Layout fullHeader isLogged>
       <Layout.Content className="bg-white">
