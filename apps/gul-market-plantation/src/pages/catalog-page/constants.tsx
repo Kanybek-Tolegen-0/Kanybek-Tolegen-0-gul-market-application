@@ -194,7 +194,7 @@ export const TABLE_HEADERS: THeader = [
     renderCell: isLiked => {
       return (
         <div className="flex justify-center cursor-pointer">
-          <HeartIcon color={Boolean(isLiked) ? '#EB4F4F' : 'none'} />
+          <HeartIcon fill={Boolean(isLiked) ? '#EC4899' : '#D1D5DB'} />
         </div>
       )
     }

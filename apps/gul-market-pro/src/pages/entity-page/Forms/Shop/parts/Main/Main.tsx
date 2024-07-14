@@ -10,31 +10,31 @@ interface MainProps {
 }
 
 const Main: FunctionComponent<MainProps> = ({ mainValues, mainErrors }) => {
-  const [val, sVal] = useState(mainValues)
-  const [err, sErr] = useState(mainErrors)
+  const [val, setVal] = useState(mainValues)
+  const [err, setErr] = useState(mainErrors)
   const testHandleChange = (e: ChangeEvent<HTMLInputElement>, addressIndex?: number) => {
     const { name, value } = e.target
     if (name === 'addresses') {
       const currentAddresses = val.addresses
       currentAddresses[addressIndex!] = value
-      sVal(prev => ({ ...prev, [name]: currentAddresses }))
+      setVal(prev => ({ ...prev, [name]: currentAddresses }))
     } else {
-      sVal(prev => ({ ...prev, [name]: value }))
+      setVal(prev => ({ ...prev, [name]: value }))
     }
   }
   const testHandleError = ({ name, errorMessage }: { name: string; errorMessage: string }, addressIndex?: number) => {
     if (name === 'addresses') {
       const currentAddresses = err.addresses
       currentAddresses[addressIndex!] = errorMessage
-      sErr(prev => ({ ...prev, [name]: currentAddresses }))
+      setErr(prev => ({ ...prev, [name]: currentAddresses }))
     } else {
-      sErr(prev => ({ ...prev, [name]: errorMessage }))
+      setErr(prev => ({ ...prev, [name]: errorMessage }))
     }
   }
 
   const addMainComponent = () => {
-    sVal(prev => ({ ...prev, addresses: [...prev.addresses, ''] }))
-    sErr(prev => ({ ...prev, addresses: [...prev.addresses, ''] }))
+    setVal(prev => ({ ...prev, addresses: [...prev.addresses, ''] }))
+    setErr(prev => ({ ...prev, addresses: [...prev.addresses, ''] }))
   }
 
   return (

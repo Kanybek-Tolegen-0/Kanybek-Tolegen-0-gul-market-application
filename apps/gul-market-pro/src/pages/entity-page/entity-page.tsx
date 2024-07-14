@@ -73,7 +73,6 @@ const EntityPage: FC = props => {
       setFormErrors(errorsObject)
       return !Object.values(errorsObject).some(error => error)
     }
-    console.log(formErrors)
   }
 
   const handlePrev = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -117,16 +116,20 @@ const EntityPage: FC = props => {
       }
     }
   }
-  //! Пока не трогать
   const addShop = () => {
-    // setFormValues(prev => [...(prev as FormValues[]), content.initialFormValues])
-    // setFormErrors(prev => [...(prev as FormErrors[]), content.initialFormErrors])
+    setFormValues(prev => [...(prev as FormValues[]), ...[content.initialFormValues[0]]])
+    setFormErrors(prev => [...(prev as FormErrors[]), ...[content.initialFormErrors[0]]])
   }
 
   useEffect(() => {
     setFormValues(content.initialFormValues)
     setFormErrors(content.initialFormErrors)
-  }, [activeStep, content.initialFormValues, content.initialFormErrors])
+  }, [activeStep])
+  if (Array.isArray(formValues) && Array.isArray(formErrors)) {
+    console.log('formValues-----', formValues[0])
+    console.log('formErrors-----', formErrors[0])
+  }
+
   return (
     <Layout>
       <Layout.Content>

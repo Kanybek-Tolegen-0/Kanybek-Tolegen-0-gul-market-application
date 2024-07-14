@@ -19,5 +19,6 @@ export const action = async ({ request }: { request: Request }) => {
     return redirect('/main')
   } catch (e) {
     console.error(e)
+    return null
   }
 }

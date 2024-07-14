@@ -9,13 +9,12 @@ export const action = async ({ request }: { request: Request }) => {
   try {
     switch (activeStep) {
       case 0:
-        // const response1: AxiosResponse = await api.put('/api/update-pro-user-city', formValues, {
-        //   headers: {
-        //     Authorization: `Bearer ${localStorage.getItem('idToken')}`
-        //   }
-        // })
-        // return response1.data
-        return null
+        const response1: AxiosResponse = await api.put('/api/update-pro-user-city', formValues, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('idToken')}`
+          }
+        })
+        return response1.data
       case 1:
         const response2: AxiosResponse = await api.put('/api/add-shop', formValues, {
           headers: {
