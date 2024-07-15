@@ -32,7 +32,6 @@ export const Header: FC<HeaderProps & NavProps> = ({
   handleLogin,
   loaderData
 }) => {
-  const { wallet } = loaderData
   const [openMenu, setOpenMenu] = React.useState(false)
 
   const handleMenu = () => {
@@ -74,7 +73,10 @@ export const Header: FC<HeaderProps & NavProps> = ({
                   <div className={'rounded-xl p-3 flex flex-col gap-3 text-gray-50 mb-1'}>
                     <div className={'flex flex-col gap-1 '}>
                       <Typography children={'На вашем счету'} className="font-normal text-xs text-gray-500" />
-                      <Typography children={wallet} className=" font-bold text-2xl text-gray-900" />
+                      <Typography
+                        children={loaderData?.wallet + ' ₸' || 'Неизвестно'}
+                        className=" font-bold text-2xl text-gray-900"
+                      />
                     </div>
                     <BrandButton className={'font-medium text-sm h-[38px] flex items-center'}>
                       Пополнить счет

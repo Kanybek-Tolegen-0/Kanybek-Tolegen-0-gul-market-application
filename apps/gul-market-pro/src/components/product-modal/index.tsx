@@ -20,18 +20,25 @@ import { ILoaderData } from '../../pages/dashboard/dashboard'
 interface ProductModalProps {
   // product: Product
   makeOrder: (
-    plantation_id: any,
-    delivery_id: any,
-    delivery_address: any,
-    quantity: any,
-    price_for_one: any,
-    tenge_price_for_one: any,
-    total_price: any,
-    total_tenge_price: any
+    enough: boolean,
+    lookingProduct: {
+      product: string
+      color: string
+      quantity: number
+      box_size: string
+      totalPrice_tenge: number
+      address: string
+      plantation_id: any
+      delivery_id: any
+      price_for_one: any
+      tenge_price_for_one: any
+      total_price: any
+    }
   ) => void
+  wallet: number
 }
 
-const ProductModal: FC<ProductModalProps> = ({ makeOrder }) => {
+const ProductModal: FC<ProductModalProps> = ({ makeOrder, wallet }) => {
   const [card, setCard] = useState<ProductCard>()
   const [count, setCount] = useState<number>(0)
   const [stock, setStock] = useState<string>('')
@@ -39,7 +46,6 @@ const ProductModal: FC<ProductModalProps> = ({ makeOrder }) => {
   const [searchParams, setSearchParams] = useSearchParams()
   const submit = useSubmit()
   const product_id = searchParams.get('chosen_product_id')
-  const { wallet } = useOutletContext() as ILoaderData
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -96,14 +102,9 @@ const ProductModal: FC<ProductModalProps> = ({ makeOrder }) => {
     </div>
   )
 
-  const checkWallet = () => {
-    if (wallet) {
-    } else {
-    }
-  }
   const imagesDemo = [fakeShopImage, fakeShopImage, fakeShopImage, fakeShopImage, fakeShopImage]
   return (
-    <div className={`flex flex-col p-5 gap-5 ${!card && 'animate-pulse'} w-[800px] h-[770px]`}>
+    <div className={`flex flex-col p-5 gap-5 ${!card && 'animate-pulse'}`}>
       <div className="flex gap-5">
         <div className="flex flex-col gap-5 ">
           <img
@@ -207,7 +208,19 @@ const ProductModal: FC<ProductModalProps> = ({ makeOrder }) => {
                 className={`h-[50px] font-medium text-base ${count === 0 || stock === '' ? 'opacity-50' : ''}`}
                 disabled={count === 0 || stock === ''}
                 onClick={() =>
-                  makeOrder(plantation_id, id, stock, count, price, tenge_price, totalPrice, totalPrice_tenge)
+                  makeOrder(wallet > totalPrice_tenge, {
+                    product: product!,
+                    color: color!,
+                    quantity: count,
+                    box_size: box_size!,
+                    totalPrice_tenge: totalPrice_tenge,
+                    address: stock,
+                    delivery_id: id,
+                    plantation_id,
+                    price_for_one: price,
+                    tenge_price_for_one: tenge_price,
+                    total_price: totalPrice
+                  })
                 }
               />
               {stock && (

@@ -3,38 +3,54 @@ import { Input, Textarea, Typography } from '@material-tailwind/react'
 import { PlusIcon, StringInput } from '@design-system/ui'
 import { Shop } from '../../../../types'
 import * as test from 'node:test'
+import { FormErrors, FormValues } from '../../../../entity-page'
+import { stringSchema } from '@design-system/ui/ui/components/string-input/stringSchema'
+import { ZodError } from 'zod'
+import { ErrorText } from '@design-system/ui/ui/components/error-text'
 
 interface MainProps {
   mainValues: Shop
   mainErrors: Shop
+  shopIndex: number
+  handleHardValChange: (vals: FormValues, shopIndex: number) => void
+  handleHardErrorChange: (errs: FormErrors, shopIndex: number) => void
 }
 
-const Main: FunctionComponent<MainProps> = ({ mainValues, mainErrors }) => {
-  const [val, setVal] = useState(mainValues)
-  const [err, setErr] = useState(mainErrors)
+const Main: FunctionComponent<MainProps> = ({
+  mainValues,
+  mainErrors,
+  shopIndex,
+  handleHardValChange,
+  handleHardErrorChange
+}) => {
   const testHandleChange = (e: ChangeEvent<HTMLInputElement>, addressIndex?: number) => {
     const { name, value } = e.target
-    if (name === 'addresses') {
-      const currentAddresses = val.addresses
-      currentAddresses[addressIndex!] = value
-      setVal(prev => ({ ...prev, [name]: currentAddresses }))
+    if (name === 'addresses' && typeof addressIndex !== 'undefined') {
+      const currentAddresses = [...mainValues.addresses]
+      currentAddresses[addressIndex] = value
+      const newValues = { ...mainValues, addresses: currentAddresses }
+      handleHardValChange(newValues, shopIndex)
     } else {
-      setVal(prev => ({ ...prev, [name]: value }))
+      const newValues = { ...mainValues, [name]: value }
+      handleHardValChange(newValues, shopIndex)
     }
   }
+
   const testHandleError = ({ name, errorMessage }: { name: string; errorMessage: string }, addressIndex?: number) => {
-    if (name === 'addresses') {
-      const currentAddresses = err.addresses
+    if (name === 'addresses' && typeof addressIndex !== 'undefined') {
+      const currentAddresses = [...mainErrors.addresses]
       currentAddresses[addressIndex!] = errorMessage
-      setErr(prev => ({ ...prev, [name]: currentAddresses }))
+      const newErrors = { ...mainErrors, addresses: currentAddresses }
+      handleHardErrorChange(newErrors, shopIndex)
     } else {
-      setErr(prev => ({ ...prev, [name]: errorMessage }))
+      const newErrors = { ...mainErrors, [name]: errorMessage }
+      handleHardErrorChange(newErrors, shopIndex)
     }
   }
 
   const addMainComponent = () => {
-    setVal(prev => ({ ...prev, addresses: [...prev.addresses, ''] }))
-    setErr(prev => ({ ...prev, addresses: [...prev.addresses, ''] }))
+    const newValueAddresses = { ...mainValues, addresses: [...mainValues.addresses, ''] }
+    handleHardValChange(newValueAddresses, shopIndex)
   }
 
   return (
@@ -47,11 +63,35 @@ const Main: FunctionComponent<MainProps> = ({ mainValues, mainErrors }) => {
             className: 'before:content-none after:content-none'
           }}
           name="name"
-          value={val.name}
+          value={mainValues.name}
           handleFormChange={testHandleChange}
-          error={err.name}
+          error={mainErrors.name}
           handleError={testHandleError}
         />
+        {/*<Input*/}
+        {/*  name={'name'}*/}
+        {/*  value={mainValues.name}*/}
+        {/*  className={`w-full !border-gray-300 focus:!border-[1px] rounded-md py-[9px] px-[13px] text-tip_bold`}*/}
+        {/*  crossOrigin=""*/}
+        {/*  error={Boolean(mainErrors.name)}*/}
+        {/*  labelProps={{*/}
+        {/*    className: 'before:content-none after:content-none'*/}
+        {/*  }}*/}
+        {/*  onChange={testHandleChange}*/}
+        {/*  onBlur={e => {*/}
+        {/*    const { value } = e.target*/}
+        {/*    try {*/}
+        {/*      stringSchema.parse(value)*/}
+        {/*      testHandleError({ name: 'name', errorMessage: '' })*/}
+        {/*    } catch (err) {*/}
+        {/*      if (err instanceof ZodError) {*/}
+        {/*        const errorMessage = err.errors[0]?.message*/}
+        {/*        errorMessage && testHandleError({ name: 'name', errorMessage })*/}
+        {/*      }*/}
+        {/*    }*/}
+        {/*  }}*/}
+        {/*/>*/}
+        {/*{mainErrors.name ? <ErrorText text={mainErrors.name} /> : null}*/}
       </div>
       <div>
         <Typography children="Описание магазина" className="font-medium text-sm text-gray-700 mr-auto mb-1" />
@@ -62,9 +102,13 @@ const Main: FunctionComponent<MainProps> = ({ mainValues, mainErrors }) => {
           }}
           placeholder="Расскажите клиентам о вашем магазине"
           resize
+          name={'description'}
+          value={mainValues.description}
+          error={Boolean(mainErrors.description)}
+          onChange={testHandleChange}
         />
       </div>
-      {val.addresses.map((eachAddress, addressIndex) => (
+      {mainValues.addresses.map((eachAddress, addressIndex) => (
         <div key={addressIndex}>
           <Typography children="Адрес филиала" className="font-medium text-sm text-gray-700 mr-auto mb-1" />
           <StringInput
@@ -75,10 +119,34 @@ const Main: FunctionComponent<MainProps> = ({ mainValues, mainErrors }) => {
             name="addresses"
             value={eachAddress}
             handleFormChange={e => testHandleChange(e, addressIndex)}
-            error={err.addresses[addressIndex]!}
+            error={mainErrors.addresses[addressIndex]!}
             handleError={testHandleError}
             addressIndex={addressIndex}
           />
+          {/*<Input*/}
+          {/*  name={'addresses'}*/}
+          {/*  value={eachAddress}*/}
+          {/*  className={`w-full !border-gray-300 focus:!border-[1px] rounded-md py-[9px] px-[13px] text-tip_bold`}*/}
+          {/*  crossOrigin=""*/}
+          {/*  error={Boolean(mainErrors.addresses[addressIndex])}*/}
+          {/*  labelProps={{*/}
+          {/*    className: 'before:content-none after:content-none'*/}
+          {/*  }}*/}
+          {/*  onChange={e => testHandleChange(e, addressIndex)}*/}
+          {/*  onBlur={e => {*/}
+          {/*    const { value } = e.target*/}
+          {/*    try {*/}
+          {/*      stringSchema.parse(value)*/}
+          {/*      testHandleError({ name: 'addresses', errorMessage: '' }, addressIndex)*/}
+          {/*    } catch (err) {*/}
+          {/*      if (err instanceof ZodError) {*/}
+          {/*        const errorMessage = err.errors[0]?.message*/}
+          {/*        errorMessage && testHandleError({ name: 'addresses', errorMessage }, addressIndex)*/}
+          {/*      }*/}
+          {/*    }*/}
+          {/*  }}*/}
+          {/*/>*/}
+          {/*{mainErrors.addresses[addressIndex]! ? <ErrorText text={mainErrors.addresses[addressIndex]!} /> : null}*/}
         </div>
       ))}
       <button

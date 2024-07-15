@@ -13,9 +13,12 @@ import {
   plantationImage,
   ScreenTemplate,
   itemsAdapter,
-  FilterSelect
+  FilterSelect,
+  BrandButton,
+  useTimer,
+  formatTimer
 } from '@design-system/ui'
-import { Tab, Tabs, TabsBody, TabsHeader } from '@material-tailwind/react'
+import { Tab, Tabs, TabsBody, TabsHeader, Typography } from '@material-tailwind/react'
 
 import {
   BUTTON_TABS_OPTIONS,
@@ -34,7 +37,10 @@ import ProductCard from '../catalog-page/parts/product-card'
 import data, { Product } from '../catalog-page/constants'
 import Modal from '@design-system/ui/ui/components/modal'
 import ProductModal from '../../components/product-modal'
-import { createSearchParams, useActionData, useSearchParams, useSubmit } from 'react-router-dom'
+import { createSearchParams, useActionData, useOutletContext, useSearchParams, useSubmit } from 'react-router-dom'
+import MakeOrderModal from '../../components/make-order-modal'
+import { boolean, unknown } from 'zod'
+import { ILoaderData } from '../dashboard/dashboard'
 
 function transform(input: { [key: string]: string[] }) {
   interface Option {
@@ -86,7 +92,7 @@ interface Products {
 const FlowersPage: FC = () => {
   const actionData = useActionData() as Products
   const [searchParams, setSearchParams] = useSearchParams()
-
+  const { wallet } = useOutletContext() as ILoaderData
   const submit = useSubmit()
   const [filterValues, setFilterValues] = useState<{ [key: string]: number | string[] }>({
     size_start: 20,
@@ -96,6 +102,21 @@ const FlowersPage: FC = () => {
   const [chosenProduct, setChosenProduct] = useState<Product>()
   const [open, setOpen] = useState(false)
   const [openDecisionModal, setOpenDesicionModal] = useState(false)
+  const [enoughMoney, setEnoughMoney] = useState<boolean>()
+  const [lookingProduct, setLookingProduct] = useState<{
+    product: string
+    color: string
+    quantity: number
+    box_size: string
+    totalPrice_tenge: number
+    address: string
+    plantation_id: any
+    delivery_id: any
+    price_for_one: any
+    tenge_price_for_one: any
+    total_price: any
+  }>()
+
   const handleOpen = (product?: Product): void => {
     if (product) {
       setChosenProduct(product)
@@ -112,6 +133,11 @@ const FlowersPage: FC = () => {
     setOpen(!open)
   }
 
+  const handleDecisionModal = () => {
+    setLookingProduct(undefined)
+    setEnoughMoney(undefined)
+    setOpenDesicionModal(!openDecisionModal)
+  }
   const handleNext = (): void => {
     if (!chosenProduct) return
     if (actionData.filtered_products) {
@@ -227,7 +253,7 @@ const FlowersPage: FC = () => {
 
   useEffect(() => {
     submit({ type: 'filter', submitData: filterValues }, { method: 'post', encType: 'application/json' })
-  }, [filterValues, searchParams])
+  }, [filterValues, searchParams, lookingProduct])
 
   const Pay = (
     plantation_id: any,
@@ -256,11 +282,84 @@ const FlowersPage: FC = () => {
     submit({ type: 'order', submitData: data }, { method: 'post', encType: 'application/json' })
   }
 
-  const makeOrder = (enough: boolean) => {
-    if (enough) {
+  const makeOrder = (
+    enough: boolean,
+    lookingProduct: {
+      product: string
+      color: string
+      quantity: number
+      box_size: string
+      address: string
+      plantation_id: any
+      delivery_id: any
+      price_for_one: any
+      tenge_price_for_one: any
+      total_price: any
+      totalPrice_tenge: number
     }
+  ) => {
+    setEnoughMoney(enough)
+    setLookingProduct(lookingProduct)
+    setOpen(false)
+    setOpenDesicionModal(true)
   }
 
+  const NotEnough = (
+    <div className={'flex flex-col gap-5 items-center'}>
+      <div className={'flex flex-col items-center gap-4 justify-center'}>
+        <Typography children={'У вас не хватает денег на счету'} className={'font-semibold text-3xl text-gray-800'} />
+        <div className={'flex flex-col gap-2 items-center'}>
+          <div className={'h-[52px] w-[73px] rounded-lg py-1.5 px-2 bg-gray-100'}>
+            <Typography children={wallet + ' ₸'} className={'font-medium text-4xl text-gray-800'} />
+          </div>
+          <Typography children={'Сейчас на счету'} className={'font-normal text-base text-gray-800'} />
+        </div>
+      </div>
+
+      <BrandButton className={'w-[210px]'}>Пополнить счет</BrandButton>
+    </div>
+  )
+
+  const Enough = () => {
+    const { timeLeft } = useTimer({ seconds: 300, isDefaultStart: true })
+    const formattedTimeLeft = formatTimer(timeLeft)
+
+    return (
+      <div className={'flex flex-col items-center gap-5'}>
+        <div className={'flex flex-col items-center gap-2'}>
+          <Typography children={'Оплатите этот товар в течении'} className={'font-normal text-base text-gray-800'} />
+          <div className={'h-[52px]  bg-pink-50 rounded-lg py-1.5 px-2 items-center justify-center'}>
+            <Typography className={'font-medium text-4xl text-pink-600'}>
+              {formattedTimeLeft?.minutes}:{formattedTimeLeft?.seconds}
+            </Typography>
+          </div>
+        </div>
+        <div className={'flex w-[432px] gap-3'}>
+          <BrandButton
+            className={'w-[210px]'}
+            onClick={() => {
+              Pay(
+                lookingProduct?.plantation_id,
+                lookingProduct?.delivery_id,
+                lookingProduct?.address,
+                lookingProduct?.quantity,
+                lookingProduct?.price_for_one,
+                lookingProduct?.tenge_price_for_one,
+                lookingProduct?.total_price,
+                lookingProduct?.totalPrice_tenge
+              )
+              handleDecisionModal()
+            }}
+          >
+            Оплатить сразу
+          </BrandButton>
+          <BrandButton className={'bg-gray-100 text-gray-700 w-[210px]'} onClick={() => handleDecisionModal()}>
+            Продолжить покупки
+          </BrandButton>
+        </div>
+      </div>
+    )
+  }
   return (
     <Layout fullHeader isLogged>
       <Layout.Content className="bg-white">
@@ -427,7 +526,14 @@ const FlowersPage: FC = () => {
                 handleNext={handleNext}
                 handlePrev={handlePrev}
               >
-                {chosenProduct && <ProductModal makeOrder={makeOrder} />}
+                {chosenProduct && <ProductModal makeOrder={makeOrder} wallet={wallet} />}
+              </Modal>
+              <Modal open={openDecisionModal} handleOpen={handleDecisionModal}>
+                <MakeOrderModal
+                  lookingProduct={lookingProduct!}
+                  Pay={Pay}
+                  content={enoughMoney ? <Enough /> : NotEnough}
+                />
               </Modal>
             </TabsBody>
           </Tabs>

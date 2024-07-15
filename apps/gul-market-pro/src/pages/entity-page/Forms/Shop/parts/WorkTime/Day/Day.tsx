@@ -1,19 +1,35 @@
-import React, { FC, useState } from 'react'
+import React, { ChangeEvent, FC, useState } from 'react'
 import { Input, Typography } from '@material-tailwind/react'
 import { NonCheckedIcon, CheckIcon } from '@design-system/ui'
+
 interface DayProps {
   day: string
+  startTime: string
+  endTime: string
+  handleTimeChange: (day: string, time: { start: string; end: string }) => void
 }
-const Day: FC<DayProps> = ({ day }) => {
-  const [isOn, setIsOn] = useState(false)
+const Day: FC<DayProps> = ({ day, startTime, endTime, handleTimeChange }) => {
+  const days = {
+    Mon: 'Понедельник',
+    Tue: 'Вторник',
+    Wed: 'Среда',
+    Thu: 'Четверг',
+    Fri: 'Пятница',
+    Sat: 'Суббота'
+  }
+  const [isOn, setIsOn] = useState(day !== 'Sat')
 
   const toggleSwitch = () => {
     setIsOn(!isOn)
+    handleTimeChange(day, { start: '', end: '' })
   }
-
+  const handleChange = (e: ChangeEvent<HTMLInputElement>, field: 'start' | 'end') => {
+    const { value } = e.target
+    handleTimeChange(day, { ...{ start: startTime, end: endTime }, [field]: value })
+  }
   return (
     <div className={'flex flex-col gap-2.5'}>
-      <Typography children={day} className="font-normal text-base text-gray-500" />
+      <Typography children={days[day]} className="font-normal text-base text-gray-500" />
       <div className="flex gap-[69px] items-center h-[38px]">
         <div className="flex gap-3">
           <Typography children="Рабочий день" className="font-normal text-base text-black" />
@@ -46,6 +62,8 @@ const Day: FC<DayProps> = ({ day }) => {
               containerProps={{
                 className: '!min-w-[160px]'
               }}
+              value={startTime}
+              onChange={e => handleChange(e, 'start')}
             />
             <Input
               crossOrigin=""
@@ -59,6 +77,8 @@ const Day: FC<DayProps> = ({ day }) => {
               containerProps={{
                 className: '!min-w-[160px]'
               }}
+              value={endTime}
+              onChange={e => handleChange(e, 'end')}
             />
           </div>
         )}

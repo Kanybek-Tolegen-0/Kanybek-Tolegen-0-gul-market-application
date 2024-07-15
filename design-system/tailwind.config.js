@@ -42,7 +42,8 @@ module.exports = withMT({
       fontSize: {
         base: ['1rem', '1.25rem'],
         xsm: ['11px', '0.75rem'],
-        little: ['13px', '18px']
+        little: ['13px', '18px'],
+        xlittle: ['12px', '13px']
       },
 
       boxShadow: {

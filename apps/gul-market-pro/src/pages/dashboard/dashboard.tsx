@@ -1,5 +1,5 @@
 import { Header, NotificationIcon, SearchInput, Select } from '@design-system/ui'
-import React from 'react'
+import React, { useState } from 'react'
 import { Outlet, useLoaderData, useLocation, useNavigate } from 'react-router-dom'
 
 const TABS = [
@@ -22,7 +22,6 @@ export interface ILoaderData {
 }
 const Dashboard = () => {
   const loaderData: { wallet: number } = useLoaderData() as ILoaderData
-  const { wallet } = loaderData
   const navigate = useNavigate()
   const location = useLocation()
   const country = new URLSearchParams(location?.search).get('country')
@@ -51,7 +50,7 @@ const Dashboard = () => {
         isLogged
         loaderData={loaderData}
       />
-      <Outlet context={{ wallet } satisfies ContextType} />
+      <Outlet context={{ wallet: loaderData?.wallet } satisfies ContextType} />
     </div>
   )
 }

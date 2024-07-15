@@ -22,6 +22,17 @@ export const action = async ({ request }: { request: Request }) => {
           }
         })
         return response2.data
+      case 2:
+        const response3: AxiosResponse = await api.put(
+          '/api/update-pro-user-role',
+          { role: 'individual' },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('idToken')}`
+            }
+          }
+        )
+        return redirect('/main')
       default:
         return redirect('/main')
     }

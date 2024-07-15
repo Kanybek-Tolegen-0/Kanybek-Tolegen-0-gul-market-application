@@ -21,8 +21,7 @@ const workScheduleSchema = z.object({
     Wed: dayScheduleSchema,
     Thu: dayScheduleSchema,
     Fri: dayScheduleSchema,
-    Sat: dayScheduleSchema,
-    Sun: dayScheduleSchema
+    Sat: dayScheduleSchema
   })
 })
 

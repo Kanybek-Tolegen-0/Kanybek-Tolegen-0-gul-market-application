@@ -12,6 +12,7 @@ interface StringInputProps extends Omit<InputProps, 'name' | 'onBlur' | 'error'>
   error: string
   className: string
   addressIndex?: number
+  needChecking?: boolean
 }
 
 export const StringInput: FC<StringInputProps> = ({
@@ -23,7 +24,8 @@ export const StringInput: FC<StringInputProps> = ({
   labelProps,
   handleFormChange,
   value,
-  addressIndex
+  addressIndex,
+  needChecking = true
 }) => {
   return (
     <div className="flex flex-col gap-[2px]">
@@ -32,14 +34,16 @@ export const StringInput: FC<StringInputProps> = ({
         label={label && label}
         value={value}
         onBlur={e => {
-          const { value } = e.target
-          try {
-            stringSchema.parse(value)
-            handleError({ name, errorMessage: '' }, addressIndex)
-          } catch (err) {
-            if (err instanceof ZodError) {
-              const errorMessage = err.errors[0]?.message
-              errorMessage && handleError({ name: name, errorMessage }, addressIndex)
+          if (needChecking) {
+            const { value } = e.target
+            try {
+              stringSchema.parse(value)
+              handleError({ name, errorMessage: '' }, addressIndex)
+            } catch (err) {
+              if (err instanceof ZodError) {
+                const errorMessage = err.errors[0]?.message
+                errorMessage && handleError({ name: name, errorMessage }, addressIndex)
+              }
             }
           }
         }}
