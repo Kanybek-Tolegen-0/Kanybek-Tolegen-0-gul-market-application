@@ -36,6 +36,10 @@ export const CatalogPage: FC = () => {
   const [activeTab, setActiveTab] = useState(TABS[0]?.value)
 
   const [filters, setFilters] = useState<IFilter[]>([])
+  const [filterValues, setFilterValues] = useState<{ [key: string]: number | string[] }>({
+    size_start: 20,
+    size_end: 100
+  })
 
   const [active, setActive] = useState<string | null>(BUTTON_TABS_OPTIONS[0]?.value || null)
 
@@ -67,6 +71,21 @@ export const CatalogPage: FC = () => {
           )
         : [...prev, { label: `${metric} ${min}-${max}`, value: { min, max }, name: checkName }]
     })
+
+    setFilterValues(prev => {
+      const value = prev[checkName]
+      const obj = { ...prev }
+
+      if (value) {
+        delete obj[`${checkName}_start`]
+        delete obj[`${checkName}_end`]
+      } else {
+        obj[`${checkName}_start`] = min
+        obj[`${checkName}_end`] = max
+      }
+
+      return obj
+    })
   }
 
   const handleColorSelectChange = ({
@@ -84,6 +103,19 @@ export const CatalogPage: FC = () => {
       return isExist
         ? prev.map(pr => (pr.name === checkName ? { label, value, name: checkName } : pr))
         : [...prev, { label, value, name: checkName }]
+    })
+
+    setFilterValues(prev => {
+      const arr = { ...prev }
+
+      if (Array.isArray(arr[checkName])) {
+        const isExist = arr[checkName].some(val => val === value)
+        arr[checkName] = isExist ? arr[checkName].filter(val => val !== value) : [...arr[checkName], value as string]
+      } else {
+        arr[checkName] = [value as string]
+      }
+
+      return arr
     })
   }
 
@@ -156,13 +188,22 @@ export const CatalogPage: FC = () => {
                   />
                 </FilterPart>
                 <FilterPart label="Цвет" collapsable>
-                  <ColorSelect name="color" options={FILTER_PART_COLOR_OPTIONS} onChange={handleColorSelectChange} />
+                  <ColorSelect
+                    selectedColors={Array.isArray(filterValues?.color) ? filterValues?.color : []}
+                    name="color"
+                    options={FILTER_PART_COLOR_OPTIONS}
+                    onChange={handleColorSelectChange}
+                  />
                 </FilterPart>
               </div>
             </Filter>
             {activeTab === 'positions' ? (
               active === 'list' ? (
-                <Table headers={TABLE_HEADERS} items={itemsAdapter({ data: TABLE_DATA, headers: TABLE_HEADERS })} />
+                <Table
+                  headers={TABLE_HEADERS}
+                  items={itemsAdapter({ data: TABLE_DATA, headers: TABLE_HEADERS })}
+                  normalItems={TABLE_DATA}
+                />
               ) : (
                 <div
                   className="gap-x-4 gap-y-4 w-full"
