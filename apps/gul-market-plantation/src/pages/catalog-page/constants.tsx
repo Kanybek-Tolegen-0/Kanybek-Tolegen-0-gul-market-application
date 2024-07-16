@@ -73,23 +73,28 @@ export const FILTER_PART_FLOWER_BOX_TYPE_OPTIONS = [
 export const FILTER_PART_COLOR_OPTIONS = [
   {
     label: 'Белый',
-    value: '#FFFFFF'
+    value: 'White',
+    color: '#FFFFFF'
   },
   {
     label: 'Голубой',
-    value: '#7BE9E1'
+    value: 'Teal',
+    color: '#7BE9E1'
   },
   {
     label: 'Желтый',
-    value: '#F5EF58'
+    value: 'Yellow',
+    color: '#F5EF58'
   },
   {
     label: 'Оранжевый',
-    value: '#FDAC4D'
+    value: 'Orange',
+    color: '#FDAC4D'
   },
   {
     label: 'Красный',
-    value: '#EB4F4F'
+    value: 'Red',
+    color: '#EB4F4F'
   }
 ]
 
