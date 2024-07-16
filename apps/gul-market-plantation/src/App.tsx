@@ -4,7 +4,7 @@ import { routes } from './routes'
 
 export function App() {
   return (
-    <Suspense>
+    <Suspense fallback="loading...">
       <RouterProvider router={routes} />
     </Suspense>
   )
