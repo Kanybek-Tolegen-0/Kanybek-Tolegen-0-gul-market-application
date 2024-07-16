@@ -18,7 +18,7 @@ module.exports = env => ({
   entry: './src/index.tsx',
   output: {
     path: path.resolve(__dirname, 'dist', ...RELEASE_PATH.split('/')),
-    publicPath: '/plants'
+    publicPath: RELEASE_PATH
   },
   devServer: {
     port: 4250,
