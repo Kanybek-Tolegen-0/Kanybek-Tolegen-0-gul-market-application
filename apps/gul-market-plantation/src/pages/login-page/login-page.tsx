@@ -1,6 +1,6 @@
-import React, { ChangeEvent, useState, FunctionComponent, FormEvent } from 'react'
-import { BrandButton, Container, EmailInput, flowerImage, Input, Layout, PasswordInput } from '@design-system/ui'
+import { BrandButton, Container, EmailInput, flowerImage, Layout, PasswordInput } from '@design-system/ui'
 import { Button, Typography } from '@material-tailwind/react'
+import React, { ChangeEvent, FormEvent, FunctionComponent, useState } from 'react'
 import { Form, Link, useNavigate, useSubmit } from 'react-router-dom'
 
 const initialFormValues = {
@@ -17,13 +17,12 @@ const LoginPage: FunctionComponent = () => {
   const navigate = useNavigate()
   const [formValues, setFormValues] = useState(initialFormValues)
   const [formErrors, setFormErrors] = useState(initialFormErrors)
-
+  const submit = useSubmit()
   const handleFormChange = (e: ChangeEvent<HTMLFormElement>) => {
     const { name, value } = e.target
     setFormValues(prev => ({ ...prev, [name]: value }))
   }
 
-  const submit = useSubmit()
   const handleError = ({ name, errorMessage }: { name: string; errorMessage: string }) =>
     setFormErrors(prev => ({ ...prev, [name]: errorMessage }))
 
@@ -47,34 +46,29 @@ const LoginPage: FunctionComponent = () => {
           <div className="flex flex-col max-w-[488px] gap-y-4">
             <Typography className="text-3xl font-bold">Войти</Typography>
             <Container className="w-full min-w-[488px]">
-              <Form className="w-full" onSubmit={handleSubmit}>
-                <div className="flex flex-col gap-y-6">
-                  <Form
-                    id="login-form"
-                    className="flex flex-col gap-y-5"
-                    onChange={handleFormChange}
-                    onSubmit={handleSubmit}
-                  >
-                    <EmailInput name="email" handleError={handleError} error={formErrors.email} />
-                    <PasswordInput
-                      name="password"
-                      secondary={
-                        <Button
-                          className="normal-case px-2 py-0 text-sm leading-5 font-medium text-brand"
-                          variant="text"
-                        >
-                          <Link to="/remember-password">Забыли пароль?</Link>
-                        </Button>
-                      }
-                      handleError={handleError}
-                      error={formErrors.password}
-                    />
-                  </Form>
-                  <BrandButton form="login-form" type="submit" className="w-full">
-                    Войти
-                  </BrandButton>
-                </div>
-              </Form>
+              <div className="flex flex-col gap-y-6 w-full">
+                <Form
+                  id="login-form"
+                  className="flex flex-col gap-y-5"
+                  onChange={handleFormChange}
+                  onSubmit={handleSubmit}
+                >
+                  <EmailInput name="email" handleError={handleError} error={formErrors.email} />
+                  <PasswordInput
+                    name="password"
+                    secondary={
+                      <Button className="normal-case px-2 py-0 text-sm leading-5 font-medium text-brand" variant="text">
+                        <Link to="/remember-password">Забыли пароль?</Link>
+                      </Button>
+                    }
+                    handleError={handleError}
+                    error={formErrors.password}
+                  />
+                </Form>
+                <BrandButton type="submit" form="login-form" className="w-full">
+                  Войти
+                </BrandButton>
+              </div>
             </Container>
 
             <div className="flex justify-center gap-x-1 py-3">
@@ -84,7 +78,7 @@ const LoginPage: FunctionComponent = () => {
               </Button>
             </div>
           </div>
-          <img className="max-w-[548px]" src={flowerImage} />
+          <img className="max-w-[548px]" src={flowerImage} alt={'flower image'} />
         </div>
       </Layout.Content>
     </Layout>

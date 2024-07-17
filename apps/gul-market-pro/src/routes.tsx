@@ -5,13 +5,14 @@ import {
   NewPasswordPage,
   flowersPage,
   BasketPage,
-  ProfilePage,
   myOrdersPage,
   loginPage,
   authorizationPage,
   chooseRolePage,
   individualPage,
-  entityPage
+  entityPage,
+  profilePage,
+  favoritePage
 } from './pages'
 import { MainPage } from './pages/main-page'
 import { CatalogPage } from './pages/catalog-page'
@@ -76,11 +77,15 @@ export const routes = createBrowserRouter([
       },
       {
         path: '/profile',
-        element: <ProfilePage />
+        element: <profilePage.Component />,
+        loader: profilePage.loader,
+        action: profilePage.action
       },
       {
         path: '/favorite',
-        element: <FavoritePage />
+        element: <favoritePage.Component />,
+        loader: favoritePage.loader,
+        action: favoritePage.action
       },
       {
         path: '/my-orders',

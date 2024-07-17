@@ -21,7 +21,7 @@ interface LayoutComponent extends FC<LayoutProps> {
 }
 
 const Layout: LayoutComponent = ({ children, className }) => (
-  <div className={`flex flex-col h-screen ${className}`}>{children}</div>
+  <div className={`flex flex-col h-full ${className}`}>{children}</div>
 )
 
 Layout.Content = Content

@@ -1,38 +1,49 @@
 import React, { FC, MouseEvent, useState } from 'react'
 import { Product } from '../../constants'
 import { Typography } from '@material-tailwind/react'
-import { fakeShopImage, HeartIcon } from '@design-system/ui'
+import { fakeShopImage, HeartIcon, hydrangeaImage, productImage1, productImage2 } from '@design-system/ui'
+import FavoriteIcon from '../../../../components/favorite-icon'
 
 interface ProductCardProps {
   eachProduct: Product
   onClick?: () => void
+  handleLikeClick: (e: MouseEvent, liked, delivery_id, productIndex) => void
+  productIndex: number
+  allLiked?: boolean
 }
 
-const ProductCard: FC<ProductCardProps> = ({ eachProduct, onClick }) => {
-  const [chosenProduct, setChosenProduct] = React.useState({})
-  const [favorite, setFavorite] = useState(false)
-  const { product, images, price, tenge_price } = eachProduct
-
+const ProductCard: FC<ProductCardProps> = ({
+  eachProduct,
+  onClick,
+  handleLikeClick,
+  productIndex,
+  allLiked = false
+}) => {
+  const { product, images, price, tenge_price, id, is_favorite, species } = eachProduct || {}
   const formatNumber = (num: number): string => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
   }
 
   const formattedName = formatNumber(tenge_price)
 
-  const handleFavoriteClick = (e: MouseEvent) => {
-    e.stopPropagation()
-    e.preventDefault()
-    setFavorite(!favorite)
-  }
   return (
     <div
       className="flex flex-col pb-5 w-fit rounded-base shadow-card cursor-pointer"
       onClick={() => onClick && onClick()}
     >
       <div className="relative mb-[15px]">
-        <img src={fakeShopImage} alt="product" width="100%" height={263} className="rounded-tr-base rounded-tl-base" />
-        <div className={`absolute rounded-lg p-1 bg-primary top-3 right-3 `} onClick={e => handleFavoriteClick(e)}>
-          <HeartIcon fill={favorite ? '#EC4899' : '#D1D5DB'} />
+        <img
+          src={species === 'Roses' ? productImage2 : species === 'Hydrangea' ? hydrangeaImage : fakeShopImage}
+          alt="product"
+          className="rounded-tr-base rounded-tl-base w-[285px] h-[263px]"
+        />
+        <div className={`absolute rounded-lg p-1 bg-primary top-3 right-3 `}>
+          <FavoriteIcon
+            is_Liked={allLiked ? true : is_favorite}
+            delivery_id={id}
+            handleLikeClick={handleLikeClick}
+            productIndex={productIndex}
+          />
         </div>
       </div>
       <div className="px-3">

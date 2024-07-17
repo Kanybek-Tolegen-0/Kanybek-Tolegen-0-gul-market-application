@@ -1,7 +1,7 @@
 export enum ORDER_STATUS {
   PENDING = 'pending',
   PLANTATION_DECLINED = 'plantation_declined',
-  APPROVED = 'approved',
+  PLANTATION_APPROVED = 'plantation_approved',
   KARGO_DECLINED = 'KARGO_DECLINED',
   COMPLETED = 'COMPLETED'
 }
@@ -17,6 +17,7 @@ export interface IOrders {
   price_tenge: string
   imageUrl: string
   logo: string
+  quantity: number
   status: ORDER_STATUS
 }
 

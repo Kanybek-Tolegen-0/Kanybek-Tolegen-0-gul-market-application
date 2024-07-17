@@ -16,8 +16,9 @@ export const action = async ({ request }: { request: Request }) => {
     } = response.data
     localStorage.setItem('idToken', idToken)
     localStorage.setItem('refreshToken', refreshToken)
-    return redirect('/main')
+    return redirect('/my-orders?status=pending')
   } catch (e) {
     console.error(e)
+    return null
   }
 }

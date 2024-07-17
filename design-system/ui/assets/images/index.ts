@@ -57,3 +57,5 @@ export { default as NetherlandFlagImage } from './Netherlands_flag.png'
 export { default as ColombiaFlagImage } from './Colombia_flag.png'
 
 export { default as KenyaFlagImage } from './Kenya_flag.png'
+
+export { default as hydrangeaImage } from './hydrangea.png'

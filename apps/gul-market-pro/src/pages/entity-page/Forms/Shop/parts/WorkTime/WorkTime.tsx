@@ -18,20 +18,43 @@ const WorkTime: FunctionComponent<TimeProps> = ({
   handleHardValChange,
   handleHardErrorChange
 }) => {
-  const handleTimeChange = (day: string, time: { start: string; end: string }) => {
-    const newWorkSchedule = { ...workTimeValues.work_schedule }
-    newWorkSchedule.days[day] = time
-    handleHardValChange({ ...workTimeValues, work_schedule: newWorkSchedule }, shopIndex)
+  const daysOrder = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+
+  const sortWeekDays = shop => {
+    const sortedDays = {}
+
+    daysOrder.forEach(day => {
+      if (shop.work_schedule.days[day]) {
+        sortedDays[day] = shop.work_schedule.days[day]
+      } else {
+        sortedDays[day] = { start: '', end: '' }
+      }
+    })
+
+    return {
+      ...shop,
+      work_schedule: {
+        ...shop.work_schedule,
+        days: sortedDays
+      }
+    }
   }
+  const handleTimeChange = (day: string, time: { start: string; end: string }) => {
+    const newWorkSchedule = { ...sortedWorkTimeValues.work_schedule }
+    newWorkSchedule.days[day] = time
+    handleHardValChange({ ...sortedWorkTimeValues, work_schedule: newWorkSchedule }, shopIndex)
+  }
+
+  const sortedWorkTimeValues = sortWeekDays(workTimeValues)
   return (
     <div className="flex flex-col gap-5">
-      {Object.keys(workTimeValues.work_schedule.days).map((day, index) => {
+      {Object.keys(sortedWorkTimeValues.work_schedule.days).map((day, index) => {
         return (
           <Day
             key={index}
             day={day}
-            startTime={workTimeValues.work_schedule.days[day].start}
-            endTime={workTimeValues.work_schedule.days[day].end}
+            startTime={sortedWorkTimeValues.work_schedule.days[day].start}
+            endTime={sortedWorkTimeValues.work_schedule.days[day].end}
             handleTimeChange={handleTimeChange}
           />
         )

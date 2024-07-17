@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FunctionComponent, useEffect, useState } from 'react'
 import { Input, Textarea, Typography } from '@material-tailwind/react'
 import { PlusIcon, StringInput } from '@design-system/ui'
-import { Shop } from '../../../../types'
+import { Shop, WorkSchedule } from '../../../../types'
 import * as test from 'node:test'
 import { FormErrors, FormValues } from '../../../../entity-page'
 import { stringSchema } from '@design-system/ui/ui/components/string-input/stringSchema'
@@ -10,10 +10,18 @@ import { ErrorText } from '@design-system/ui/ui/components/error-text'
 
 interface MainProps {
   mainValues: Shop
-  mainErrors: Shop
-  shopIndex: number
-  handleHardValChange: (vals: FormValues, shopIndex: number) => void
-  handleHardErrorChange: (errs: FormErrors, shopIndex: number) => void
+  mainErrors?: Shop
+  shopIndex?: number
+  handleHardValChange: (
+    vals: {
+      work_schedule: WorkSchedule
+      addresses: string[]
+      name: string
+      description: string
+    },
+    shopIndex: number | undefined
+  ) => void
+  handleHardErrorChange?: (errs: FormErrors, shopIndex: number) => void
 }
 
 const Main: FunctionComponent<MainProps> = ({
@@ -38,13 +46,17 @@ const Main: FunctionComponent<MainProps> = ({
 
   const testHandleError = ({ name, errorMessage }: { name: string; errorMessage: string }, addressIndex?: number) => {
     if (name === 'addresses' && typeof addressIndex !== 'undefined') {
-      const currentAddresses = [...mainErrors.addresses]
+      const currentAddresses = [...mainErrors!.addresses]
       currentAddresses[addressIndex!] = errorMessage
       const newErrors = { ...mainErrors, addresses: currentAddresses }
-      handleHardErrorChange(newErrors, shopIndex)
+      if (handleHardErrorChange) {
+        handleHardErrorChange(newErrors, shopIndex)
+      }
     } else {
       const newErrors = { ...mainErrors, [name]: errorMessage }
-      handleHardErrorChange(newErrors, shopIndex)
+      if (handleHardErrorChange) {
+        handleHardErrorChange(newErrors, shopIndex)
+      }
     }
   }
 
@@ -65,7 +77,7 @@ const Main: FunctionComponent<MainProps> = ({
           name="name"
           value={mainValues.name}
           handleFormChange={testHandleChange}
-          error={mainErrors.name}
+          error={mainErrors?.name}
           handleError={testHandleError}
         />
         {/*<Input*/}

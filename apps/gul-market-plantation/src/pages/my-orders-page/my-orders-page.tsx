@@ -53,11 +53,24 @@ const MyOrdersPage = () => {
             <OrderTabs active={activeTab} tabs={tabs} onChange={onTabChange} />
             <div className="flex flex-col gap-[12px] mt-[12px]">
               {formatOrderData(
-                orders.filter(({ status }) => status === activeTab),
+                data?.filter(({ status }) => status === activeTab),
                 ACTION_HANDLERS
-              ).map(
+              )?.map(
                 (
-                  { title, subTitle, imageUrl, logo, name, flag, total_price, priceDollar, priceTenge, actions },
+                  {
+                    title,
+                    subTitle,
+                    imageUrl,
+                    logo,
+                    name,
+                    flag,
+                    total_price,
+                    priceDollar,
+                    priceTenge,
+                    box_size,
+                    quantity,
+                    actions
+                  },
                   index
                 ) => (
                   <OrderCard
@@ -71,6 +84,8 @@ const MyOrdersPage = () => {
                     total_price={total_price}
                     priceDollar={priceDollar}
                     priceTenge={priceTenge}
+                    box_size={box_size}
+                    quantity={quantity}
                     actions={actions}
                   />
                 )

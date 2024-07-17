@@ -74,7 +74,7 @@ export const Header: FC<HeaderProps & NavProps> = ({
                     <div className={'flex flex-col gap-1 '}>
                       <Typography children={'На вашем счету'} className="font-normal text-xs text-gray-500" />
                       <Typography
-                        children={loaderData?.wallet + ' ₸' || 'Неизвестно'}
+                        children={loaderData?.wallet || 0 + ' ₸' || 'Неизвестно'}
                         className=" font-bold text-2xl text-gray-900"
                       />
                     </div>
@@ -84,7 +84,7 @@ export const Header: FC<HeaderProps & NavProps> = ({
                   </div>
                   <Link to={'/favorite'}>
                     <MenuItem className="flex gap-2 items-center px-0 ">
-                      <StarIcon fill={'transparent'} />
+                      <StarIcon fill={'#9CA3AF'} stroke={'#9CA3AF'} />
                       <Typography children={'Мои избранные'} className={'font-normal text-sm text-gray-900'} />
                     </MenuItem>
                   </Link>

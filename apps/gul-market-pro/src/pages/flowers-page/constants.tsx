@@ -1,6 +1,7 @@
 import React from 'react'
 import { HeartIcon, ListIcon, RectangleIcon } from '@design-system/ui/ui/assets/icons'
 import { THeader } from '@design-system/ui/ui/@types'
+import FavoriteIcon from '../../components/favorite-icon'
 
 export const TABS = [
   {
@@ -195,11 +196,17 @@ export const TABLE_HEADERS: THeader = [
   { label: 'Кол-во', key: 'boxes' },
   {
     label: '',
-    key: 'is_like',
-    renderCell: isLiked => {
+    key: 'is_favorite',
+    renderCell: (value: { is_Liked: any; delivery_id: number; handleLikeClick; productIndex }) => {
+      const { is_Liked, delivery_id, handleLikeClick, productIndex } = value
       return (
         <div className="flex justify-center cursor-pointer">
-          <HeartIcon fill={Boolean(isLiked) ? '#EC4899' : '#D1D5DB'} />
+          <FavoriteIcon
+            delivery_id={delivery_id}
+            is_Liked={is_Liked}
+            handleLikeClick={handleLikeClick}
+            productIndex={productIndex}
+          />
         </div>
       )
     }

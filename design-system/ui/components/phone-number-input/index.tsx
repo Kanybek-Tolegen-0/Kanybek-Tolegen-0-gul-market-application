@@ -55,7 +55,10 @@ export const PhoneNumberInput: FC<{
         </Menu>
         <div className="flex flex-col gap-[4px] w-full">
           <PatternFormat
-            className="rounded-md border border-gray-300 w-full"
+            className={`rounded-md border ${error ? 'focus:border-t-red-500' : 'focus:border-t-black'} focus:!border-2 w-full border-t-gray-300 `}
+            labelProps={{
+              className: 'before:content-none after:content-none'
+            }}
             name={name}
             format="(###) ### ## ##"
             customInput={Input}

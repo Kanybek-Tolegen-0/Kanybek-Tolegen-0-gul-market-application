@@ -32,6 +32,12 @@ export const action = async ({ request }: { request: Request }) => {
             }
           }
         )
+        const {
+          updated_tokens: { idToken, refreshToken }
+        } = response3.data
+        localStorage.setItem('idToken', idToken)
+        localStorage.setItem('refreshToken', refreshToken)
+
         return redirect('/main')
       default:
         return redirect('/main')

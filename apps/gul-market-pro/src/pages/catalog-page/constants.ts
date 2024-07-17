@@ -35,6 +35,7 @@ export interface Product {
   mixed: false
   plantation_id: number
   plantation_name: string
+  is_favorite: boolean
 }
 
 export interface DeliveryProps

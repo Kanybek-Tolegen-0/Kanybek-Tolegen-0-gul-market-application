@@ -7,10 +7,10 @@ import { Shop } from '../../types'
 import { FormErrors, FormValues } from '../../entity-page'
 interface ShopsProps {
   shopFormValues: Shop
-  shopFormErrors: Shop
-  shopIndex: number
+  shopFormErrors?: Shop
+  shopIndex?: number
   handleHardValChange: (vals: FormValues, shopIndex: number) => void
-  handleHardErrorChange: (errs: FormErrors, shopIndex: number) => void
+  handleHardErrorChange?: (errs: FormErrors, shopIndex: number) => void
 }
 
 const Shop: FunctionComponent<ShopsProps> = ({

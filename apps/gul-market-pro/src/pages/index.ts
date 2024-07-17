@@ -16,6 +16,8 @@ export { flowersPage } from './flowers-page'
 
 export { BasketPage } from './basket-page'
 
-export { ProfilePage } from './profile-page'
+export { profilePage } from './profile-page'
 
 export { myOrdersPage } from './my-orders-page'
+
+export { favoritePage } from './favorite-page'

@@ -16,11 +16,15 @@ export const action = async ({ request }: { request: Request }) => {
         })
         return response1.data
       case 1:
-        const response2: AxiosResponse = await api.post('/api/add-shop', formValues, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('idToken')}`
+        const response2: AxiosResponse = await api.post(
+          '/api/add-shop',
+          { shops: formValues },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('idToken')}`
+            }
           }
-        })
+        )
         return response2.data
       case 2:
         const response3: AxiosResponse = await api.put(
@@ -32,6 +36,11 @@ export const action = async ({ request }: { request: Request }) => {
             }
           }
         )
+        const {
+          updated_tokens: { idToken, refreshToken }
+        } = response3.data
+        localStorage.setItem('idToken', idToken)
+        localStorage.setItem('refreshToken', refreshToken)
         return redirect('/main')
       default:
         return redirect('/main')

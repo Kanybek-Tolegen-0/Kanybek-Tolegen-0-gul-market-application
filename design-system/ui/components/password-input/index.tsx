@@ -30,7 +30,10 @@ export const PasswordInput: FC<{
       <Input
         name={name}
         type={show ? 'text' : 'password'}
-        className={`${className} input rounded-md border border-gray-300`}
+        className={`${className} rounded-md border  ${error ? 'focus:border-t-red-500 border-t-red-500' : 'focus:!border-t-black border-blue-gray-200 border-t-blue-gray-200'} focus:!border-2 w-full  `}
+        labelProps={{
+          className: 'before:content-none after:content-none'
+        }}
         icon={
           <div className="p-0" onClick={() => setShow(prev => !prev)}>
             {show ? <EyesClosedIcon className="cursor-pointer" /> : <EyesOpenIcon className="cursor-pointer" />}

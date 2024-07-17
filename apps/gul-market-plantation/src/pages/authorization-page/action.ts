@@ -16,12 +16,9 @@ export const action = async ({ request }: { request: Request }) => {
     } = response.data
     localStorage.setItem('idToken', idToken)
     localStorage.setItem('refreshToken', refreshToken)
-    return redirect('/my-orders')
+    return redirect('/main')
   } catch (e) {
     console.error(e)
-    //! Убрать позже
-    return redirect('/my-orders')
-
-    // return e
+    return e
   }
 }

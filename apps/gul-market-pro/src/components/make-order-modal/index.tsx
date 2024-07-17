@@ -3,16 +3,6 @@ import { productImage3 } from '@design-system/ui'
 import { Typography } from '@material-tailwind/react'
 
 interface MakeOrderModalProps {
-  Pay: (
-    plantation_id: any,
-    delivery_id: any,
-    delivery_address: any,
-    quantity: any,
-    price_for_one: any,
-    tenge_price_for_one: any,
-    total_price: any,
-    total_tenge_price: any
-  ) => void
   content?: React.ReactNode
   lookingProduct: {
     product: string
@@ -24,7 +14,7 @@ interface MakeOrderModalProps {
   }
 }
 
-const MakeOrderModal: FC<MakeOrderModalProps> = ({ Pay, content, lookingProduct }) => {
+const MakeOrderModal: FC<MakeOrderModalProps> = ({ content, lookingProduct }) => {
   const { product, color, quantity, box_size, totalPrice_tenge, address } = lookingProduct
   return (
     <div className={`flex flex-col p-5 gap-10`}>

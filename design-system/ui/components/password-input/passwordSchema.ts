@@ -9,7 +9,5 @@ export const passwordSchema = zod.string().superRefine((val, ctx) => {
     ctx.addIssue({ code: ZodIssueCode.custom, message: 'Пароль должен содержать хотя бы одну строчную букву' })
   } else if (!val.match(/[A-Z]/)) {
     ctx.addIssue({ code: ZodIssueCode.custom, message: 'Пароль должен содержать хотя бы одну заглавную букву' })
-  } else if (!val.match(/[\W]/)) {
-    ctx.addIssue({ code: ZodIssueCode.custom, message: 'Пароль должен содержать хотя бы один символ' })
   }
 })

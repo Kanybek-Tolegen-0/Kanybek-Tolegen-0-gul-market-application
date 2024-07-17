@@ -3,7 +3,7 @@ import { IOrders, ORDER_STATUS } from './types'
 
 export const tabs = [
   { label: 'Ожидают ответа', value: ORDER_STATUS.PENDING },
-  { label: 'Принятые', value: ORDER_STATUS.APPROVED },
+  { label: 'Принятые', value: ORDER_STATUS.PLANTATION_APPROVED },
   { label: 'Отказанные', value: ORDER_STATUS.PLANTATION_DECLINED },
   { label: 'Отказано карго', value: ORDER_STATUS.KARGO_DECLINED },
   { label: 'Завершенные', value: ORDER_STATUS.COMPLETED }
@@ -47,7 +47,7 @@ export const orders: IOrders[] = [
     price_tenge: '198 ₸',
     imageUrl: orderFlowerImage,
     logo: logoImage,
-    status: ORDER_STATUS.APPROVED
+    status: ORDER_STATUS.PLANTATION_APPROVED
   },
   {
     order_id: 4,
@@ -92,7 +92,7 @@ export const orders: IOrders[] = [
 
 export const FLAG_LABELS: { [key: string]: FlagProps } = {
   [ORDER_STATUS.PENDING]: { label: 'Ожидает ответа', color: 'text-yellow-800', bgColor: 'bg-yellow-100' },
-  [ORDER_STATUS.APPROVED]: { label: 'Принято', color: 'text-green-800', bgColor: 'bg-green-100' },
+  [ORDER_STATUS.PLANTATION_APPROVED]: { label: 'Принято', color: 'text-green-800', bgColor: 'bg-green-100' },
   [ORDER_STATUS.PLANTATION_DECLINED]: { label: 'Отклонена плантацией', color: 'text-red-800', bgColor: 'bg-red-100' },
   [ORDER_STATUS.KARGO_DECLINED]: { label: 'Отклонена карго', color: 'text-red-800', bgColor: 'bg-red-100' },
   [ORDER_STATUS.COMPLETED]: { label: 'Завершен', color: 'text-purple-800', bgColor: 'bg-purple-100' }

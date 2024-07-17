@@ -18,7 +18,7 @@ import {
   useTimer,
   formatTimer
 } from '@design-system/ui'
-import { Tab, Tabs, TabsBody, TabsHeader, Typography } from '@material-tailwind/react'
+import { Spinner, Tab, Tabs, TabsBody, TabsHeader, Typography } from '@material-tailwind/react'
 
 import {
   BUTTON_TABS_OPTIONS,
@@ -41,6 +41,9 @@ import { createSearchParams, useActionData, useOutletContext, useSearchParams, u
 import MakeOrderModal from '../../components/make-order-modal'
 import { boolean, unknown } from 'zod'
 import { ILoaderData } from '../dashboard/dashboard'
+import { AxiosResponse } from 'axios'
+import { api } from '../../api'
+import { toast, ToastContainer } from 'react-toastify'
 
 function transform(input: { [key: string]: string[] }) {
   interface Option {
@@ -116,7 +119,7 @@ const FlowersPage: FC = () => {
     tenge_price_for_one: any
     total_price: any
   }>()
-
+  const [filteredProduct, setFilteredProduct] = useState()
   const handleOpen = (product?: Product): void => {
     if (product) {
       setChosenProduct(product)
@@ -140,19 +143,19 @@ const FlowersPage: FC = () => {
   }
   const handleNext = (): void => {
     if (!chosenProduct) return
-    if (actionData.filtered_products) {
-      const currentIndex = actionData.filtered_products.delivery.findIndex(product => product.id === chosenProduct.id)
-      const nextIndex = (currentIndex + 1) % actionData.filtered_products.delivery.length
-      setChosenProduct(actionData.filtered_products.delivery[nextIndex])
+    if (filteredProduct) {
+      const currentIndex = filteredProduct.delivery.findIndex(product => product.id === chosenProduct.id)
+      const nextIndex = (currentIndex + 1) % filteredProduct.delivery.length
+      setChosenProduct(filteredProduct.delivery[nextIndex])
     }
   }
 
   const handlePrev = (): void => {
     if (!chosenProduct) return
-    if (actionData.filtered_products) {
-      const currentIndex = actionData.filtered_products.delivery.findIndex(product => product.id === chosenProduct.id)
-      const prevIndex = (currentIndex - 1 + actionData.filtered_products.delivery.length) % data.products.length
-      setChosenProduct(actionData.filtered_products.delivery[prevIndex])
+    if (filteredProduct) {
+      const currentIndex = filteredProduct.delivery.findIndex(product => product.id === chosenProduct.id)
+      const prevIndex = (currentIndex - 1 + filteredProduct.delivery.length) % data.products.length
+      setChosenProduct(filteredProduct.delivery[prevIndex])
     }
   }
 
@@ -255,32 +258,10 @@ const FlowersPage: FC = () => {
     submit({ type: 'filter', submitData: filterValues }, { method: 'post', encType: 'application/json' })
   }, [filterValues, searchParams, lookingProduct])
 
-  const Pay = (
-    plantation_id: any,
-    delivery_id: any,
-    delivery_address: any,
-    quantity: any,
-    price_for_one: any,
-    tenge_price_for_one: any,
-    total_price: any,
-    total_tenge_price: any
-  ): any => {
-    const data = {
-      orders: [
-        {
-          plantation_id: plantation_id,
-          delivery_id: delivery_id,
-          delivery_address: delivery_address,
-          quantity: quantity,
-          price_for_one: price_for_one,
-          tenge_price_for_one: tenge_price_for_one,
-          total_price: total_price,
-          total_tenge_price: total_tenge_price
-        }
-      ]
-    }
-    submit({ type: 'order', submitData: data }, { method: 'post', encType: 'application/json' })
-  }
+  useEffect(() => {
+    setFilteredProduct(actionData?.filtered_products)
+  }, [actionData])
+  const Pay = (): any => {}
 
   const makeOrder = (
     enough: boolean,
@@ -298,7 +279,24 @@ const FlowersPage: FC = () => {
       totalPrice_tenge: number
     }
   ) => {
-    setEnoughMoney(enough)
+    setEnoughMoney(true)
+    if (enough) {
+      const data = {
+        orders: [
+          {
+            plantation_id: lookingProduct.plantation_id,
+            delivery_id: lookingProduct.delivery_id,
+            delivery_address: lookingProduct.address,
+            quantity: lookingProduct.quantity,
+            price_for_one: lookingProduct.price_for_one,
+            tenge_price_for_one: lookingProduct.tenge_price_for_one,
+            total_price: lookingProduct.total_price,
+            total_tenge_price: lookingProduct.totalPrice_tenge
+          }
+        ]
+      }
+      submit({ type: 'order', submitData: data }, { method: 'post', encType: 'application/json' })
+    }
     setLookingProduct(lookingProduct)
     setOpen(false)
     setOpenDesicionModal(true)
@@ -309,7 +307,7 @@ const FlowersPage: FC = () => {
       <div className={'flex flex-col items-center gap-4 justify-center'}>
         <Typography children={'У вас не хватает денег на счету'} className={'font-semibold text-3xl text-gray-800'} />
         <div className={'flex flex-col gap-2 items-center'}>
-          <div className={'h-[52px] w-[73px] rounded-lg py-1.5 px-2 bg-gray-100'}>
+          <div className={'h-[52px] w-[73px] rounded-lg py-1.5 px-2 bg-gray-100 w-full'}>
             <Typography children={wallet + ' ₸'} className={'font-medium text-4xl text-gray-800'} />
           </div>
           <Typography children={'Сейчас на счету'} className={'font-normal text-base text-gray-800'} />
@@ -338,16 +336,7 @@ const FlowersPage: FC = () => {
           <BrandButton
             className={'w-[210px]'}
             onClick={() => {
-              Pay(
-                lookingProduct?.plantation_id,
-                lookingProduct?.delivery_id,
-                lookingProduct?.address,
-                lookingProduct?.quantity,
-                lookingProduct?.price_for_one,
-                lookingProduct?.tenge_price_for_one,
-                lookingProduct?.total_price,
-                lookingProduct?.totalPrice_tenge
-              )
+              Pay()
               handleDecisionModal()
             }}
           >
@@ -360,6 +349,58 @@ const FlowersPage: FC = () => {
       </div>
     )
   }
+
+  const handleLikeClick = async (e: MouseEvent, liked, delivery_id, productIndex) => {
+    e.preventDefault()
+    e.stopPropagation()
+    if (!liked) {
+      try {
+        const response: AxiosResponse = await api.post(
+          '/api/add-favorite-product',
+          { delivery_id: delivery_id },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('idToken')}`
+            }
+          }
+        )
+        setFilteredProduct(prev => {
+          const deliveries = prev?.delivery
+          deliveries[productIndex].is_favorite = true
+          return { ...prev, delivery: deliveries }
+        })
+        return toast.success('Товар добавлен в избранные')
+      } catch (e) {
+        return toast.error('Не удалось добавить товар в избранные, попробуйте ещё раз')
+      }
+    } else {
+      try {
+        const response: AxiosResponse = await api.delete('/api/remove-favorite-product', {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('idToken')}`
+          },
+          data: { delivery_id: delivery_id }
+        })
+        setFilteredProduct(prev => {
+          const deliveries = prev?.delivery
+          deliveries[productIndex].is_favorite = false
+          return { ...prev, delivery: deliveries }
+        })
+        return toast.success('Товар убран из избранных')
+      } catch (e) {
+        return toast.error('Не удалось убрать товар избранных, попробуйте ещё раз')
+      }
+    }
+  }
+  useEffect(() => {
+    if (actionData) {
+      if (actionData.success) {
+        toast.success(actionData.message)
+      } else {
+        toast.error(actionData.message)
+      }
+    }
+  }, [actionData])
   return (
     <Layout fullHeader isLogged>
       <Layout.Content className="bg-white">
@@ -423,7 +464,7 @@ const FlowersPage: FC = () => {
                     <CheckboxGroup
                       name="flower_type"
                       options={
-                        actionData?.filtered_products?.flower_types?.map(type => ({
+                        filteredProduct?.flower_types?.map(type => ({
                           label: String(FLOWER_TYPE_LABELS[type]),
                           value: type
                         })) || []
@@ -439,8 +480,8 @@ const FlowersPage: FC = () => {
                     <CheckboxGroup
                       name="flower_species"
                       options={
-                        actionData?.filtered_products?.flower_species
-                          ? transform(actionData?.filtered_products?.flower_species)
+                        filteredProduct?.flower_species
+                          ? transform(filteredProduct?.flower_species)
                           : FILTER_PART_FLOWER_SORT_OPTIONS
                       }
                       filters={filters}
@@ -484,28 +525,37 @@ const FlowersPage: FC = () => {
                 </div>
               </Filter>
               {activeTab === 'positions' ? (
-                active === 'list' ? (
-                  <Table
-                    headers={TABLE_HEADERS}
-                    items={itemsAdapter({
-                      data: actionData?.filtered_products?.delivery || [],
-                      headers: TABLE_HEADERS
-                    })}
-                    normalItems={actionData?.filtered_products?.delivery}
-                    itemOnClick={handleOpen}
-                  />
+                filteredProduct?.delivery ? (
+                  active === 'list' ? (
+                    <Table
+                      headers={TABLE_HEADERS}
+                      items={itemsAdapter({
+                        data: filteredProduct?.delivery || [],
+                        headers: TABLE_HEADERS
+                      })}
+                      normalItems={filteredProduct?.delivery}
+                      itemOnClick={handleOpen}
+                      handleLikeClick={handleLikeClick}
+                    />
+                  ) : (
+                    <div
+                      className="gap-x-4 gap-y-4 w-full"
+                      style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)' }}
+                    >
+                      {filteredProduct?.delivery.map((eachProduct, productIndex) => (
+                        <ProductCard
+                          key={eachProduct.product}
+                          eachProduct={eachProduct}
+                          onClick={() => handleOpen(eachProduct)}
+                          handleLikeClick={handleLikeClick}
+                          productIndex={productIndex}
+                        />
+                      ))}
+                    </div>
+                  )
                 ) : (
-                  <div
-                    className="gap-x-4 gap-y-4 w-full"
-                    style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)' }}
-                  >
-                    {actionData?.filtered_products?.delivery.map(eachProduct => (
-                      <ProductCard
-                        key={eachProduct.product}
-                        eachProduct={eachProduct}
-                        onClick={() => handleOpen(eachProduct)}
-                      />
-                    ))}
+                  <div className={'flex justify-center items-center w-full mt-20'}>
+                    <Spinner color={'pink'} className={' h-10 w-10'} />
                   </div>
                 )
               ) : (
@@ -529,15 +579,12 @@ const FlowersPage: FC = () => {
                 {chosenProduct && <ProductModal makeOrder={makeOrder} wallet={wallet} />}
               </Modal>
               <Modal open={openDecisionModal} handleOpen={handleDecisionModal}>
-                <MakeOrderModal
-                  lookingProduct={lookingProduct!}
-                  Pay={Pay}
-                  content={enoughMoney ? <Enough /> : NotEnough}
-                />
+                <MakeOrderModal lookingProduct={lookingProduct!} content={enoughMoney ? <Enough /> : NotEnough} />
               </Modal>
             </TabsBody>
           </Tabs>
         </ScreenTemplate>
+        <ToastContainer limit={3} autoClose={1500} />
       </Layout.Content>
     </Layout>
   )

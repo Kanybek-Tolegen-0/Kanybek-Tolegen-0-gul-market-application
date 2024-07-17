@@ -33,7 +33,7 @@ export const formatOrderData = (
     }[]
   }
 ) =>
-  data.map(
+  data?.map(
     ({
       order_id,
       name,
@@ -45,12 +45,13 @@ export const formatOrderData = (
       price_tenge,
       imageUrl,
       logo,
+      quantity,
       status
     }) => {
       const handler = handlers && handlers[status]
 
       return {
-        title: `${species}  ${box_size}`,
+        title: `${species}`,
         subTitle: delivery_address,
         imageUrl,
         logo,
@@ -65,6 +66,8 @@ export const formatOrderData = (
         total_price,
         priceDollar: price_dollar,
         priceTenge: price_tenge,
+        box_size: box_size,
+        quantity,
         actions: handler
           ? renderActions<Pick<IOrders, 'order_id'>>(handler, {
               order_id
