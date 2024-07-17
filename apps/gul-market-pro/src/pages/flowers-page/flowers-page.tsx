@@ -279,7 +279,7 @@ const FlowersPage: FC = () => {
       totalPrice_tenge: number
     }
   ) => {
-    setEnoughMoney(true)
+    setEnoughMoney(enough)
     if (enough) {
       const data = {
         orders: [
