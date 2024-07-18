@@ -15,8 +15,6 @@ import {
   favoritePage
 } from './pages'
 import { MainPage } from './pages/main-page'
-import { CatalogPage } from './pages/catalog-page'
-import { FavoritePage } from './pages/favorite-page'
 import { dashboard } from './pages/dashboard'
 
 export const routes = createBrowserRouter([
@@ -90,7 +88,8 @@ export const routes = createBrowserRouter([
       {
         path: '/my-orders',
         element: <myOrdersPage.Component />,
-        action: myOrdersPage.action
+        action: myOrdersPage.action,
+        loader: myOrdersPage.loader
       }
     ]
   }

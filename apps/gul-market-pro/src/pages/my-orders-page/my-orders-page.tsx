@@ -1,16 +1,33 @@
 import React, { useEffect, useState } from 'react'
-import { Layout, OrderCard, orderFlowerImage, OrderTabs, ScreenTemplate, useTabs } from '@design-system/ui'
-import { boxes, orders, steps, tabs } from './constants'
+import { Flag, Layout, OrderCard, orderFlowerImage, OrderTabs, ScreenTemplate, useTabs } from '@design-system/ui'
+import { boxes, FLAG_LABELS, orders, steps, tabs } from './constants'
 import { IOrders, ORDER_STATUS } from './types'
 import { formatOrderData } from './helpers'
 import { Dialog } from '@material-tailwind/react'
 import { RatingModal } from './rating-modal'
 import { DeliveryModal } from './delivery-modal'
-import { useSubmit } from 'react-router-dom'
+import { useLoaderData, useSubmit } from 'react-router-dom'
 
 const activeStep = 2
 
+interface IOrder {
+  species: string
+  box_size: string
+  order_id: number
+  plantation_name: string
+  plantation_id: number
+  price_for_one: number
+  total_price: number
+  tenge_price_for_one: number
+  total_tenge_price: number
+  delivery_address: string
+  status: string
+}
+
 const MyOrdersPage = () => {
+  const loaderData = useLoaderData() as IOrder[]
+
+  console.log({ loaderData })
   const submit = useSubmit()
   const { activeTab, onTabChange } = useTabs<ORDER_STATUS>({ tabs })
 
@@ -53,10 +70,6 @@ const MyOrdersPage = () => {
     ]
   }
 
-  useEffect(() => {
-    submit({}, { method: 'post', encType: 'application/json' })
-  }, [])
-
   return (
     <>
       <Layout isLogged fullHeader>
@@ -64,26 +77,64 @@ const MyOrdersPage = () => {
           <ScreenTemplate title="Мои заказы">
             <OrderTabs active={activeTab} tabs={tabs} onChange={onTabChange} />
             <div className="flex flex-col gap-[12px] mt-[12px]">
-              {formatOrderData(
-                orders.filter(({ status }) => status === activeTab),
-                ACTION_HANDLERS
-              ).map(
-                ({ title, subTitle, imageUrl, logo, name, flag, price, priceDollar, priceTenge, actions }, index) => (
-                  <OrderCard
-                    key={index}
-                    name={name}
-                    title={title}
-                    subTitle={subTitle}
-                    imageUrl={imageUrl}
-                    logo={logo}
-                    flag={flag}
-                    price={price}
-                    priceDollar={priceDollar}
-                    priceTenge={priceTenge}
-                    actions={actions}
-                  />
-                )
-              )}
+              {loaderData
+                ? loaderData.map(
+                    ({
+                      species,
+                      delivery_address,
+                      plantation_name,
+                      order_id,
+                      box_size,
+                      tenge_price_for_one,
+                      total_tenge_price,
+                      status
+                    }) => (
+                      <OrderCard
+                        key={order_id}
+                        title={species}
+                        name={plantation_name}
+                        subTitle={delivery_address}
+                        imageUrl={''}
+                        logo={''}
+                        total_price={String(total_tenge_price)}
+                        priceDollar={''}
+                        priceTenge={String(tenge_price_for_one)}
+                        box_size={box_size}
+                        quantity={0}
+                        flag={
+                          FLAG_LABELS[status] ? (
+                            <Flag
+                              label={FLAG_LABELS[status]?.label}
+                              color={FLAG_LABELS[status]?.color}
+                              bgColor={FLAG_LABELS[status]?.bgColor}
+                            />
+                          ) : null
+                        }
+                      />
+                    )
+                  )
+                : formatOrderData(
+                    orders.filter(({ status }) => status === activeTab),
+                    ACTION_HANDLERS
+                  ).map(
+                    (
+                      { title, subTitle, imageUrl, logo, name, flag, price, priceDollar, priceTenge, actions },
+                      index
+                    ) => (
+                      <OrderCard
+                        key={index}
+                        name={name}
+                        title={title}
+                        subTitle={subTitle}
+                        imageUrl={imageUrl}
+                        logo={logo}
+                        flag={flag}
+                        priceDollar={priceDollar}
+                        priceTenge={priceTenge}
+                        actions={actions}
+                      />
+                    )
+                  )}
             </div>
           </ScreenTemplate>
         </Layout.Content>

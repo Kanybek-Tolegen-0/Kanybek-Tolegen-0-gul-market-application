@@ -3,7 +3,7 @@ import { api } from '../../api'
 export const loader = async ({ request }: { request: Request }) => {
   const url = new URL(request.url)
   const status = url.searchParams.get('status')
-  const response = await api.get('/api/plantation-orders', {
+  const response = await api.get('/api/pro-user-orders', {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('idToken')}`
     },

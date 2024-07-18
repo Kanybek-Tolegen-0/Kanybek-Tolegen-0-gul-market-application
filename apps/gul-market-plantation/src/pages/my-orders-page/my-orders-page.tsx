@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
 import { Layout, OrderCard, orderFlowerImage, OrderTabs, ScreenTemplate, useTabs } from '@design-system/ui'
-import { orders, tabs } from './constants'
-import { IOrders, ORDER_STATUS } from './types'
+import { tabs } from './constants'
+import { ORDER_STATUS } from './types'
 import { formatOrderData } from './helpers'
 import { Dialog } from '@material-tailwind/react'
 import { ApproveModal } from './approve-modal'
 import { DeclineModal } from './decline-modal'
 import { useLoaderData, useSubmit } from 'react-router-dom'
 import { Simulate } from 'react-dom/test-utils'
-import submit = Simulate.submit
 
 const MyOrdersPage = () => {
   const submit = useSubmit()

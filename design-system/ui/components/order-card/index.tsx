@@ -88,7 +88,7 @@ export const OrderCard: FC<OrderCardProps> = ({
             <div className="flex flex-col self-end">
               <Typography className="text-3xl leading-10 font-medium text-gray-900">{'$ ' + total_price}</Typography>
               <Typography className="text-base leading-7 font-normal text-gray-600">
-                {quantity + ' '} {box_size}
+                {quantity ? quantity + ' ' : ''} {box_size}
               </Typography>
             </div>
             {actions}
