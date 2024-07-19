@@ -3,8 +3,8 @@ import React from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 
 const TABS = [
-  { label: 'Главная', link: '/main' },
-  { label: 'Каталог', link: '/catalog' },
+  // { label: 'Главная', link: '/main' },
+  // { label: 'Каталог', link: '/catalog' },
   { label: 'Заказы', link: '/my-orders?status=pending' }
 ]
 
