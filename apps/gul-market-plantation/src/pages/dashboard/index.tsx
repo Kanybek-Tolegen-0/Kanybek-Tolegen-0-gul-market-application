@@ -42,6 +42,7 @@ export const Dashboard = () => {
         renderCountryOptions={renderCountryOptions}
         fullHeader
         isLogged
+        needMenu={false}
       />
       <Outlet />
     </div>

@@ -103,7 +103,7 @@ const ProfilePage: FunctionComponent = () => {
 
   const {
     pro_user_info: { pro_user, shops }
-  } = loaderData
+  } = loaderData || { pro_user_info: {} }
   const [userInfo, setUserInfo] = useState<any>(
     {
       name: pro_user?.name,
@@ -184,7 +184,7 @@ const ProfilePage: FunctionComponent = () => {
   }
 
   const handleChangeUserRole = () => {
-    const toRole = pro_user.role === 'individual' ? 'shop' : 'individual'
+    const toRole = pro_user?.role === 'individual' ? 'shop' : 'individual'
     submit({ type: 'update_role', submitData: { role: toRole } }, { method: 'post', encType: 'application/json' })
   }
   const handleSaveNewInitials = () => {
@@ -225,7 +225,7 @@ const ProfilePage: FunctionComponent = () => {
               onClick={handleChangeUserRole}
               className={'bg-gray-100 flex justify-center items-center rounded-lg font-medium text-base text-gray-700'}
             >
-              Сменить роль на {pro_user.role === 'individual' ? 'юр.лицо' : 'физ.лицо'}
+              Сменить роль на {pro_user?.role === 'individual' ? 'юр.лицо' : 'физ.лицо'}
             </BrandButton>
           </div>
           <div className={'flex justify-between gap-9'}>

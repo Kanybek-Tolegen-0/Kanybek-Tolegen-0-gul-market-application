@@ -5,8 +5,8 @@ import { Outlet, useLoaderData, useLocation, useNavigate } from 'react-router-do
 const TABS = [
   { label: 'Главная', link: '/main' },
   { label: 'Каталог', link: '/catalog' },
-  { label: 'Заказы', link: '/my-orders' },
-  { label: 'Рекламация', link: '' }
+  { label: 'Заказы', link: '/my-orders' }
+  // { label: 'Рекламация', link: '' }
 ]
 
 const COUNTRY_OPTIONS = [
